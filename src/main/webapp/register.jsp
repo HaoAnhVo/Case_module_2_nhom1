@@ -1,4 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String message = (String) session.getAttribute("message");
+    String status = (String) session.getAttribute("status");
+    if (message != null && status != null) {
+%>
+<div id="popup" class="popup <%= status %>">
+    <span class="popup-message"><%= message %></span>
+    <button id="close-popup" onclick="closePopup()">X</button>
+</div>
+<%
+        session.removeAttribute("message");
+        session.removeAttribute("status");
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -136,19 +150,18 @@
                                     <p class="p-2" style="color: var(--primary)">
                                         <i class="fa fa-plane me-3"></i>Những hành trình mới đang chờ đợi bạn
                                     </p>
-                                    <form class="text-white">
+                                    <form action="UserServlet?action=insert" method="post" class="text-white">
                                         <div class="row g-3">
                                             <div class="col-md-6">
                                                 <div class="form-floating form-input">
                                                     <input
                                                         type="text"
+                                                        name="username"
                                                         class="form-control form-register bg-transparent"
                                                         id="register-username"
                                                         placeholder="Tên tài khoản"
                                                         autofocus
                                                         required
-                                                        pattern="^[a-zA-Z0-9_]{5,15}$"
-                                                        title="Username must be 5-15 characters long and can only contain letters, numbers, and underscores."
                                                     />
 
                                                     <label for="register-username"
@@ -160,14 +173,14 @@
                                                 <div class="form-floating">
                                                     <input
                                                         type="text"
-                                                        class="form-control bg-transparent"
-                                                        id="register-fullname"
+                                                        name="name"
+                                                        class="form-control form-register bg-transparent"
+                                                        id="register-name"
                                                         required
                                                         placeholder="Họ và tên"
-                                                        pattern="^[a-zA-Z\s]{2,50}$"
-                                                        title="Full Name must be 2-50 characters long and can only contain letters and spaces."
+
                                                     />
-                                                    <label for="register-fullname"
+                                                    <label for="register-name"
                                                         ><i class="fa-solid fa-signature me-3"></i>Họ và tên</label
                                                     >
                                                 </div>
@@ -176,7 +189,8 @@
                                                 <div class="form-floating">
                                                     <input
                                                         type="password"
-                                                        class="form-control bg-transparent"
+                                                        name="password"
+                                                        class="form-control form-register bg-transparent"
                                                         id="register-password"
                                                         placeholder="Mật khẩu"
                                                         required
@@ -190,7 +204,7 @@
                                                 <div class="form-floating">
                                                     <input
                                                         type="password"
-                                                        class="form-control bg-transparent"
+                                                        class="form-control form-register bg-transparent"
                                                         id="register-confirm-password"
                                                         placeholder="Xác nhận mật khẩu"
                                                         required
@@ -204,12 +218,11 @@
                                                 <div class="form-floating">
                                                     <input
                                                         type="email"
-                                                        class="form-control bg-transparent"
+                                                        name="email"
+                                                        class="form-control form-register bg-transparent"
                                                         id="register-email"
                                                         placeholder="Email"
                                                         required
-                                                        [a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$
-                                                        title="Please enter a valid email address."
                                                     />
                                                     <label for="register-email"
                                                         ><i class="fa-solid fa-envelope me-3"></i>Email</label
@@ -220,8 +233,9 @@
                                                 <div class="form-floating date" id="date3" data-target-input="nearest">
                                                     <input
                                                         type="text"
+                                                        name="birthday"
                                                         id="birthdate"
-                                                        class="form-control bg-transparent"
+                                                        class="form-control form-register bg-transparent"
                                                         placeholder="dd/mm/yyyy"
                                                         onfocus="(this.type='date')"
                                                         onblur="(this.type='text')"

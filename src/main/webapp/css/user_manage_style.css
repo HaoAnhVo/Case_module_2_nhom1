@@ -1,0 +1,278 @@
+/* List User */
+body, h2, table {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.add-user-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body {
+    background-color: #f4f4f4;
+    padding: 20px;
+    color: #333;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table th {
+    background-color: #86b817;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.add-user {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #86b817;
+    padding: 10px 20px;
+    color: #fff;
+    margin: 0 10px 0 auto;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.add-user:hover {
+    color: #688b12;
+}
+
+
+.actions {
+    display: flex;
+    gap: 18px;
+}
+
+.actions a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: #86b817;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.actions a:hover {
+    color: #688b12;
+}
+
+.actions a::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    opacity: 0;
+    visibility: hidden;
+    white-space: nowrap;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.actions a:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Add User */
+form {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form input[type="date"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #86b817;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+form input[type="submit"]:hover {
+    background-color: #688b12;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+}
+
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #555;
+    background-color: #fff;
+    appearance: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select:hover {
+    border-color: #86b817;
+}
+
+select:focus {
+    border-color: #86b817;
+    outline: none;
+    box-shadow: 0 0 5px rgba(134, 184, 23, 0.5);
+}
+
+.back-link {
+    margin-top: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.back-link .arrow {
+    display: inline-block;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.back-link:hover .arrow {
+    transform: translateX(-3px);
+}
+
+.back-link:hover {
+    color: #86b817;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    form {
+        padding: 15px 20px;
+    }
+
+    form input[type="submit"] {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+.popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #86b817; /* Success color */
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Error color */
+.popup.error {
+    background-color: #e74c3c;
+}
+
+/* Message text */
+.popup-message {
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+/* Close button */
+#close-popup {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Animation for smooth fade-in */
+.popup {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
