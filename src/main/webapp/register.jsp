@@ -121,7 +121,7 @@
                                 <a href="cuisine.jsp" class="dropdown-item">Ẩm thực</a>
                             </div>
                         </div>
-                        <a href="blog.jsp" class="nav-item nav-link">Bài viết</a>
+                        <a href="PostServlet?action=list&view=blog" class="nav-item nav-link">Bài viết</a>
                         <a href="about.jsp" class="nav-item nav-link">Chúng tôi</a>
                         <a href="contact.jsp" class="nav-item nav-link">Liên hệ</a>
                     </div>
@@ -150,7 +150,7 @@
                                     <p class="p-2" style="color: var(--primary)">
                                         <i class="fa fa-plane me-3"></i>Những hành trình mới đang chờ đợi bạn
                                     </p>
-                                    <form action="UserServlet?action=insert" method="post" class="text-white">
+                                    <form action="UserServlet?action=insert" method="post" class="text-white" onsubmit="validatePassword()">
                                         <div class="row g-3">
                                             <div class="col-md-6">
                                                 <div class="form-floating form-input">
@@ -209,9 +209,11 @@
                                                         placeholder="Xác nhận mật khẩu"
                                                         required
                                                     />
+
                                                     <label for="register-confirm-password"
                                                         ><i class="fa-solid fa-unlock me-3"></i>Xác nhận mật khẩu</label
                                                     >
+                                                    <span id="message-confirm" style="color:red;"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -239,6 +241,7 @@
                                                         placeholder="dd/mm/yyyy"
                                                         onfocus="(this.type='date')"
                                                         onblur="(this.type='text')"
+                                                        required
                                                     />
 
                                                     <label for="birthdate"
@@ -374,5 +377,6 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script src="js/sub-script.js"></script>
     </body>
 </html>

@@ -1,5 +1,6 @@
 package org.example.repository.userRepository;
 
+import org.example.model.Post;
 import org.example.model.User;
 import org.example.repository.BaseRepository;
 

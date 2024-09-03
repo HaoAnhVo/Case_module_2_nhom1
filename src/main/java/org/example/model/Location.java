@@ -5,6 +5,8 @@ public class Location {
     private String locationName;
     private String mapLink;
 
+    public Location() {}
+
     public Location(int locationId, String locationName, String mapLink) {
         this.locationId = locationId;
         this.locationName = locationName;

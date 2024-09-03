@@ -8,6 +8,10 @@ public class Comment {
     private Date createdAt;
     private int userId;
     private int postId;
+    private String username;
+
+    public Comment() {
+    }
 
     public Comment(int commentId, String content, Date createdAt, int userId, int postId) {
         this.commentId = commentId;
@@ -55,5 +59,13 @@ public class Comment {
 
     public void setPostId(int postId) {
         this.postId = postId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

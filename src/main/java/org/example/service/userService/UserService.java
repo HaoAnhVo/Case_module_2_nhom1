@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserService implements IUserService {
 
-    private final IUserRepository iUserRepository = new UserRepository();
+    IUserRepository iUserRepository = new UserRepository();
 
     @Override
     public User getUserByUsernameAndPassword(String username, String password) {

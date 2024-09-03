@@ -12,6 +12,13 @@ public class Post {
     private int locationId;
     private int categoryId;
     private int authorId;
+    private String locationName;
+    private String categoryName;
+    private String authorName;
+
+    public Post() {
+
+    }
 
     public Post(int postId, String title, String content, String imageUrl, Date createdAt, Date updatedAt, int locationId, int categoryId, int authorId) {
         this.postId = postId;
@@ -95,5 +102,29 @@ public class Post {
 
     public void setAuthorId(int authorId) {
         this.authorId = authorId;
+    }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 }

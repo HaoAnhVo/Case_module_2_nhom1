@@ -61,7 +61,7 @@ table tr:hover {
     background-color: #86b817;
     padding: 10px 20px;
     color: #fff;
-    margin: 0 10px 0 auto;
+    margin: 0 20px;
     border-radius: 20px;
     cursor: pointer;
 }

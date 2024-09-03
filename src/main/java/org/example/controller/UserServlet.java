@@ -10,13 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.Serial;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 @WebServlet(name = "UserServlet", urlPatterns = "/UserServlet")
 public class UserServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
     private UserService userService;
 
     public void init() {
@@ -26,7 +24,7 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
-            action = "";
+            action = "list";
         }
         switch (action) {
             case "list":
@@ -35,17 +33,11 @@ public class UserServlet extends HttpServlet {
             case "new":
                 showNewForm(request, response);
                 break;
-            case "insert":
-                insertUser(request, response);
-                break;
             case "delete":
                 deleteUser(request, response);
                 break;
             case "edit":
                 showEditForm(request, response);
-                break;
-            case "update":
-                updateUser(request, response);
                 break;
         }
     }
@@ -100,6 +92,7 @@ public class UserServlet extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
 
         User newUser = new User();
         newUser.setUsername(username);

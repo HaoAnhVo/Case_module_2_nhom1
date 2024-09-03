@@ -112,7 +112,7 @@
                         <a href="cuisine.jsp" class="dropdown-item">Ẩm thực</a>
                     </div>
                 </div>
-                <a href="blog.jsp" class="nav-item nav-link">Bài viết</a>
+                <a href="PostServlet?action=list&view=blog" class="nav-item nav-link">Bài viết</a>
                 <a href="about.jsp" class="nav-item nav-link" id="about-tab">Chúng tôi</a>
                 <a href="contact.jsp" class="nav-item nav-link" id="contact-tab">Liên hệ</a>
             </div>
