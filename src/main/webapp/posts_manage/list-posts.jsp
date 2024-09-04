@@ -247,6 +247,7 @@
     <h2>Quản lý</h2>
     <a href="UserServlet">Quản lý người dùng</a>
     <a href="PostServlet" class="active">Quản lý bài viết</a>
+    <a href="LocationServlet">Quản lý địa điểm</a>
 </div>
 <div class="content">
     <a class="actions" href="LogoutServlet" style="display: flex; justify-content: end; text-decoration: none"
