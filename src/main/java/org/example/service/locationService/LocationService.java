@@ -27,12 +27,12 @@ public class LocationService implements ILocationService {
     }
 
     @Override
-    public boolean deleteLocation(int id) throws SQLException {
-        return iLocationRepository.deleteLocation(id);
+    public void deleteLocation(int id) throws SQLException {
+        iLocationRepository.deleteLocation(id);
     }
 
     @Override
-    public boolean updateLocation(Location location) throws SQLException {
-        return iLocationRepository.updateLocation(location);
+    public void updateLocation(Location location) throws SQLException {
+        iLocationRepository.updateLocation(location);
     }
 }

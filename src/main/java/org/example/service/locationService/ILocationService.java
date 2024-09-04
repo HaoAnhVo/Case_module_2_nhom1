@@ -12,7 +12,7 @@ public interface ILocationService {
 
     public List<Location> getAllLocations();
 
-    public boolean deleteLocation(int id) throws SQLException;
+    public void deleteLocation(int id) throws SQLException;
 
-    public boolean updateLocation(Location location) throws SQLException;
+    public void updateLocation(Location location) throws SQLException;
 }

@@ -4,7 +4,6 @@
 <% if ("true".equals(error)) { %>
 <p style="color:red;">Sai tài khoản hoặc mật khẩu!</p>
 <% } %>
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>

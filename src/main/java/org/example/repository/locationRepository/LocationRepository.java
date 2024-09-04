@@ -7,16 +7,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationRepository implements ILocationRepository{
-    private static final String INSERT_LOCATION = "INSERT INTO location (locationName, mapLink) VALUES (?, ?)";
+public class LocationRepository implements ILocationRepository {
+    private static final String INSERT_LOCATION = "INSERT INTO locations (locationName, mapLink, imgURL) VALUES (?, ?, ?)";
     private static final String SELECT_ALL_LOCATIONS = "select * from locations";
-    private static final String SELECT_LOCATION_BY_ID = "select * from location where id = ?";
+    private static final String SELECT_LOCATION_BY_ID = "select * from locations where locationId = ?";
+    private static final String DELETE_LOCATION_BY_ID = "delete from locations where locationId = ?";
+    private static final String UPDATE_LOCATION = "update locations set locationName = ?, mapLink = ?, imgURL = ? where locationId = ?";
+
     @Override
     public void insertLocation(Location location) throws SQLException {
         try (Connection connection = BaseRepository.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_LOCATION)) {
             preparedStatement.setString(1, location.getLocationName());
             preparedStatement.setString(2, location.getMapLink());
+            preparedStatement.setString(3, location.getImgURL());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             printSQLException(e);
@@ -28,7 +32,16 @@ public class LocationRepository implements ILocationRepository{
         Location location = null;
         try (Connection connection = BaseRepository.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOCATION_BY_ID);) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
 
+            while (rs.next()) {
+                String locationName = rs.getString("locationName");
+                String mapLink = rs.getString("mapLink");
+                String imgURL = rs.getString("imgURL");
+                location = new Location(id, locationName, mapLink, imgURL);
+            }
         } catch (SQLException e) {
             printSQLException(e);
         }
@@ -45,8 +58,8 @@ public class LocationRepository implements ILocationRepository{
                 int id = resultSet.getInt("locationId");
                 String locationName = resultSet.getString("locationName");
                 String mapLink = resultSet.getString("mapLink");
-
-                locations.add(new Location(id, locationName, mapLink));
+                String imgURL = resultSet.getString("imgURL");
+                locations.add(new Location(id, locationName, mapLink, imgURL));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -55,13 +68,29 @@ public class LocationRepository implements ILocationRepository{
     }
 
     @Override
-    public boolean deleteLocation(int id) throws SQLException {
-        return false;
+    public void deleteLocation(int id) throws SQLException {
+        try (Connection connection = BaseRepository.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_LOCATION_BY_ID)){
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public boolean updateLocation(Location location) throws SQLException {
-        return false;
+    public void updateLocation(Location location) throws SQLException {
+        try (Connection connection = BaseRepository.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_LOCATION)) {
+            preparedStatement.setString(1, location.getLocationName());
+            preparedStatement.setString(2, location.getMapLink());
+            preparedStatement.setString(3, location.getImgURL());
+            preparedStatement.setInt(4, location.getLocationId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
     }
 
     private void printSQLException(SQLException ex) {
