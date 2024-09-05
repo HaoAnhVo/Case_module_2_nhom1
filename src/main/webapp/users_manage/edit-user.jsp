@@ -15,7 +15,7 @@
         session.removeAttribute("status");
     }
 %>
-<!DOCTYPE html>
+
 <html>
 <head>
     <title>Chỉnh sửa thông tin người dùng</title>
@@ -246,5 +246,6 @@
 <a href="UserServlet?action=list" class="back-link">
     <span class="arrow">←</span>Quay về trang trước
 </a>
+<script src="<%=request.getContextPath()%>js/sub-script.js"></script>
 </body>
 </html>

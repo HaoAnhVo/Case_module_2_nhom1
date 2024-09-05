@@ -3,13 +3,15 @@ package org.example.model;
 public class Location {
     private int locationId;
     private String locationName;
+    private String locationImage;
     private String mapLink;
 
     public Location() {}
 
-    public Location(int locationId, String locationName, String mapLink) {
+    public Location(int locationId, String locationName, String locationImage,String mapLink) {
         this.locationId = locationId;
         this.locationName = locationName;
+        this.locationImage = locationImage;
         this.mapLink = mapLink;
     }
 
@@ -35,5 +37,13 @@ public class Location {
 
     public void setMapLink(String mapLink) {
         this.mapLink = mapLink;
+    }
+
+    public String getLocationImage() {
+        return locationImage;
+    }
+
+    public void setLocationImage(String locationImage) {
+        this.locationImage = locationImage;
     }
 }

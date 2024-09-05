@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -81,35 +81,7 @@
 
         <!-- Navbar & Hero Start -->
         <div class="container-fluid position-relative p-0">
-            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-2 py-lg-0">
-                <a href="./index.jsp" class="navbar-brand px-5">
-                    <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>MeTrip</h1>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="fa fa-bars"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto py-0">
-                        <a href="index.jsp" class="nav-item nav-link">Trang chủ</a>
-                        <a href="destination.jsp" class="nav-item nav-link">Địa điểm</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Danh mục</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="unesco.jsp" class="dropdown-item">Kỳ quan</a>
-                                <a href="./beach.jsp" class="dropdown-item active">Bãi biển</a>
-                                <a href="forest_mount.jsp" class="dropdown-item">Núi rừng</a>
-                                <a href="waterfall.jsp" class="dropdown-item">Thác nước</a>
-                                <a href="cuisine.jsp" class="dropdown-item">Ẩm thực</a>
-                            </div>
-                        </div>
-                        <a href="PostServlet?action=list&view=blog" class="nav-item nav-link">Bài viết</a>
-                        <a href="about.jsp" class="nav-item nav-link">Chúng tôi</a>
-                        <a href="contact.jsp" class="nav-item nav-link">Liên hệ</a>
-                    </div>
-                    <a href="login.jsp" class="ms-auto m-2 btn btn-primary rounded-pill py-2 px-4">Đăng nhập</a>
-                    <a href="register.jsp" class="btn btn-secondary rounded-pill py-2 px-4">Đăng ký</a>
-                </div>
-            </nav>
+            <jsp:include page="navbar.jsp" />
 
             <div class="container-fluid bg-primary py-5 mb-5 hero-header">
                 <div class="container py-5">
@@ -130,7 +102,7 @@
                     <h2 class="mb-4 mt-4 text-center" style="font-size: 2.2rem">Bãi biển</h2>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="package-item">
-                            <a href="hanoi_blog_1_details.jsp">
+                            <a href="detail-blog.jsp">
                                 <div class="overflow-hidden">
                                     <img class="img-fluid" src="img/package-1.jpg" alt="" />
                                 </div>

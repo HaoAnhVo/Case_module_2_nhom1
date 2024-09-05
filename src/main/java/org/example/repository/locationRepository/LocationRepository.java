@@ -14,7 +14,7 @@ public class LocationRepository implements ILocationRepository {
     @Override
     public List<Location> getAllLocations() {
         List<Location> locations = new ArrayList<>();
-        String query = "SELECT locationId, locationName FROM locations";
+        String query = "SELECT * FROM locations";
 
         try (Connection con = BaseRepository.getConnection();
              PreparedStatement ps = con.prepareStatement(query);
@@ -24,6 +24,7 @@ public class LocationRepository implements ILocationRepository {
                 Location location = new Location();
                 location.setLocationId(rs.getInt("locationId"));
                 location.setLocationName(rs.getString("locationName"));
+                location.setLocationImage(rs.getString("imageURL"));
                 locations.add(location);
             }
         } catch (SQLException e) {
