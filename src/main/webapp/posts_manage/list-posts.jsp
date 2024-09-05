@@ -243,12 +243,7 @@
     </style>
 </head>
 <body>
-<div class="sidebar">
-    <h2>Quản lý</h2>
-    <a href="UserServlet">Quản lý người dùng</a>
-    <a href="PostServlet" class="active">Quản lý bài viết</a>
-    <a href="LocationServlet">Quản lý địa điểm</a>
-</div>
+<jsp:include page="../common/sidebar.jsp" />
 <div class="content">
     <a class="actions" href="LogoutServlet" style="display: flex; justify-content: end; text-decoration: none"
        data-tooltip="Đăng xuất"><i class="fa-solid fa-right-from-bracket"

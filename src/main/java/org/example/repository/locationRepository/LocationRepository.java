@@ -1,6 +1,7 @@
 package org.example.repository.locationRepository;
 
 import org.example.model.Location;
+import org.example.model.Post;
 import org.example.repository.BaseRepository;
 
 import java.sql.*;
@@ -107,5 +108,35 @@ public class LocationRepository implements ILocationRepository {
                 }
             }
         }
+    }
+
+    @Override
+    public List<Post> getPostsByLocation(int locationId) {
+        List<Post> posts = new ArrayList<>();
+        String query = "SELECT * FROM posts WHERE locationId = ?";
+        try (Connection con = BaseRepository.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setInt(1, locationId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Post post = new Post();
+                post.setPostId(rs.getInt("postId"));
+                post.setTitle(rs.getString("title"));
+                post.setContent(rs.getString("content"));
+                post.setImageUrl(rs.getString("imageUrl"));
+                post.setCreatedAt(rs.getDate("createdAt"));
+                post.setUpdatedAt(rs.getDate("updatedAt"));
+                post.setLocationId(rs.getInt("locationId"));
+                post.setCategoryId(rs.getInt("categoryId"));
+                post.setAuthorId(rs.getInt("authorId"));
+
+                post.setLocationName(rs.getString("locationName"));
+                post.setCategoryName(rs.getString("categoryName"));
+                posts.add(post);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
     }
 }

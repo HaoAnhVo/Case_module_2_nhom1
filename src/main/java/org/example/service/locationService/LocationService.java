@@ -1,6 +1,7 @@
 package org.example.service.locationService;
 
 import org.example.model.Location;
+import org.example.model.Post;
 import org.example.repository.locationRepository.ILocationRepository;
 import org.example.repository.locationRepository.LocationRepository;
 
@@ -35,4 +36,11 @@ public class LocationService implements ILocationService {
     public void updateLocation(Location location) throws SQLException {
         iLocationRepository.updateLocation(location);
     }
+
+    @Override
+    public List<Post> getPostsByLocation(int locationId) {
+        return iLocationRepository.getPostsByLocation(locationId);
+    }
+
+
 }
