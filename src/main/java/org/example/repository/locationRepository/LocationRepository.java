@@ -1,35 +1,154 @@
 package org.example.repository.locationRepository;
 
 import org.example.model.Location;
+import org.example.model.Post;
 import org.example.repository.BaseRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LocationRepository implements ILocationRepository {
+    private static final String INSERT_LOCATION = "INSERT INTO locations (locationName, mapLink, imgURL) VALUES (?, ?, ?)";
+    private static final String SELECT_ALL_LOCATIONS = "select * from locations";
+    private static final String SELECT_LOCATION_BY_ID = "select * from locations where locationId = ?";
+    private static final String DELETE_LOCATION_BY_ID = "delete from locations where locationId = ?";
+    private static final String UPDATE_LOCATION = "update locations set locationName = ?, mapLink = ?, imgURL = ? where locationId = ?";
+
+    @Override
+    public void insertLocation(Location location) throws SQLException {
+        try (Connection connection = BaseRepository.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_LOCATION)) {
+            preparedStatement.setString(1, location.getLocationName());
+            preparedStatement.setString(2, location.getMapLink());
+            preparedStatement.setString(3, location.getImgURL());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+    }
+
+    @Override
+    public Location selectLocation(int id) {
+        Location location = null;
+        try (Connection connection = BaseRepository.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOCATION_BY_ID);) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                String locationName = rs.getString("locationName");
+                String mapLink = rs.getString("mapLink");
+                String imgURL = rs.getString("imgURL");
+                location = new Location(id, locationName, mapLink, imgURL);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return location;
+    }
+
     @Override
     public List<Location> getAllLocations() {
         List<Location> locations = new ArrayList<>();
-        String query = "SELECT locationId, locationName FROM locations";
+<<<<<<< HEAD
+        try (Connection connection = BaseRepository.getConnection();
+             Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(SELECT_ALL_LOCATIONS);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("locationId");
+                String locationName = resultSet.getString("locationName");
+                String mapLink = resultSet.getString("mapLink");
+                String imgURL = resultSet.getString("imgURL");
+                locations.add(new Location(id, locationName, mapLink, imgURL));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return locations;
+    }
+=======
+        String query = "SELECT * FROM locations";
+>>>>>>> main
 
-        try (Connection con = BaseRepository.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+    @Override
+    public void deleteLocation(int id) throws SQLException {
+        try (Connection connection = BaseRepository.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_LOCATION_BY_ID)){
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateLocation(Location location) throws SQLException {
+        try (Connection connection = BaseRepository.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_LOCATION)) {
+            preparedStatement.setString(1, location.getLocationName());
+            preparedStatement.setString(2, location.getMapLink());
+            preparedStatement.setString(3, location.getImgURL());
+            preparedStatement.setInt(4, location.getLocationId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+    }
+
+    private void printSQLException(SQLException ex) {
+        for (Throwable e : ex) {
+            if (e instanceof SQLException) {
+                e.printStackTrace(System.err);
+                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+                System.err.println("Message: " + e.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<Post> getPostsByLocation(int locationId) {
+        List<Post> posts = new ArrayList<>();
+        String query = "SELECT * FROM posts WHERE locationId = ?";
+        try (Connection con = BaseRepository.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setInt(1, locationId);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
+<<<<<<< HEAD
+                Post post = new Post();
+                post.setPostId(rs.getInt("postId"));
+                post.setTitle(rs.getString("title"));
+                post.setContent(rs.getString("content"));
+                post.setImageUrl(rs.getString("imageUrl"));
+                post.setCreatedAt(rs.getDate("createdAt"));
+                post.setUpdatedAt(rs.getDate("updatedAt"));
+                post.setLocationId(rs.getInt("locationId"));
+                post.setCategoryId(rs.getInt("categoryId"));
+                post.setAuthorId(rs.getInt("authorId"));
+
+                post.setLocationName(rs.getString("locationName"));
+                post.setCategoryName(rs.getString("categoryName"));
+                posts.add(post);
+=======
                 Location location = new Location();
                 location.setLocationId(rs.getInt("locationId"));
                 location.setLocationName(rs.getString("locationName"));
+                location.setLocationImage(rs.getString("imageURL"));
                 locations.add(location);
+>>>>>>> main
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return locations;
+        return posts;
     }
 }

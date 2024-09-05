@@ -14,7 +14,7 @@
         session.removeAttribute("status");
     }
 %>
-
+<!DOCTYPE html>
 <html>
 <head>
     <title>${post == null ? "Tạo bài viết mới" : "Chỉnh sửa bài viết"}</title>
@@ -266,87 +266,42 @@
     </style>
 </head>
 <body>
-<h1>${post == null ? "Tạo bài viết mới" : "Chỉnh sửa bài viết"}</h1>
-<%-- Post detail --%>
-<form action="PostServlet?action=${post == null ? 'insert' : 'update'}" method="post" class="form-post">
-    <input type="hidden" name="postId" value="${post != null ? post.postId : ''}">
+<h1>${location == null ? "Tạo địa điểm mới" : "Chỉnh sửa địa điểm"}</h1>
+<form action="LocationServlet?action=${location == null ? 'create' : 'edit'}" method="post" class="form-post">
+    <input type="hidden" name="locationId" value="${location != null ? location.locationId : ''}">
     <div>
-        <label>Tiêu đề:</label>
-        <input type="text" name="title" value="${post != null ? post.title : ''}" required>
+        <label>Địa điểm:</label>
+        <c:if test="${location == null}">
+            <input type="text" name="locationName">
+        </c:if>
+        <c:if test="${location != null}">
+            <select name="locationId" required disabled>
+                <option value="">-- Chọn địa điểm --</option>
+                <c:forEach var="item" items="${locations}">
+                    <option value="${item.locationId}"
+                            <c:if test="${location != null && location.locationId == item.locationId}">selected</c:if>>
+                            ${item.locationName}
+                    </option>
+                </c:forEach>
+            </select>
+        </c:if>
     </div>
     <div>
-        <label>Nội dung:</label>
-        <textarea name="content" required>${post != null ? post.content : ''}</textarea>
+        <label>Link google maps:</label>
+        <textarea name="mapLink" required>${location != null ? location.mapLink : ''}</textarea>
     </div>
     <div>
         <label>Link hình ảnh:</label>
-        <input type="text" name="imageUrl" value="${post != null ? post.imageUrl : ''}">
-    </div>
-    <div>
-        <label>Địa điểm:</label>
-        <select name="locationId" required>
-            <option value="">-- Chọn địa điểm --</option>
-            <c:forEach var="location" items="${locations}">
-                <option value="${location.locationId}"
-                        <c:if test="${post != null && post.locationId == location.locationId}">selected</c:if>>
-                        ${location.locationName}
-                </option>
-            </c:forEach>
-        </select>
-    </div>
-    <div>
-        <label>Danh mục:</label>
-        <select name="categoryId" required>
-            <option value="">-- Chọn danh mục --</option>
-            <c:forEach var="category" items="${categories}">
-                <option value="${category.categoryId}"
-                        <c:if test="${post != null && post.categoryId == category.categoryId}">selected</c:if>>
-                        ${category.categoryName}
-                </option>
-            </c:forEach>
-        </select>
+        <input type="text" name="imgURL" value="${location != null ? location.imgURL : ''}">
     </div>
     <%--  Submit --%>
     <div>
-        <button type="submit">${post == null ? "Thêm" : "Cập nhật"}</button>
+        <button type="submit">${location == null ? "Thêm" : "Cập nhật"}</button>
     </div>
 </form>
-<c:if test="${post != null}">
-    <div class="comment-section">
-        <h2>Bình luận</h2>
-        <div class="comment-list">
-            <c:forEach var="comment" items="${comments}">
-                <div class="comment-item">
-                    <div>
-                        <p>${comment.content}</p>
-                        <p><strong>Người đăng:</strong> ${comment.username}</p>
-                        <p><strong>Ngày đăng:</strong> ${comment.createdAt}</p>
-                    </div>
-                    <a class="delete-btn"
-                       href="PostServlet?action=deleteComment&commentId=${comment.commentId}&postId=${post.postId}"
-                       onclick="return confirm('Bạn chắc chắn muốn xóa bình luận này?')"
-                       data-tooltip="Xóa">
-                        <i class="fa-solid fa-trash">Xóa</i>
-                    </a>
-                </div>
-            </c:forEach>
-        </div>
-        <form action="PostServlet?action=addComment" method="post">
-            <input type="hidden" name="postId" value="${post.postId}">
-            <div>
-                <label for="content">Chia sẻ góp ý của bạn:</label>
-                <textarea name="content" id="content"></textarea>
-            </div>
-            <div>
-                <button type="submit">Thêm</button>
-            </div>
-        </form>
-    </div>
-</c:if>
-
-<a href="PostServlet?action=list" class="back-link">
+<a href="LocationServlet?action=list" class="back-link">
     <span class="arrow">← </span>Quay về trang trước
 </a>
-<script src="<%=request.getContextPath()%>js/sub-script.js"></script>
+</div>
 </body>
 </html>

@@ -6,6 +6,7 @@
     User user = (User) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp");
+        return;
     }
 %>
 <%
@@ -22,7 +23,7 @@
         session.removeAttribute("status");
     }
 %>
-<!DOCTYPE html>
+
 <html>
 <head>
     <title>Quản lý người dùng</title>
@@ -244,18 +245,62 @@
                 transform: translateY(0);
             }
         }
+
+        .user-info-act {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 30px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .user-info i {
+            margin-right: 8px;
+            color: #86b817;
+            font-size: 24px;
+        }
+
+        .user-info span {
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
+<<<<<<< HEAD
+<jsp:include page="../common/sidebar.jsp" />
+=======
 <div class="sidebar">
     <h2>Quản lý</h2>
-    <a href="UserServlet" class="active">Quản lý người dùng</a>
-    <a href="PostServlet">Quản lý bài viết</a>
+    <c:choose>
+        <c:when test="${user.role == 'admin'}">
+            <a href="UserServlet?action=list">Quản lý người
+                dùng</a>
+            <a href="PostServlet?action=list">Quản lý bài
+                viết</a>
+        </c:when>
+        <c:when test="${user.role == 'moderator'}">
+            <a href="PostServlet?action=list">Quản lý bài
+                viết</a>
+        </c:when>
+    </c:choose>
 </div>
+>>>>>>> main
 <div class="content">
-    <a class="actions" href="LogoutServlet" style="display: flex; justify-content: end; text-decoration: none"
-       data-tooltip="Đăng xuất"><i class="fa-solid fa-right-from-bracket"
-                                   style="color: #86b817; font-size: 24px"></i></a>
+    <div class="user-info-act">
+        <div class="user-info">
+            <i class="fa-solid fa-user"></i>
+            <span>${user.username}</span>
+        </div>
+        <a class="actions" href="LogoutServlet" style="text-decoration: none"
+           data-tooltip="Đăng xuất"><i class="fa-solid fa-right-from-bracket"
+                                       style="color: #86b817; font-size: 24px"></i></a>
+    </div>
     <h1>Danh sách người dùng</h1>
     <a class="add" href="UserServlet?action=new">Thêm mới người dùng</a>
 
