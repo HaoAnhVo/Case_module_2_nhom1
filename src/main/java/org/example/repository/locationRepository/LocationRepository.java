@@ -52,6 +52,7 @@ public class LocationRepository implements ILocationRepository {
     @Override
     public List<Location> getAllLocations() {
         List<Location> locations = new ArrayList<>();
+<<<<<<< HEAD
         try (Connection connection = BaseRepository.getConnection();
              Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(SELECT_ALL_LOCATIONS);
@@ -67,6 +68,9 @@ public class LocationRepository implements ILocationRepository {
         }
         return locations;
     }
+=======
+        String query = "SELECT * FROM locations";
+>>>>>>> main
 
     @Override
     public void deleteLocation(int id) throws SQLException {
@@ -119,6 +123,7 @@ public class LocationRepository implements ILocationRepository {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
+<<<<<<< HEAD
                 Post post = new Post();
                 post.setPostId(rs.getInt("postId"));
                 post.setTitle(rs.getString("title"));
@@ -133,6 +138,13 @@ public class LocationRepository implements ILocationRepository {
                 post.setLocationName(rs.getString("locationName"));
                 post.setCategoryName(rs.getString("categoryName"));
                 posts.add(post);
+=======
+                Location location = new Location();
+                location.setLocationId(rs.getInt("locationId"));
+                location.setLocationName(rs.getString("locationName"));
+                location.setLocationImage(rs.getString("imageURL"));
+                locations.add(location);
+>>>>>>> main
             }
         } catch (SQLException e) {
             e.printStackTrace();

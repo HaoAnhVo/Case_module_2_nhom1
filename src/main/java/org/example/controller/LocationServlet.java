@@ -1,8 +1,11 @@
 package org.example.controller;
 
 import org.example.model.Location;
+<<<<<<< HEAD
 import org.example.model.User;
 import org.example.service.locationService.ILocationService;
+=======
+>>>>>>> main
 import org.example.service.locationService.LocationService;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+<<<<<<< HEAD
 import java.sql.SQLException;
 
 @WebServlet(name = "LocationServlet", urlPatterns = "/LocationServlet")
@@ -141,5 +145,24 @@ public class LocationServlet extends HttpServlet {
         request.getSession().setAttribute("message", "Cập nhật thành công!");
         request.getSession().setAttribute("status", "success");
         response.sendRedirect("LocationServlet?action=list");
+=======
+import java.util.List;
+
+@WebServlet(name = "LocationServlet", urlPatterns = "/LocationServlet")
+public class LocationServlet extends HttpServlet {
+    private LocationService locationService;
+
+    @Override
+    public void init() {
+        locationService = new LocationService();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Location> locations = locationService.getAllLocations();
+        request.setAttribute("locations", locations);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("destination.jsp");
+        dispatcher.forward(request, response);
+>>>>>>> main
     }
 }
