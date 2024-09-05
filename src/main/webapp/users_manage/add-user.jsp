@@ -15,7 +15,7 @@
         session.removeAttribute("status");
     }
 %>
-<!DOCTYPE html>
+
 <html>
 <head>
     <title>Thêm Mới</title>

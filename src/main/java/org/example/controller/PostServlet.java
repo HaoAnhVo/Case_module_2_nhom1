@@ -37,7 +37,7 @@ public class PostServlet extends HttpServlet {
             action = "list";
         }
 
-        loadCategories(request);
+
         try {
             switch (action) {
                 case "list":
@@ -219,7 +219,13 @@ public class PostServlet extends HttpServlet {
 
         request.setAttribute("post", post);
         request.setAttribute("comments", comments);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("posts_manage/detail-post.jsp");
+        String view = request.getParameter("view");
+        String page = "posts_manage/detail-post.jsp";
+        if("detail-blog".equals(view)) {
+            page = "detail-blog.jsp";
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }
 
@@ -248,6 +254,7 @@ public class PostServlet extends HttpServlet {
         User loggedInUser = (User) session.getAttribute("user");
         if (loggedInUser != null) {
             int authorId = loggedInUser.getUserId();
+            String role = loggedInUser.getRole();
 
             Comment comment = new Comment();
             comment.setContent(content);
@@ -258,37 +265,16 @@ public class PostServlet extends HttpServlet {
             commentService.addComment(comment);
             request.getSession().setAttribute("message", "Thêm bình luận bài viết thành công!");
             request.getSession().setAttribute("status", "success");
-            response.sendRedirect("PostServlet?action=edit&postId=" + postId);
+
+            if ("admin".equalsIgnoreCase(role) || "moderator".equalsIgnoreCase(role)) {
+                response.sendRedirect("PostServlet?action=edit&postId=" + postId);
+            } else {
+                response.sendRedirect("PostServlet?action=view&view=detail-blog&postId=" + postId);
+            }
         } else {
+            request.getSession().setAttribute("message", "Bạn cần đăng nhập để có thể bình luận bài viết!");
+            request.getSession().setAttribute("status", "error");
             response.sendRedirect("login.jsp");
         }
-    }
-
-    /*********  Category  *********/
-    private void loadCategories(HttpServletRequest request) {
-        List<Category> categories = categoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-    }
-
-    private void setCategories(HttpServletRequest request) {
-        List<Category> categories = categoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-    }
-
-    private void listCategories(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServletException, IOException {
-        setCategories(request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("postList.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    private void listPostsByCategory(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServletException, IOException {
-        String categoryId = request.getParameter("categoryId");
-        List<Post> posts = postService.getPostsByCategory(Integer.parseInt(categoryId));
-        request.setAttribute("posts", posts);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("category_posts.jsp"); // Trang hiển thị bài viết
-        dispatcher.forward(request, response);
     }
 }

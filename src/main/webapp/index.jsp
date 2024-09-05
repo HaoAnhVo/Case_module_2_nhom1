@@ -80,7 +80,8 @@
 
 <!-- Navbar & Hero Start -->
 <div class="container-fluid position-relative p-0">
-    <jsp:include page="common/navbar.jsp" />
+    <% request.setAttribute("currentPage", "index.jsp"); %>
+    <jsp:include page="./common/navbar.jsp" />
 
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
         <div class="container py-5">
@@ -171,7 +172,7 @@
         </div>
         <div class="row g-4 justify-content-between">
             <div class="col-lg-4 col-sm-4 wow fadeInUp" data-wow-delay="0.1s">
-                <a href="#!">
+                <a href="./blog.jsp">
                     <img
                             src="https://theworldtravelguy.com/wp-content/uploads/2020/04/DSCF3947_450n.jpg"
                             alt=""
@@ -181,7 +182,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-4 wow fadeInUp" data-wow-delay="0.3s">
-                <a href="#!">
+                <a href="./destination.jsp">
                     <img
                             src="https://theworldtravelguy.com/wp-content/uploads/2021/05/DSCF1687_450n2.jpg"
                             alt=""
@@ -191,7 +192,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-4 wow fadeInUp" data-wow-delay="0.5s">
-                <a href="#!">
+                <a href="./about.jsp">
                     <img
                             src="https://theworldtravelguy.com/wp-content/uploads/2021/10/DSCF1029-2_450.jpg"
                             alt=""
@@ -399,7 +400,7 @@
         <div class="row g-4 justify-content-center">
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="package-item">
-                    <a href="hanoi_blog_1_details.jsp">
+                    <a href="#!">
                         <div class="overflow-hidden">
                             <img class="img-fluid" src="img/package-1.jpg" alt=""/>
                         </div>
@@ -425,7 +426,7 @@
             </div>
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="package-item">
-                    <a href="up_post.jsp">
+                    <a href="#!">
                         <div class="overflow-hidden">
                             <img class="img-fluid" src="img/package-1.jpg" alt=""/>
                         </div>

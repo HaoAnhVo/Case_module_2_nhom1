@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.model.Location;
+import org.example.model.User;
 import org.example.service.locationService.ILocationService;
 import org.example.service.locationService.LocationService;
 
@@ -12,12 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "LocationServlet", urlPatterns = "/LocationServlet")
 public class LocationServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ILocationService iLocationService;
 
+    @Override
     public void init() {
         iLocationService = new LocationService();
     }
@@ -71,8 +74,18 @@ public class LocationServlet extends HttpServlet {
 
     public void listLocation(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         request.setAttribute("locations", iLocationService.getAllLocations());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("location/list-locations.jsp");
+        String view = request.getParameter("view");
+        String page = "location/list-locations.jsp";
+        if ("location".equals(view)) {
+            page = "destination.jsp";
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
         dispatcher.forward(request, response);
+
+//        List<Location> locations = iLocationService.getAllLocations();
+//        request.setAttribute("locations", locations);
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("destination.jsp");
+//        dispatcher.forward(request, response);
     }
 
     public void insertLocation(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
