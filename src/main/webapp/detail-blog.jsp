@@ -70,7 +70,7 @@
 
 <!-- Navbar & Hero Start -->
 <div class="container-fluid position-relative p-0">
-    <jsp:include page="navbar.jsp"/>
+    <jsp:include page="./common/navbar.jsp"/>
 
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
         <div class="container py-5">
