@@ -269,7 +269,7 @@
 </head>
 <body>
 
-<jsp:include page="../common/sidebar.jsp" />
+<jsp:include page="../common/sidebar.jsp"/>
 
 <div class="content">
     <div class="user-info-act">

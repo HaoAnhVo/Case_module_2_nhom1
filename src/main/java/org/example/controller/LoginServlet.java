@@ -33,7 +33,6 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-
             if("admin".equals(user.getRole())) {
                 session.setAttribute("activeTab", "userManagement");
                 response.sendRedirect("UserServlet?action=list");

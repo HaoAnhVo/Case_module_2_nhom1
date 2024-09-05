@@ -105,7 +105,6 @@ table tr:hover {
 .actions {
     display: flex;
     gap: 18px;
-    justify-content: center;
 }
 
 .actions a {
@@ -166,7 +165,6 @@ table tr:hover {
 .back-link:hover {
     color: #86b817;
 }
-
 
 
 .popup {
@@ -230,4 +228,28 @@ form button[type="submit"] {
 
 form button[type="submit"]:hover {
     background-color: #688b12;
+}
+
+.user-info-act {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 30px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #333;
+}
+
+.user-info i {
+    margin-right: 8px;
+    color: #86b817;
+    font-size: 24px;
+}
+
+.user-info span {
+    font-size: 18px;
 }

@@ -24,38 +24,42 @@
 %>
 <html>
 <head>
-    <title>Quản lý địa điểm</title>
+    <title>Danh sách danh mục</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href="../common/sidebar.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="../common/sidebar.jsp"/>
 <div class="content">
-    <a class="actions" href="LogoutServlet" style="display: flex; justify-content: end; text-decoration: none"
-       data-tooltip="Đăng xuất"><i class="fa-solid fa-right-from-bracket"
-                                   style="color: #86b817; font-size: 24px"></i></a>
-    <h1>Quản lý địa điểm</h1>
-    <a class="add" href="LocationServlet?action=create">Thêm mới địa điểm</a>
+    <div class="user-info-act">
+        <div class="user-info">
+            <i class="fa-solid fa-user"></i>
+            <span>${user.username}</span>
+        </div>
+        <a class="actions" href="LogoutServlet" style="text-decoration: none"
+           data-tooltip="Đăng xuất"><i class="fa-solid fa-right-from-bracket"
+                                       style="color: #86b817; font-size: 24px"></i></a>
+    </div>
+    <h1>Danh sách danh mục</h1>
+    <a class="add" href="LocationServlet?action=create">Thêm mới danh mục</a>
 
     <table border="1">
         <thead>
         <tr>
-            <th>Địa điểm</th>
-            <th>Link google maps</th>
-            <th>Hoạt động</th>
+            <th>Danh mục</th>
+            <th>Hành động</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="location" items="${locations}">
+        <c:forEach var="category" items="${categories}">
             <tr>
-                <td>${location.locationName}</td>
-                <td>${location.mapLink}</td>
+                <td>${category.categoryName}</td>
                 <td>
                     <div class="actions">
-                        <a href="LocationServlet?action=edit&locationId=${location.locationId}" data-tooltip="Sửa"><i
+                        <a href="CategoryServlet?action=edit&categoryId=${category.categoryId}" data-tooltip="Sửa"><i
                                 class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="LocationServlet?action=delete&locationId=${location.locationId}"
-                           onclick="return confirm('Bạn chắc chắn muốn xóa địa điểm này?')"
+                        <a href="CategoryServlet?action=delete&categoryId=${category.categoryId}"
+                           onclick="return confirm('Bạn chắc chắn muốn xóa danh mục này?')"
                            data-tooltip="Xóa">
                             <i class="fa-solid fa-trash"></i>
                         </a>

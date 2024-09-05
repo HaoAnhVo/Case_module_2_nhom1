@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -80,6 +79,13 @@ public class UserServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirm-password");
+        if (!password.equals(confirmPassword)) {
+            request.getSession().setAttribute("message", "Xác nhận mật khẩu không trùng khớp!");
+            request.getSession().setAttribute("status", "error");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String role = request.getParameter("role");
@@ -96,6 +102,15 @@ public class UserServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        // Kiểm tra xem username đã tồn tại chưa
+        if (checkUsernameExists(username)) {
+            request.getSession().setAttribute("message", "Tên tài khoản đã tồn! Vui lòng chọn một tên khác.");
+            request.getSession().setAttribute("status", "error");
+            request.setAttribute("email", email);
+            request.setAttribute("birthday", birthdayStr);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
 
         User newUser = new User();
         newUser.setUsername(username);
@@ -107,9 +122,24 @@ public class UserServlet extends HttpServlet {
         newUser.setBirthday(new java.sql.Date(birthday.getTime()));
 
         userService.addUser(newUser);
-        request.getSession().setAttribute("message", "Thêm người dùng thành công!");
-        request.getSession().setAttribute("status", "success");
-        response.sendRedirect("UserServlet?action=list");
+
+        // Kiểm tra tham số "registrationType" để xác định điều hướng
+        String registrationType = request.getParameter("registrationType");
+        if ("register".equals(registrationType)) {
+            // Nếu người dùng tự đăng ký, chuyển hướng đến trang đăng nhập
+            request.getSession().setAttribute("message", "Đăng ký thành công! Vui lòng đăng nhập.");
+            request.getSession().setAttribute("status", "success");
+            response.sendRedirect("login.jsp");
+        } else {
+            // Nếu admin thêm mới người dùng, chuyển hướng đến danh sách người dùng
+            request.getSession().setAttribute("message", "Thêm người dùng thành công!");
+            request.getSession().setAttribute("status", "success");
+            response.sendRedirect("UserServlet?action=list");
+        }
+    }
+
+    private boolean checkUsernameExists(String username) {
+        return userService.findByUsername(username) != null;
     }
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -170,7 +200,6 @@ public class UserServlet extends HttpServlet {
 
     private void listUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User currentUser = (User) request.getSession().getAttribute("user");
-
         List<User> allUsers = userService.getAllUsers();
         List<User> filteredUsers = allUsers.stream()
                 .filter(user -> getRoleLevel(user.getRole()) < getRoleLevel(currentUser.getRole()))

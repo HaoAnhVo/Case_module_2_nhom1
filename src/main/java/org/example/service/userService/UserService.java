@@ -40,4 +40,9 @@ public class UserService implements IUserService {
     public void deleteUser(int userId) {
         iUserRepository.deleteUser(userId);
     }
+
+    @Override
+    public User findByUsername(String username) {
+        return iUserRepository.findByUsername(username);
+    }
 }

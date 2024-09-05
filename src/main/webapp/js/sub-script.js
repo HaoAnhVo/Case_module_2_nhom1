@@ -18,7 +18,8 @@ function validatePassword() {
     if (password !== confirm_password) {
         message.textContent = "Mật khẩu không trùng khớp";
         return false;
+    } else {
+        message.textContent = "";
+        return true
     }
-
-    return true;
 }

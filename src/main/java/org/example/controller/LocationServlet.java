@@ -74,7 +74,7 @@ public class LocationServlet extends HttpServlet {
     public void listLocation(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         request.setAttribute("locations", iLocationService.getAllLocations());
         String view = request.getParameter("view");
-        String page = "location/list-locations.jsp";
+        String page = "locations_manage/list-locations.jsp";
         if ("location".equals(view)) {
             page = "destination.jsp";
         }
@@ -102,7 +102,7 @@ public class LocationServlet extends HttpServlet {
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("location/form-location.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("locations_manage/form-location.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -112,7 +112,7 @@ public class LocationServlet extends HttpServlet {
         System.out.println(location);
         request.setAttribute("location", location);
         request.setAttribute("locations", iLocationService.getAllLocations());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("location/form-location.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("locations_manage/form-location.jsp");
         dispatcher.forward(request, response);
     }
 

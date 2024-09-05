@@ -75,7 +75,7 @@ public class CategoryServlet extends HttpServlet {
     public void listCategory(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         request.setAttribute("categories", iCategoryService.getAllCategories());
         String view = request.getParameter("view");
-        String page = "category/list-categories.jsp";
+        String page = "categories_manage/list-categories.jsp";
 //        if ("location".equals(view)) {
 //            page = "destination.jsp";
 //        }
@@ -100,7 +100,7 @@ public class CategoryServlet extends HttpServlet {
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("category/form-categories.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("categories_manage/form-categories.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -109,7 +109,7 @@ public class CategoryServlet extends HttpServlet {
         Category category = iCategoryService.selectCategory(categoryId);
         request.setAttribute("categories", category);
         request.setAttribute("categories", iCategoryService.getAllCategories());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("category/form-categories.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("categories_manage/form-categories.jsp");
         dispatcher.forward(request, response);
     }
 
