@@ -268,22 +268,9 @@
     </style>
 </head>
 <body>
-<<<<<<< HEAD
+
 <jsp:include page="../common/sidebar.jsp" />
-=======
-<div class="sidebar">
-    <h2>Quản lý</h2>
-    <c:choose>
-        <c:when test="${user.role == 'admin'}">
-            <a href="UserServlet?action=list">Quản lý người dùng</a>
-            <a href="PostServlet?action=list">Quản lý bài viết</a>
-        </c:when>
-        <c:when test="${user.role == 'moderator'}">
-            <a href="PostServlet?action=list">Quản lý bài viết</a>
-        </c:when>
-    </c:choose>
-</div>
->>>>>>> main
+
 <div class="content">
     <div class="user-info-act">
         <div class="user-info">

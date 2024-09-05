@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.model.Location;
+import org.example.model.User;
 import org.example.service.locationService.ILocationService;
 import org.example.service.locationService.LocationService;
 

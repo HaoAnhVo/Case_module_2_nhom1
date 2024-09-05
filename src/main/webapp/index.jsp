@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<<<<<<< HEAD
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-=======
 
-
->>>>>>> main
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -86,11 +82,11 @@
 <!-- Navbar & Hero Start -->
 <div class="container-fluid position-relative p-0">
     <% request.setAttribute("currentPage", "index.jsp"); %>
-<<<<<<< HEAD
+
     <jsp:include page="./common/navbar.jsp" />
-=======
-    <jsp:include page="navbar.jsp"/>
->>>>>>> main
+
+
+
 
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
         <div class="container py-5">

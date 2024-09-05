@@ -83,11 +83,8 @@
 <!-- Navbar & Hero Start -->
 <div class="container-fluid position-relative p-0">
     <% request.setAttribute("currentPage", "destination.jsp"); %>
-<<<<<<< HEAD
+
     <jsp:include page="./common/navbar.jsp" />
-=======
-    <jsp:include page="navbar.jsp"/>
->>>>>>> main
 
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
         <div class="container py-5">
@@ -116,11 +113,9 @@
                     <c:forEach var="location" items="${locations}">
                         <div class="col-lg-4 col-md-4 wow zoomIn" data-wow-delay="0.1s">
                             <a class="position-relative d-block overflow-hidden" href="">
-<<<<<<< HEAD
+
                                 <img class="img-fluid" src="${location.imgURL}" alt="${location.locationName}"/>
-=======
-                                <img class="img-fluid" src="${location.locationImage}" alt="${location.locationName}"/>
->>>>>>> main
+
                                 <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">
                                         ${location.locationName}
                                 </div>

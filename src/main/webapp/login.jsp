@@ -91,11 +91,11 @@
 
 <!-- Navbar & Hero Start -->
 <div class="container-fluid position-relative p-0">
-<<<<<<< HEAD
+
     <jsp:include page="./common/navbar.jsp" />
-=======
-    <jsp:include page="navbar.jsp" />
->>>>>>> main
+
+
+
 </div>
 <!-- Navbar & Hero End -->
 
