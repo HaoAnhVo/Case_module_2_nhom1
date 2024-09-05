@@ -285,12 +285,11 @@
            data-tooltip="Đăng xuất"><i class="fa-solid fa-right-from-bracket"
                                        style="color: #86b817; font-size: 24px"></i></a>
     </div>
-    <h1>Danh sách người dùng</h1>
+    <h1>Quản lý người dùng</h1>
     <a class="add" href="UserServlet?action=new">Thêm mới người dùng</a>
 
     <table border="1" cellpadding="5" cellspacing="5">
         <tr>
-            <th>ID</th>
             <th>Tài khoản</th>
             <th>Họ tên</th>
             <th>Email</th>
@@ -300,7 +299,6 @@
         </tr>
         <c:forEach var="user" items="${listUser}">
             <tr>
-                <td>${user.userId}</td>
                 <td>${user.username}</td>
                 <td>${user.name}</td>
                 <td>${user.email}</td>

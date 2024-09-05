@@ -214,7 +214,7 @@
     </style>
 </head>
 <body class="add-user-body">
-<h2>Chỉnh Sửa Thông Tin Người Dùng</h2>
+<h2>Chỉnh sửa thông tin người dùng</h2>
 <form action="UserServlet?action=update" method="post">
     <input type="hidden" name="userId" value="${user.userId}">
 

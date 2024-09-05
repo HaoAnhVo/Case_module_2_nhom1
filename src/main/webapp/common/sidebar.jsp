@@ -26,10 +26,12 @@
             <a href="UserServlet?action=list" class="<%= currentUrl.contains("/users_manage/list-users.jsp") ? "active" : "" %>">Quản lý người dùng</a>
             <a href="PostServlet?action=list" class="<%= currentUrl.contains("/posts_manage/list-posts.jsp") ? "active" : "" %>">Quản lý bài viết</a>
             <a href="LocationServlet?action=list" class="<%= currentUrl.contains("/location/list-locations.jsp") ? "active" : "" %>">Quản lý địa điểm</a>
+            <a href="CategoryServlet?action=list" class="<%= currentUrl.contains("/category/list-categories.jsp") ? "active" : "" %>">Quản lý danh mục</a>
         </c:when>
         <c:when test="${user.getRole() == 'moderator'}">
             <a href="PostServlet?action=list" class="<%= currentUrl.contains("/posts_manage/list-posts.jsp") ? "active" : "" %>">Quản lý bài viết</a>
             <a href="LocationServlet?action=list" class="<%= currentUrl.contains("/location/list-locations.jsp") ? "active" : "" %>">Quản lý địa điểm</a>
+            <a href="CategoryServlet?action=list" class="<%= currentUrl.contains("/category/list-categories.jsp") ? "active" : "" %>">Quản lý danh mục</a>
         </c:when>
     </c:choose>
 </div>

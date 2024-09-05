@@ -18,7 +18,7 @@
 
 <html>
 <head>
-    <title>Thêm Mới</title>
+    <title>Thêm mới người dùng</title>
     <style>
         body {
             margin: 0;

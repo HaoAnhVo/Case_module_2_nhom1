@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "UserServlet", urlPatterns = "/UserServlet")
 public class UserServlet extends HttpServlet {
@@ -167,11 +169,28 @@ public class UserServlet extends HttpServlet {
     }
 
     private void listUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");
-        request.setAttribute("listUser", userService.getAllUsers());
+        User currentUser = (User) request.getSession().getAttribute("user");
+
+        List<User> allUsers = userService.getAllUsers();
+        List<User> filteredUsers = allUsers.stream()
+                .filter(user -> getRoleLevel(user.getRole()) < getRoleLevel(currentUser.getRole()))
+                .collect(Collectors.toList());
+
+        request.setAttribute("listUser", filteredUsers);
         RequestDispatcher dispatcher = request.getRequestDispatcher("users_manage/list-users.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private int getRoleLevel(String role) {
+        switch (role) {
+            case "admin":
+                return 3;
+            case "moderator":
+                return 2;
+            case "viewer":
+                return 1;
+            default:
+                return 0;
+        }
     }
 }

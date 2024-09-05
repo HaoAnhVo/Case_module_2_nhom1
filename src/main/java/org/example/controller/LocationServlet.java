@@ -81,18 +81,12 @@ public class LocationServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher(page);
         dispatcher.forward(request, response);
 
-//        List<Location> locations = iLocationService.getAllLocations();
-//        request.setAttribute("locations", locations);
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("destination.jsp");
-//        dispatcher.forward(request, response);
     }
 
     public void insertLocation(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         String locationName = request.getParameter("locationName");
         String mapLink = request.getParameter("mapLink");
         String imgURL = request.getParameter("imgURL");
-        System.out.println(locationName);
-        System.out.println(mapLink);
 
         if (locationName == null || mapLink == null) {
             request.getSession().setAttribute("message", "Vui lòng điền đầy đủ thông tin");

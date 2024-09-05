@@ -24,42 +24,38 @@
 %>
 <html>
 <head>
-    <title>Danh sách địa điểm</title>
+    <title>Quản lý địa điểm</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href="../common/sidebar.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="../common/sidebar.jsp" />
+<jsp:include page="../common/sidebar.jsp"/>
 <div class="content">
     <a class="actions" href="LogoutServlet" style="display: flex; justify-content: end; text-decoration: none"
        data-tooltip="Đăng xuất"><i class="fa-solid fa-right-from-bracket"
                                    style="color: #86b817; font-size: 24px"></i></a>
-    <h1>Danh sách địa điểm</h1>
+    <h1>Quản lý địa điểm</h1>
     <a class="add" href="LocationServlet?action=create">Thêm mới địa điểm</a>
 
     <table border="1">
         <thead>
         <tr>
-            <th>ID</th>
             <th>Địa điểm</th>
             <th>Link google maps</th>
-            <th>ImgURL</th>
             <th>Hoạt động</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="location" items="${locations}">
             <tr>
-                <td class="column-width">${location.locationId}</td>
-                <td class="column-width">${location.locationName}</td>
-                <td class="column-width">${location.mapLink}</td>
-                <td class="column-width">${location.imgURL}</td>
+                <td>${location.locationName}</td>
+                <td>${location.mapLink}</td>
                 <td>
                     <div class="actions">
                         <a href="LocationServlet?action=edit&locationId=${location.locationId}" data-tooltip="Sửa"><i
                                 class="fa-solid fa-pen-to-square"></i></a>
                         <a href="LocationServlet?action=delete&locationId=${location.locationId}"
-                           onclick="return confirm('Are you sure?')"
+                           onclick="return confirm('Bạn chắc chắn muốn xóa địa điểm này?')"
                            data-tooltip="Xóa">
                             <i class="fa-solid fa-trash"></i>
                         </a>

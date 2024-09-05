@@ -26,7 +26,7 @@
 
 <html>
 <head>
-    <title>Danh sách bài viết</title>
+    <title>Quản lý bài viết</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <style>
         body {
@@ -281,16 +281,14 @@
            data-tooltip="Đăng xuất"><i class="fa-solid fa-right-from-bracket"
                                        style="color: #86b817; font-size: 24px"></i></a>
     </div>
-    <h1>Danh sách bài viết</h1>
+    <h1>Quản lý bài viết</h1>
     <a class="add" href="PostServlet?action=new">Thêm mới bài viết</a>
 
     <table border="1">
         <thead>
         <tr>
-            <th>ID</th>
             <th>Tiêu đề</th>
             <th>Nội dung</th>
-            <th>Hình ảnh</th>
             <th>Địa điểm</th>
             <th>Danh mục</th>
             <th>Hoạt động</th>
@@ -299,10 +297,8 @@
         <tbody>
         <c:forEach var="post" items="${posts}">
             <tr>
-                <td>${post.postId}</td>
                 <td>${post.title}</td>
                 <td>${post.content}</td>
-                <td><img src="${post.imageUrl}" alt="Post Image"/></td>
                 <td>${post.locationName}</td>
                 <td>${post.categoryName}</td>
                 <td>

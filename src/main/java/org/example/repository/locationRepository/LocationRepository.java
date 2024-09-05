@@ -114,8 +114,7 @@ public class LocationRepository implements ILocationRepository {
     @Override
     public List<Post> getPostsByLocation(int locationId) {
         List<Post> posts = new ArrayList<>();
-        String query = "SELECT * FROM posts WHERE locationId = ?";
-        try (Connection con = BaseRepository.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = BaseRepository.getConnection(); PreparedStatement ps = con.prepareStatement(SELECT_LOCATION_BY_ID)) {
             ps.setInt(1, locationId);
             ResultSet rs = ps.executeQuery();
 

@@ -14,10 +14,9 @@
         session.removeAttribute("status");
     }
 %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>${post == null ? "Tạo bài viết mới" : "Chỉnh sửa bài viết"}</title>
+    <title>${post == null ? "Tạo địa điểm mới" : "Chỉnh sửa địa điểm"}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -270,7 +269,7 @@
 <form action="LocationServlet?action=${location == null ? 'create' : 'edit'}" method="post" class="form-post">
     <input type="hidden" name="locationId" value="${location != null ? location.locationId : ''}">
     <div>
-        <label>Địa điểm:</label>
+        <label>Địa điểm</label>
         <c:if test="${location == null}">
             <input type="text" name="locationName">
         </c:if>
@@ -287,11 +286,11 @@
         </c:if>
     </div>
     <div>
-        <label>Link google maps:</label>
+        <label>Link google maps</label>
         <textarea name="mapLink" required>${location != null ? location.mapLink : ''}</textarea>
     </div>
     <div>
-        <label>Link hình ảnh:</label>
+        <label>Link hình ảnh</label>
         <input type="text" name="imgURL" value="${location != null ? location.imgURL : ''}">
     </div>
     <%--  Submit --%>
