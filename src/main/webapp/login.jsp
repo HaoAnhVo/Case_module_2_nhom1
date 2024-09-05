@@ -4,7 +4,7 @@
 <% if ("true".equals(error)) { %>
 <p style="color:red;">Sai tài khoản hoặc mật khẩu!</p>
 <% } %>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -91,11 +91,51 @@
 
 <!-- Navbar & Hero Start -->
 <div class="container-fluid position-relative p-0">
-<<<<<<< HEAD
-    <jsp:include page="./common/navbar.jsp" />
-=======
-    <jsp:include page="navbar.jsp" />
->>>>>>> main
+    <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-2 py-lg-0">
+        <a href="./index.jsp" class="navbar-brand px-5">
+            <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>MeTrip</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="index.jsp" class="nav-item nav-link">Trang chủ</a>
+                <a href="destination.jsp" class="nav-item nav-link">Địa điểm</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Danh mục</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="unesco.jsp" class="dropdown-item">Kỳ quan</a>
+                        <a href="beach.jsp" class="dropdown-item">Bãi biển</a>
+                        <a href="forest_mount.jsp" class="dropdown-item">Núi rừng</a>
+                        <a href="waterfall.jsp" class="dropdown-item">Thác nước</a>
+                        <a href="cuisine.jsp" class="dropdown-item">Ẩm thực</a>
+                    </div>
+                </div>
+                <a href="PostServlet?action=list&view=blog" class="nav-item nav-link">Bài viết</a>
+                <a href="about.jsp" class="nav-item nav-link" id="about-tab">Chúng tôi</a>
+                <a href="contact.jsp" class="nav-item nav-link" id="contact-tab">Liên hệ</a>
+            </div>
+            <a href="login.jsp" class="ms-auto m-2 btn btn-primary rounded-pill py-2 px-4">Đăng nhập</a>
+            <a href="register.jsp" class="btn btn-secondary rounded-pill py-2 px-4">Đăng ký</a>
+
+            <!-- User Avatar -->
+            <div id="user-avatar" class="nav-item dropdown" style="display: none">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <img
+                            src="path/to/avatar.jpg"
+                            alt="User Avatar"
+                            class="rounded-circle"
+                            style="width: 40px; height: 40px"
+                    />
+                </a>
+                <div class="dropdown-menu m-0">
+                    <a href="profile.jsp" class="dropdown-item">Trang cá nhân</a>
+                    <a href="logout.jsp" class="dropdown-item">Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 </div>
 <!-- Navbar & Hero End -->
 

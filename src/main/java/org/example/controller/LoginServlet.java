@@ -35,12 +35,8 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
 
             if("admin".equals(user.getRole())) {
-                session.setAttribute("activeTab", "userManagement");
                 response.sendRedirect("UserServlet?action=list");
-            } else if("moderator".equals(user.getRole()))  {
-                session.setAttribute("activeTab", "postManagement");
-                response.sendRedirect("PostServlet?action=list");
-            } else {
+            } else  {
                 response.sendRedirect("index.jsp");
             }
         } else {

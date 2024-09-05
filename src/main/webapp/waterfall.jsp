@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -130,7 +130,7 @@
                     <h2 class="mb-4 mt-4 text-center" style="font-size: 2.2rem">Thác nước</h2>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="package-item">
-                            <a href="detail-blog.jsp">
+                            <a href="hanoi_blog_1_details.jsp">
                                 <div class="overflow-hidden">
                                     <img class="img-fluid" src="img/package-1.jpg" alt="" />
                                 </div>

@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>MeTrip - Ẩm thực Việt</title>
+        <title>Hà Nội blogs</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <meta content="" name="keywords" />
         <meta content="" name="description" />
@@ -22,15 +22,16 @@
         <!-- Icon Font Stylesheet -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
         <!-- Libraries Stylesheet -->
         <link href="lib/animate/animate.min.css" rel="stylesheet" />
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
         <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-        <!-- CSS Stylesheet -->
+        <!-- Customized Bootstrap Stylesheet -->
         <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+        <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet" />
     </head>
 
@@ -93,16 +94,16 @@
                         <a href="index.jsp" class="nav-item nav-link">Trang chủ</a>
                         <a href="destination.jsp" class="nav-item nav-link">Địa điểm</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Danh mục</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Danh mục</a>
                             <div class="dropdown-menu m-0">
                                 <a href="unesco.jsp" class="dropdown-item">Kỳ quan</a>
                                 <a href="beach.jsp" class="dropdown-item">Bãi biển</a>
                                 <a href="forest_mount.jsp" class="dropdown-item">Núi rừng</a>
                                 <a href="waterfall.jsp" class="dropdown-item">Thác nước</a>
-                                <a href="./cuisine.jsp" class="dropdown-item active">Ẩm thực</a>
+                                <a href="cuisine.jsp" class="dropdown-item">Ẩm thực</a>
                             </div>
                         </div>
-                        <a href="PostServlet?action=list&view=blog" class="nav-item nav-link">Bài viết</a>
+                        <a href="PostServlet?action=list&view=blog" class="nav-item nav-link active">Bài viết</a>
                         <a href="about.jsp" class="nav-item nav-link">Chúng tôi</a>
                         <a href="contact.jsp" class="nav-item nav-link">Liên hệ</a>
                     </div>
@@ -113,104 +114,175 @@
 
             <div class="container-fluid bg-primary py-5 mb-5 hero-header">
                 <div class="container py-5">
-                    <div class="row justify-content-center py-5"></div>
+                    <div class="row justify-content-center py-5">
+                        <div class="col-lg-12 p-5"></div>
+                    </div>
                 </div>
             </div>
         </div>
         <!-- Navbar & Hero End -->
 
-        <!-- Blog Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h6 class="section-title bg-white text-center text-primary px-3">Bài viết</h6>
-                </div>
+        <!-- Main Content Start -->
+        <div class="container my-5">
+            <div class="row">
+                <!-- Post Content Start -->
+                <div class="col-lg-8">
+                    <!-- Post Title -->
+                    <h1 class="post-title">Hà Nội title 1</h1>
 
-                <div class="row g-4 justify-content-center">
-                    <h2 class="mb-4 mt-4 text-center" style="font-size: 2.2rem">Ẩm thực</h2>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="package-item">
-                            <a href="hanoi_blog_1_details.jsp">
-                                <div class="overflow-hidden">
-                                    <img class="img-fluid" src="img/package-1.jpg" alt="" />
-                                </div>
-                                <div class="d-flex border-bottom p-2">
-                                    <h5 class="flex-fill py-2 mt-1">Ẩm thực title 1</h5>
-                                </div>
-                                <div class="p-3">
-                                    <p class="desc">
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum officia
-                                        eveniet est ut, quam nihil suscipit nemo nostrum corporis, dicta aut ipsam rerum
-                                        architecto aspernatur tempore et! Officiis eius neque architecto culpa ducimus
-                                        dignissimos aliquid impedit ex numquam facere modi quod, temporibus, corporis
-                                        maxime quos praesentium est deserunt mollitia magnam.
-                                    </p>
-                                    <div class="d-flex justify-content-center mb-2">
-                                        <button class="btn btn-sm btn-primary px-3" style="border-radius: 30px">
-                                            Đọc thêm
-                                        </button>
-                                    </div>
-                                </div>
-                            </a>
+                    <!-- Post Meta Information -->
+                    <div class="post-meta d-flex align-items-center mb-4">
+                        <span><i class="fas fa-user"></i> <a href="#">[Tên tác giả]</a></span>
+                        <span><i class="fas fa-calendar-alt"></i> [Ngày tạo]</span>
+                        <span><i class="fas fa-folder-open"></i> <a href="#">[Tên chuyên mục]</a></span>
+                        <span><i class="fas fa-map-marker-alt"></i> <a href="#">[Tên địa điểm]</a></span>
+                    </div>
+
+                    <!-- Post Image -->
+                    <img
+                        src="https://suckhoedoisong.qltns.mediacdn.vn/Images/thanhloan/2020/11/28/Nam-2030-du-lich-ha-noi-phan-dau-tro-thanh-nganh-kinh-te-mui-nhon-cua-thu-do-19.jpg"
+                        alt="[Tiêu đề bài viết]"
+                        class="post-image"
+                    />
+
+                    <!-- Post Content -->
+
+                    <div class="post-content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius cumque impedit nesciunt corrupti
+                        veniam odit. Quis ad suscipit accusantium aut iste et unde corrupti beatae, corporis aperiam ea
+                        ex sint officia, debitis quam inventore illo cumque ipsa. Natus dolorem porro eligendi eum,
+                        sunt, tenetur hic ducimus ut ad vitae quo maxime? Animi quibusdam accusantium officiis, fuga
+                        omnis cumque est aliquid rerum repellat itaque, eveniet iusto velit quis earum vitae, facere
+                        modi! Tempore, commodi repellendus itaque voluptates ea, possimus velit saepe dolorem, eaque hic
+                        temporibus eius blanditiis sunt magni dignissimos earum veniam? Eos aliquam minus velit neque
+                        consequuntur veniam possimus fugit!
+                    </div>
+
+                    <!-- Author Information -->
+                    <div class="author-info d-flex align-items-center bg-white p-4 mt-5 shadow-sm rounded">
+                        <img src="[URL ảnh tác giả]" alt="[Tên tác giả]" />
+                        <div>
+                            <h5 class="mb-1">[Tên tác giả]</h5>
+                            <p class="mb-0">[Mô tả ngắn về tác giả hoặc tiểu sử]</p>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="package-item">
-                            <a href="#!">
-                                <div class="overflow-hidden">
-                                    <img class="img-fluid" src="img/package-1.jpg" alt="" />
+
+                    <!-- Comments Section -->
+                    <div class="comments-section mt-5">
+                        <h3 class="mb-4">Bình luận ([Số lượng bình luận])</h3>
+
+                        <!-- Single Comment Start -->
+                        <div class="comment d-flex">
+                            <img src="[URL ảnh người dùng]" alt="[Tên người dùng]" />
+                            <div>
+                                <h6 class="mb-1">
+                                    [Tên người dùng] <small class="text-muted">[Ngày bình luận]</small>
+                                </h6>
+                                <p>[Nội dung bình luận]</p>
+                            </div>
+                        </div>
+                        <!-- Single Comment End -->
+
+                        <!-- Thêm các bình luận khác tương tự -->
+
+                        <!-- Comment Form -->
+                        <div class="comment-form mt-4">
+                            <h4>Để lại bình luận của bạn</h4>
+                            <form action="#" method="POST" class="mt-3">
+                                <div class="mb-3">
+                                    <textarea
+                                        class="form-control"
+                                        name="comment"
+                                        rows="5"
+                                        placeholder="Nhập bình luận của bạn..."
+                                    ></textarea>
                                 </div>
-                                <div class="d-flex border-bottom p-2">
-                                    <h5 class="flex-fill py-2 mt-1">Ẩm thực title 2</h5>
-                                </div>
-                                <div class="p-3">
-                                    <p class="desc">
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi pariatur
-                                        itaque ut nostrum, beatae aperiam, ducimus suscipit consequatur vero temporibus
-                                        eos qui voluptate quaerat iure consequuntur accusantium. Reprehenderit deserunt
-                                        at corporis alias, numquam ipsum rerum! Autem quisquam architecto dolorem sunt
-                                        assumenda recusandae pariatur illum esse, laboriosam beatae ut distinctio
-                                        corrupti.
-                                    </p>
-                                    <div class="d-flex justify-content-center mb-2">
-                                        <button class="btn btn-sm btn-primary px-3" style="border-radius: 30px">
-                                            Đọc thêm
-                                        </button>
-                                    </div>
-                                </div>
-                            </a>
+                                <button type="submit" class="btn btn-primary">Gửi Bình Luận</button>
+                            </form>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="package-item">
-                            <a href="#!">
-                                <div class="overflow-hidden">
-                                    <img class="img-fluid" src="img/package-1.jpg" alt="" />
-                                </div>
-                                <div class="d-flex border-bottom p-2">
-                                    <h5 class="flex-fill py-2 mt-1">Ẩm thực title 3</h5>
-                                </div>
-                                <div class="p-3">
-                                    <p class="desc">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, delectus harum.
-                                        Delectus molestias, quidem dolorum, cupiditate sapiente ex eaque voluptatum
-                                        veniam veritatis omnis alias repellat laboriosam velit nam recusandae suscipit
-                                        provident, adipisci rerum expedita autem pariatur id enim ut. Nemo deserunt
-                                        impedit cumque at libero quos perferendis consequuntur ut harum.
-                                    </p>
-                                    <div class="d-flex justify-content-center mb-2">
-                                        <button class="btn btn-sm btn-primary px-3" style="border-radius: 30px">
-                                            Đọc thêm
-                                        </button>
-                                    </div>
+                </div>
+                <!-- Post Content End -->
+
+                <!-- Sidebar Start -->
+                <div class="col-lg-4">
+                    <!-- Search Widget -->
+                    <div class="mb-5">
+                        <form action="#" method="GET">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Tìm kiếm..." />
+                                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Categories Widget -->
+                    <div class="mb-5">
+                        <h4 class="mb-4">Chuyên Mục</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                [Tên chuyên mục 1]
+                                <span class="badge bg-primary rounded-pill">[Số bài viết]</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                [Tên chuyên mục 2]
+                                <span class="badge bg-primary rounded-pill">[Số bài viết]</span>
+                            </li>
+                            <!-- Thêm các chuyên mục khác -->
+                        </ul>
+                    </div>
+
+                    <!-- Recent Posts Widget -->
+                    <div class="mb-5">
+                        <h4 class="mb-4">Bài Viết Mới Nhất</h4>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action d-flex">
+                                <img
+                                    src="[URL ảnh bài viết]"
+                                    alt="[Tiêu đề bài viết]"
+                                    style="width: 60px; height: 60px; object-fit: cover; margin-right: 15px"
+                                />
+                                <div>
+                                    <h6 class="mb-1">[Tiêu đề bài viết]</h6>
+                                    <small class="text-muted">[Ngày đăng]</small>
                                 </div>
                             </a>
+                            <!-- Thêm các bài viết khác -->
                         </div>
                     </div>
+
+                    <!-- Tags Widget -->
+                    <div class="mb-5">
+                        <h4 class="mb-4">Thẻ</h4>
+                        <div>
+                            <a href="#" class="btn btn-sm btn-outline-primary mb-2">[Tên thẻ 1]</a>
+                            <a href="#" class="btn btn-sm btn-outline-primary mb-2">[Tên thẻ 2]</a>
+                            <!-- Thêm các thẻ khác -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar End -->
+            </div>
+
+            <!-- Related Posts Start -->
+            <div class="related-posts mt-5">
+                <h3 class="mb-4">Bài Viết Liên Quan</h3>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="[URL ảnh bài viết liên quan]" class="card-img-top" alt="[Tiêu đề bài viết]" />
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="#">[Tiêu đề bài viết liên quan]</a></h5>
+                                <p class="card-text">[Tóm tắt ngắn của bài viết liên quan]</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Thêm các bài viết liên quan khác -->
                 </div>
             </div>
+            <!-- Related Posts End -->
         </div>
-        <!-- Blog End -->
+        <!-- Main Content End -->
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -304,15 +376,15 @@
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/tempusdominus/js/moment.min.js"></script>
-        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="./lib/wow/wow.min.js"></script>
+        <script src="./lib/easing/easing.min.js"></script>
+        <script src="./lib/waypoints/waypoints.min.js"></script>
+        <script src="./lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="./lib/tempusdominus/js/moment.min.js"></script>
+        <script src="./lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="./lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
         <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+        <script src="./js/main.js"></script>
     </body>
 </html>

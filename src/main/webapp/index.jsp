@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<<<<<<< HEAD
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-=======
 
-
->>>>>>> main
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -85,12 +81,7 @@
 
 <!-- Navbar & Hero Start -->
 <div class="container-fluid position-relative p-0">
-    <% request.setAttribute("currentPage", "index.jsp"); %>
-<<<<<<< HEAD
-    <jsp:include page="./common/navbar.jsp" />
-=======
-    <jsp:include page="navbar.jsp"/>
->>>>>>> main
+    <jsp:include page="navbar.jsp" />
 
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
         <div class="container py-5">
@@ -181,7 +172,7 @@
         </div>
         <div class="row g-4 justify-content-between">
             <div class="col-lg-4 col-sm-4 wow fadeInUp" data-wow-delay="0.1s">
-                <a href="./blog.jsp">
+                <a href="#!">
                     <img
                             src="https://theworldtravelguy.com/wp-content/uploads/2020/04/DSCF3947_450n.jpg"
                             alt=""
@@ -191,7 +182,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-4 wow fadeInUp" data-wow-delay="0.3s">
-                <a href="./destination.jsp">
+                <a href="#!">
                     <img
                             src="https://theworldtravelguy.com/wp-content/uploads/2021/05/DSCF1687_450n2.jpg"
                             alt=""
@@ -201,7 +192,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-4 wow fadeInUp" data-wow-delay="0.5s">
-                <a href="./about.jsp">
+                <a href="#!">
                     <img
                             src="https://theworldtravelguy.com/wp-content/uploads/2021/10/DSCF1029-2_450.jpg"
                             alt=""
@@ -409,7 +400,7 @@
         <div class="row g-4 justify-content-center">
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="package-item">
-                    <a href="#!">
+                    <a href="hanoi_blog_1_details.jsp">
                         <div class="overflow-hidden">
                             <img class="img-fluid" src="img/package-1.jpg" alt=""/>
                         </div>
@@ -435,7 +426,7 @@
             </div>
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="package-item">
-                    <a href="#!">
+                    <a href="up_post.jsp">
                         <div class="overflow-hidden">
                             <img class="img-fluid" src="img/package-1.jpg" alt=""/>
                         </div>
@@ -685,11 +676,11 @@
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="lib/wow/wow.min.js"></script>
 <script src="lib/easing/easing.min.js"></script>
 <script src="lib/waypoints/waypoints.min.js"></script>
-<script src="lib/owlcarousel/owl.carousel.min.js"></script>
 <script src="lib/tempusdominus/js/moment.min.js"></script>
 <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
 <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>

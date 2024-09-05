@@ -9,38 +9,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0">
-            <a href="index.jsp" class="nav-item nav-link ${currentPage == 'index.jsp' ? 'active' : ''}">Trang chủ</a>
-            <a href="LocationServlet" class="nav-item nav-link ${currentPage == 'destination.jsp' ? 'active' : ''}">Địa điểm</a>
+            <a href="index.jsp" class="nav-item nav-link active">Trang chủ</a>
+            <a href="destination.jsp" class="nav-item nav-link">Địa điểm</a>
             <div class="nav-item dropdown">
-                <a href="CategoryServlet" class="nav-link dropdown-toggle ${currentPage == 'CategoryServlet' ? 'active' : ''}" data-bs-toggle="dropdown">Danh mục</a>
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Danh mục</a>
                 <div class="dropdown-menu m-0">
-                    <c:forEach var="category" items="${applicationScope.categories}">
-                        <a href="#!" class="dropdown-item">${category.categoryName}</a>
+                    <c:forEach var="category" items="${categories}">
+                        <a href="category.jsp?&categoryId=${category.categoryId}"
+                           class="dropdown-item">${category.categoryName}</a>
                     </c:forEach>
                 </div>
             </div>
-            <a href="PostServlet?action=list&view=blog" class="nav-item nav-link ${currentPage == 'blog.jsp' ? 'active' : ''}">Bài viết</a>
-            <a href="about.jsp" class="nav-item nav-link ${currentPage == 'about.jsp' ? 'active' : ''}">Chúng tôi</a>
-            <a href="contact.jsp" class="nav-item nav-link ${currentPage == 'contact.jsp' ? 'active' : ''}">Liên hệ</a>
+            <a href="PostServlet?action=list&view=blog" class="nav-item nav-link">Bài viết</a>
+            <a href="about.jsp" class="nav-item nav-link">Chúng tôi</a>
+            <a href="contact.jsp" class="nav-item nav-link">Liên hệ</a>
         </div>
-
-        <!-- Check if user is logged in -->
-        <c:choose>
-            <c:when test="${not empty sessionScope.user}">
-                <div class="nav-item dropdown ms-auto">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <i class="fa fa-user me-2"></i>${sessionScope.user.username}
-                    </a>
-                    <div class="dropdown-menu m-0">
-                        <a href="profile.jsp" class="dropdown-item">Hồ sơ</a>
-                        <a href="LogoutServlet" class="dropdown-item">Đăng xuất</a>
-                    </div>
-                </div>
-            </c:when>
-            <c:otherwise>
-                <a href="login.jsp" class="ms-auto m-2 btn btn-primary rounded-pill py-2 px-4">Đăng nhập</a>
-                <a href="register.jsp" class="btn btn-secondary rounded-pill py-2 px-4">Đăng ký</a>
-            </c:otherwise>
-        </c:choose>
+        <a href="login.jsp" class="ms-auto m-2 btn btn-primary rounded-pill py-2 px-4">Đăng nhập</a>
+        <a href="register.jsp" class="btn btn-secondary rounded-pill py-2 px-4">Đăng ký</a>
     </div>
 </nav>

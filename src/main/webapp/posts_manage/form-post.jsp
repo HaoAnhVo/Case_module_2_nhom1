@@ -14,7 +14,7 @@
         session.removeAttribute("status");
     }
 %>
-
+<!DOCTYPE html>
 <html>
 <head>
     <title>${post == null ? "Tạo bài viết mới" : "Chỉnh sửa bài viết"}</title>
@@ -322,8 +322,7 @@
                         <p><strong>Người đăng:</strong> ${comment.username}</p>
                         <p><strong>Ngày đăng:</strong> ${comment.createdAt}</p>
                     </div>
-                    <a class="delete-btn"
-                       href="PostServlet?action=deleteComment&commentId=${comment.commentId}&postId=${post.postId}"
+                    <a class="delete-btn" href="PostServlet?action=deleteComment&commentId=${comment.commentId}&postId=${post.postId}"
                        onclick="return confirm('Bạn chắc chắn muốn xóa bình luận này?')"
                        data-tooltip="Xóa">
                         <i class="fa-solid fa-trash">Xóa</i>
@@ -347,6 +346,6 @@
 <a href="PostServlet?action=list" class="back-link">
     <span class="arrow">← </span>Quay về trang trước
 </a>
-<script src="<%=request.getContextPath()%>js/sub-script.js"></script>
+</div>
 </body>
 </html>
