@@ -70,16 +70,17 @@
 
 <!-- Navbar & Hero Start -->
 <div class="container-fluid position-relative p-0">
-<<<<<<< HEAD
+    <% request.setAttribute("currentPage", "blog.jsp"); %>
     <jsp:include page="./common/navbar.jsp"/>
-
-
-
-
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
         <div class="container py-5">
             <div class="row justify-content-center py-5">
-                <div class="col-lg-12 p-5"></div>
+                <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+                    <h1 class="display-3 text-white animated slideInDown">${post.title}</h1>
+                    <p class="fs-4 mb-4 animated slideInDown" style="color: var(--primary); font-size: 1.6rem">
+                        Kiến thức - Kinh nghiệm - Trải nghiệm
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -196,5 +197,19 @@
         <!-- Sidebar End -->
     </div>
 </div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/tempusdominus/js/moment.min.js"></script>
+<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
 </body>
 </html>

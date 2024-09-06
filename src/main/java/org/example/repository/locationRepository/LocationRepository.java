@@ -12,6 +12,7 @@ public class LocationRepository implements ILocationRepository {
     private static final String INSERT_LOCATION = "INSERT INTO locations (locationName, mapLink, imgURL) VALUES (?, ?, ?)";
     private static final String SELECT_ALL_LOCATIONS = "select * from locations";
     private static final String SELECT_LOCATION_BY_ID = "select * from locations where locationId = ?";
+    private static final String SELECT_POSTS_BY_LOCATION_ID = "select * from posts where locationId = ?";
     private static final String DELETE_LOCATION_BY_ID = "delete from locations where locationId = ?";
     private static final String UPDATE_LOCATION = "update locations set locationName = ?, mapLink = ?, imgURL = ? where locationId = ?";
 
@@ -114,7 +115,7 @@ public class LocationRepository implements ILocationRepository {
     @Override
     public List<Post> getPostsByLocation(int locationId) {
         List<Post> posts = new ArrayList<>();
-        try (Connection con = BaseRepository.getConnection(); PreparedStatement ps = con.prepareStatement(SELECT_LOCATION_BY_ID)) {
+        try (Connection con = BaseRepository.getConnection(); PreparedStatement ps = con.prepareStatement(SELECT_POSTS_BY_LOCATION_ID)) {
             ps.setInt(1, locationId);
             ResultSet rs = ps.executeQuery();
 
@@ -130,8 +131,6 @@ public class LocationRepository implements ILocationRepository {
                 post.setCategoryId(rs.getInt("categoryId"));
                 post.setAuthorId(rs.getInt("authorId"));
 
-                post.setLocationName(rs.getString("locationName"));
-                post.setCategoryName(rs.getString("categoryName"));
                 posts.add(post);
             }
         } catch (SQLException e) {

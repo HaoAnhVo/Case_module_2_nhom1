@@ -91,7 +91,7 @@ public class PostRepository implements IPostRepository {
 
     public List<Post> getPostsByCategory(int categoryId) {
         List<Post> posts = new ArrayList<>();
-        String query = "SELECT * FROM posts WHERE category_id = ?";
+        String query = "SELECT * FROM posts WHERE categoryId = ?";
         try (Connection con = BaseRepository.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ps.setInt(1, categoryId);
             ResultSet rs = ps.executeQuery();
@@ -108,8 +108,6 @@ public class PostRepository implements IPostRepository {
                 post.setCategoryId(rs.getInt("categoryId"));
                 post.setAuthorId(rs.getInt("authorId"));
 
-                post.setLocationName(rs.getString("locationName"));
-                post.setCategoryName(rs.getString("categoryName"));
                 posts.add(post);
             }
         } catch (SQLException e) {

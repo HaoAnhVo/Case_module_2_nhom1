@@ -112,7 +112,7 @@
                 <div class="row g-3">
                     <c:forEach var="location" items="${locations}">
                         <div class="col-lg-4 col-md-4 wow zoomIn" data-wow-delay="0.1s">
-                            <a class="position-relative d-block overflow-hidden" href="">
+                            <a class="position-relative d-block overflow-hidden" href="LocationServlet?action=getPostsByLocation&locationId=${location.locationId}">
 
                                 <img class="img-fluid" src="${location.imgURL}" alt="${location.locationName}"/>
 

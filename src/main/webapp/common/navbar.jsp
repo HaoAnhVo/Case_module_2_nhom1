@@ -15,7 +15,7 @@
                 <a href="CategoryServlet" class="nav-link dropdown-toggle ${currentPage == 'CategoryServlet' ? 'active' : ''}" data-bs-toggle="dropdown">Danh mục</a>
                 <div class="dropdown-menu m-0">
                     <c:forEach var="category" items="${applicationScope.categories}">
-                        <a href="#!" class="dropdown-item">${category.categoryName}</a>
+                        <a href="PostServlet?action=getPostsByCategory&categoryId=${category.categoryId}" class="dropdown-item">${category.categoryName}</a>
                     </c:forEach>
                 </div>
             </div>
@@ -32,7 +32,8 @@
                         <i class="fa fa-user me-2"></i>${sessionScope.user.username}
                     </a>
                     <div class="dropdown-menu m-0">
-                        <a href="profile.jsp" class="dropdown-item">Hồ sơ</a>
+                        <a href="profile?action=view" class="dropdown-item">Hồ sơ</a>
+                        <a href="profile?action=viewChangePassword" class="dropdown-item">Đổi mật khẩu</a>
                         <a href="LogoutServlet" class="dropdown-item">Đăng xuất</a>
                     </div>
                 </div>

@@ -8,7 +8,7 @@ function closePopup() {
 // Automatically close popup after 3 seconds
 setTimeout(function() {
     closePopup();
-}, 3000);
+}, 300);
 
 function validatePassword() {
     var password = document.getElementById("register-password").value;

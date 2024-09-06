@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.model.Location;
+import org.example.model.Post;
 import org.example.model.User;
 import org.example.service.locationService.ILocationService;
 import org.example.service.locationService.LocationService;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
 @WebServlet(name = "LocationServlet", urlPatterns = "/LocationServlet")
 public class LocationServlet extends HttpServlet {
@@ -41,6 +44,9 @@ public class LocationServlet extends HttpServlet {
                     break;
                 case "delete":
                     deleteLocation(request, response);
+                    break;
+                case "getPostsByLocation":
+                    getPostsByLocation(request, response);
                     break;
                 default:
                     listLocation(request, response);
@@ -135,5 +141,14 @@ public class LocationServlet extends HttpServlet {
         request.getSession().setAttribute("message", "Cập nhật thành công!");
         request.getSession().setAttribute("status", "success");
         response.sendRedirect("LocationServlet?action=list");
+    }
+
+    private void getPostsByLocation (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        int locationId = Integer.parseInt(request.getParameter("locationId"));
+        List<Post> posts = iLocationService.getPostsByLocation(locationId);
+        Location locationByPost = iLocationService.selectLocation(locationId);
+        request.setAttribute("locationByPost", locationByPost);
+        request.setAttribute("posts", posts);
+        request.getRequestDispatcher("location/list-posts-by-location.jsp").forward(request, response);
     }
 }

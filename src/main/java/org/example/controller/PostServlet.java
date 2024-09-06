@@ -58,6 +58,9 @@ public class PostServlet extends HttpServlet {
                 case "deleteComment":
                     deleteComment(request, response);
                     break;
+                case "getPostsByCategory":
+                    getPostsByCategory(request, response);
+                    break;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -276,5 +279,14 @@ public class PostServlet extends HttpServlet {
             request.getSession().setAttribute("status", "error");
             response.sendRedirect("login.jsp");
         }
+    }
+
+    private void getPostsByCategory (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        List<Post> posts = postService.getPostsByCategory(categoryId);
+        Category postsByCategory = categoryService.selectCategory(categoryId);
+        request.setAttribute("postsByCategory", postsByCategory);
+        request.setAttribute("posts", posts);
+        request.getRequestDispatcher("category/list-posts-by-category.jsp").forward(request, response);
     }
 }
