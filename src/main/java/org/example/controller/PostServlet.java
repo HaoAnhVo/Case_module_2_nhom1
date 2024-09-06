@@ -224,7 +224,7 @@ public class PostServlet extends HttpServlet {
         request.setAttribute("comments", comments);
         String view = request.getParameter("view");
         String page = "posts_manage/detail-post.jsp";
-        if("detail-blog".equals(view)) {
+        if ("detail-blog".equals(view)) {
             page = "detail-blog.jsp";
         }
 
@@ -287,6 +287,6 @@ public class PostServlet extends HttpServlet {
         Category postsByCategory = categoryService.selectCategory(categoryId);
         request.setAttribute("postsByCategory", postsByCategory);
         request.setAttribute("posts", posts);
-        request.getRequestDispatcher("category/list-posts-by-category.jsp").forward(request, response);
+        request.getRequestDispatcher("categories_manage/list-posts-by-category.jsp").forward(request, response);
     }
 }

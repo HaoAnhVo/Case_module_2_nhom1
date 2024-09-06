@@ -2,7 +2,6 @@ package org.example.controller;
 
 import org.example.model.Location;
 import org.example.model.Post;
-import org.example.model.User;
 import org.example.service.locationService.ILocationService;
 import org.example.service.locationService.LocationService;
 
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 
 @WebServlet(name = "LocationServlet", urlPatterns = "/LocationServlet")
@@ -149,6 +147,6 @@ public class LocationServlet extends HttpServlet {
         Location locationByPost = iLocationService.selectLocation(locationId);
         request.setAttribute("locationByPost", locationByPost);
         request.setAttribute("posts", posts);
-        request.getRequestDispatcher("location/list-posts-by-location.jsp").forward(request, response);
+        request.getRequestDispatcher("locations_manage/list-posts-by-location.jsp").forward(request, response);
     }
 }

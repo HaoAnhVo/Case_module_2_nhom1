@@ -107,7 +107,6 @@ public class PostRepository implements IPostRepository {
                 post.setLocationId(rs.getInt("locationId"));
                 post.setCategoryId(rs.getInt("categoryId"));
                 post.setAuthorId(rs.getInt("authorId"));
-
                 posts.add(post);
             }
         } catch (SQLException e) {

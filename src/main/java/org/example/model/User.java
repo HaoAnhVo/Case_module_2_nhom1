@@ -10,6 +10,7 @@ public class User {
     private String email;
     private String role;
     private Date birthday;
+    private String formattedBirthday;
 
     public User() {}
     public User(int userId, String username, String password, String name, String email, Date birthday, String role) {
@@ -86,5 +87,13 @@ public class User {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public String getFormattedBirthday() {
+        return formattedBirthday;
+    }
+
+    public void setFormattedBirthday(String formattedBirthday) {
+        this.formattedBirthday = formattedBirthday;
     }
 }

@@ -72,6 +72,7 @@
 <div class="container-fluid position-relative p-0">
     <% request.setAttribute("currentPage", "blog.jsp"); %>
     <jsp:include page="./common/navbar.jsp"/>
+
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
         <div class="container py-5">
             <div class="row justify-content-center py-5">
@@ -152,52 +153,51 @@
         </div>
 
         <!-- Sidebar Start -->
-<%--        <div class="col-lg-4">--%>
-<%--            <!-- Search Widget -->--%>
-<%--            <div class="mb-5">--%>
-<%--                <form action="#" method="GET">--%>
-<%--                    <div class="input-group">--%>
-<%--                        <input type="text" class="form-control" placeholder="Tìm kiếm..."/>--%>
-<%--                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>--%>
-<%--                    </div>--%>
-<%--                </form>--%>
-<%--            </div>--%>
+        <%--        <div class="col-lg-4">--%>
+        <%--            <!-- Search Widget -->--%>
+        <%--            <div class="mb-5">--%>
+        <%--                <form action="#" method="GET">--%>
+        <%--                    <div class="input-group">--%>
+        <%--                        <input type="text" class="form-control" placeholder="Tìm kiếm..."/>--%>
+        <%--                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>--%>
+        <%--                    </div>--%>
+        <%--                </form>--%>
+        <%--            </div>--%>
 
-<%--            <!-- Recent Posts Widget -->--%>
-<%--            <div class="mb-5">--%>
-<%--                <h4 class="mb-4">Bài Viết Mới Nhất</h4>--%>
-<%--                <div class="list-group">--%>
-<%--                    <c:forEach var="recentPost" items="${recentPosts}">--%>
-<%--                        <a href="post_details.jsp?id=${recentPost.postId}"--%>
-<%--                           class="list-group-item list-group-item-action d-flex">--%>
-<%--                            <img--%>
-<%--                                    src="${recentPost.imageUrl}"--%>
-<%--                                    alt="${recentPost.title}"--%>
-<%--                                    style="width: 60px; height: 60px; object-fit: cover; margin-right: 15px"--%>
-<%--                            />--%>
-<%--                            <div>--%>
-<%--                                <h6 class="mb-1">${recentPost.title}</h6>--%>
-<%--                                <small class="text-muted">${recentPost.createdAt}</small>--%>
-<%--                            </div>--%>
-<%--                        </a>--%>
-<%--                    </c:forEach>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+        <%--            <!-- Recent Posts Widget -->--%>
+        <%--            <div class="mb-5">--%>
+        <%--                <h4 class="mb-4">Bài Viết Mới Nhất</h4>--%>
+        <%--                <div class="list-group">--%>
+        <%--                    <c:forEach var="recentPost" items="${recentPosts}">--%>
+        <%--                        <a href="post_details.jsp?id=${recentPost.postId}"--%>
+        <%--                           class="list-group-item list-group-item-action d-flex">--%>
+        <%--                            <img--%>
+        <%--                                    src="${recentPost.imageUrl}"--%>
+        <%--                                    alt="${recentPost.title}"--%>
+        <%--                                    style="width: 60px; height: 60px; object-fit: cover; margin-right: 15px"--%>
+        <%--                            />--%>
+        <%--                            <div>--%>
+        <%--                                <h6 class="mb-1">${recentPost.title}</h6>--%>
+        <%--                                <small class="text-muted">${recentPost.createdAt}</small>--%>
+        <%--                            </div>--%>
+        <%--                        </a>--%>
+        <%--                    </c:forEach>--%>
+        <%--                </div>--%>
+        <%--            </div>--%>
 
-<%--            <!-- Tags Widget -->--%>
-<%--            <div class="mb-5">--%>
-<%--                <h4 class="mb-4">Thẻ</h4>--%>
-<%--                <div>--%>
-<%--                    <c:forEach var="tag" items="${tags}">--%>
-<%--                        <a href="#" class="btn btn-sm btn-outline-primary mb-2">${tag.name}</a>--%>
-<%--                    </c:forEach>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+        <%--            <!-- Tags Widget -->--%>
+        <%--            <div class="mb-5">--%>
+        <%--                <h4 class="mb-4">Thẻ</h4>--%>
+        <%--                <div>--%>
+        <%--                    <c:forEach var="tag" items="${tags}">--%>
+        <%--                        <a href="#" class="btn btn-sm btn-outline-primary mb-2">${tag.name}</a>--%>
+        <%--                    </c:forEach>--%>
+        <%--                </div>--%>
+        <%--            </div>--%>
+        <%--        </div>--%>
         <!-- Sidebar End -->
     </div>
 </div>
-
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

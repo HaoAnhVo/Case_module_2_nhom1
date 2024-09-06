@@ -12,9 +12,9 @@ public class LocationRepository implements ILocationRepository {
     private static final String INSERT_LOCATION = "INSERT INTO locations (locationName, mapLink, imgURL) VALUES (?, ?, ?)";
     private static final String SELECT_ALL_LOCATIONS = "select * from locations";
     private static final String SELECT_LOCATION_BY_ID = "select * from locations where locationId = ?";
-    private static final String SELECT_POSTS_BY_LOCATION_ID = "select * from posts where locationId = ?";
     private static final String DELETE_LOCATION_BY_ID = "delete from locations where locationId = ?";
     private static final String UPDATE_LOCATION = "update locations set locationName = ?, mapLink = ?, imgURL = ? where locationId = ?";
+    private static final String SELECT_POSTS_BY_LOCATION_ID = "select * from posts where locationId = ?";
 
     @Override
     public void insertLocation(Location location) throws SQLException {
@@ -130,7 +130,6 @@ public class LocationRepository implements ILocationRepository {
                 post.setLocationId(rs.getInt("locationId"));
                 post.setCategoryId(rs.getInt("categoryId"));
                 post.setAuthorId(rs.getInt("authorId"));
-
                 posts.add(post);
             }
         } catch (SQLException e) {

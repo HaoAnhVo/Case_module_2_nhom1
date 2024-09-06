@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -80,10 +81,17 @@ public class UserServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirm-password");
+        String registrationType = request.getParameter("registrationType");
+
         if (!password.equals(confirmPassword)) {
             request.getSession().setAttribute("message", "Xác nhận mật khẩu không trùng khớp!");
             request.getSession().setAttribute("status", "error");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+
+            if ("register".equals(registrationType)) {
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("UserServlet?action=new");
+            }
             return;
         }
         String name = request.getParameter("name");
@@ -108,7 +116,11 @@ public class UserServlet extends HttpServlet {
             request.getSession().setAttribute("status", "error");
             request.setAttribute("email", email);
             request.setAttribute("birthday", birthdayStr);
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            if ("register".equals(registrationType)) {
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("UserServlet?action=new");
+            }
             return;
         }
 
@@ -123,8 +135,7 @@ public class UserServlet extends HttpServlet {
 
         userService.addUser(newUser);
 
-        // Kiểm tra tham số "registrationType" để xác định điều hướng
-        String registrationType = request.getParameter("registrationType");
+        // Kiểm tra tham số "registrationType" để xác định điều hướng;
         if ("register".equals(registrationType)) {
             // Nếu người dùng tự đăng ký, chuyển hướng đến trang đăng nhập
             request.getSession().setAttribute("message", "Đăng ký thành công! Vui lòng đăng nhập.");
