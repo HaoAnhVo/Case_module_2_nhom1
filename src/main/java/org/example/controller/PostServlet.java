@@ -242,7 +242,7 @@ public class PostServlet extends HttpServlet {
         request.setAttribute("tags",tags);
         String view = request.getParameter("view");
         String page = "posts_manage/detail-post.jsp";
-        if("detail-blog".equals(view)) {
+        if ("detail-blog".equals(view)) {
             page = "detail-blog.jsp";
         }
 

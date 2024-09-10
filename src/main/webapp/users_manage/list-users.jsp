@@ -303,7 +303,7 @@
                 <td>${user.name}</td>
                 <td>${user.email}</td>
                 <td>${user.role}</td>
-                <td>${user.birthday}</td>
+                <td>${user.formattedBirthday}</td>
                 <td>
                     <div class="actions">
                         <a href="UserServlet?action=edit&userId=${user.userId}" data-tooltip="Sửa">

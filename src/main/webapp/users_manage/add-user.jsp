@@ -221,6 +221,9 @@
     <label for="password">Mật khẩu</label>
     <input type="password" id="password" name="password" required><br>
 
+    <label for="password">Xác nhận mật khẩu</label>
+    <input type="password" id="confirm-password" name="confirm-password" required><br>
+
     <label for="name">Họ tên</label>
     <input type="text" id="name" name="name" required><br>
 

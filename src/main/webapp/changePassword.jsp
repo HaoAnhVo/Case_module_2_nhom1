@@ -57,7 +57,6 @@
             font-family: Arial, sans-serif;
             color: #333;
         }
-
         /* Header Section */
         .header {
             background: linear-gradient(rgba(20, 20, 31, 0.7), rgba(20, 20, 31, 0.7)), url("./img/bg-hero.jpg") no-repeat center center;
@@ -69,118 +68,96 @@
             color: white;
             text-align: center;
         }
-
         .header h1 {
             font-size: 4rem;
             font-weight: bold;
             color: whitesmoke;
         }
-
         .header p {
             font-size: 1.5rem;
             margin-top: 20px;
         }
-
         .header .btn {
             margin-top: 30px;
             padding: 10px 30px;
             font-size: 1.2rem;
         }
-
         /* About Section */
         .about-section {
             padding: 80px 0;
             background-color: #f8f9fa;
         }
-
         .about-content {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         .about-content img {
             max-width: 80%;
             border-radius: 50%;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
-
         .about-text {
             margin-left: 50px;
         }
-
         .about-text h2 {
             font-size: 3rem;
             font-weight: bold;
             margin-bottom: 20px;
         }
-
         .about-text p {
             font-size: 1.2rem;
             line-height: 1.6;
         }
-
         .about-text .btn {
             margin-top: 30px;
             padding: 10px 30px;
             font-size: 1.2rem;
         }
-
         /* Blog Posts Section */
         .blog-section {
             padding: 80px 0;
             background-color: white;
         }
-
         .blog-post {
             margin-bottom: 40px;
         }
-
         .blog-post img {
             width: 100%;
             border-radius: 10px;
             margin-bottom: 20px;
         }
-
         .blog-post h3 {
             font-size: 2rem;
             margin-bottom: 10px;
         }
-
         .blog-post p {
             font-size: 1.2rem;
             color: #555;
         }
-
         img {
             transition: 0.5s;
         }
-
         img:hover {
             transform: scale(1.1);
         }
-
         .form-section {
             background-color: #f8f9fa;
             padding: 60px 0;
         }
-
         .form-label {
             font-weight: 600;
             font-size: 1.2rem;
         }
-
         .form-control {
             border-radius: 5px;
             padding: 15px;
             font-size: 1.1rem;
         }
-
         .btn-lg {
             padding: 12px 30px;
             font-size: 1.2rem;
         }
-
         .popup {
             position: fixed;
             top: 20px;
@@ -195,7 +172,6 @@
             align-items: center;
             justify-content: space-between;
         }
-
         .popup-error {
             position: fixed;
             top: 20px;
@@ -210,13 +186,11 @@
             align-items: center;
             justify-content: space-between;
         }
-
         /* Message text */
         .popup-message {
             font-size: 14px;
             margin-right: 10px;
         }
-
         /* Close button */
         #close-popup {
             background: none;
@@ -225,32 +199,26 @@
             font-size: 16px;
             cursor: pointer;
         }
-
         /* Animation for smooth fade-in */
         .popup {
             animation: fadeIn 0.5s ease-in-out;
         }
-
         label {
             color: #303334;
         }
-
         @media (max-width: 768px) {
             .form-section {
                 padding: 40px 20px;
             }
-
             .form-control {
                 padding: 10px;
             }
         }
-
         @media (max-width: 768px) {
             .about-content {
                 flex-direction: column;
                 text-align: center;
             }
-
             .about-text {
                 margin-left: 0;
                 margin-top: 30px;

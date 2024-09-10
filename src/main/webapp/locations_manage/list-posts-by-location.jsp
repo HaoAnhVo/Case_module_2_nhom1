@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 5/9/2024
-  Time: 4:54 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -79,7 +72,7 @@
 <div class="container-fluid position-relative p-0">
     <% request.setAttribute("currentPage", "destination.jsp"); %>
 
-    <jsp:include page="../common/navbar.jsp" />
+    <jsp:include page="../common/navbar.jsp"/>
 
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
         <div class="container py-5">
