@@ -15,10 +15,9 @@ public class Post {
     private String locationName;
     private String categoryName;
     private String authorName;
+    private String tagName;
 
-    public Post() {
-
-    }
+    public Post() {}
 
     public Post(int postId, String title, String content, String imageUrl, Date createdAt, Date updatedAt, int locationId, int categoryId, int authorId) {
         this.postId = postId;
@@ -127,4 +126,8 @@ public class Post {
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
     }
+
+    public String getTagName() {return tagName;}
+
+    public void setTagName(String tagName) {this.tagName = tagName;}
 }

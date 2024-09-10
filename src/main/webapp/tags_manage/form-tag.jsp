@@ -1,6 +1,11 @@
+<%@ page import="org.example.model.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
+    User user = (User) session.getAttribute("user");
+    if (user == null) {
+        response.sendRedirect("login.jsp");
+    }
     String message = (String) session.getAttribute("message");
     String status = (String) session.getAttribute("status");
     if (message != null && status != null) {
@@ -14,9 +19,10 @@
         session.removeAttribute("status");
     }
 %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>${location == null ? "Tạo địa điểm mới" : "Chỉnh sửa địa điểm"}</title>
+    <title>${tag == null ? "Tạo tag mới" : "Chỉnh sửa tag"}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -265,40 +271,24 @@
     </style>
 </head>
 <body>
-<h1>${location == null ? "Tạo địa điểm mới" : "Chỉnh sửa địa điểm"}</h1>
-<form action="LocationServlet?action=${location == null ? 'create' : 'edit'}" method="post" class="form-post">
-    <input type="hidden" name="locationId" value="${location != null ? location.locationId : ''}">
+<h1>${tag == null ? "Tạo tag mới" : "Chỉnh sửa tag"}</h1>
+<form action="TagServlet?action=${tag == null ? 'create' : 'edit'}" method="post" class="form-post">
+    <input type="hidden" name="tagId" value="${tag != null ? tag.tagId : ''}">
     <div>
-        <label>Địa điểm</label>
-        <c:if test="${location == null}">
-            <input type="text" name="locationName">
+        <label>Tên tag</label>
+        <c:if test="${tag == null}">
+            <input type="text" name="tagName" required>
         </c:if>
-        <c:if test="${location != null}">
-            <select name="locationId" required disabled>
-                <option value="">-- Chọn địa điểm --</option>
-                <c:forEach var="item" items="${locations}">
-                    <option value="${item.locationId}"
-                            <c:if test="${location != null && location.locationId == item.locationId}">selected</c:if>>
-                            ${item.locationName}
-                    </option>
-                </c:forEach>
-            </select>
+        <c:if test="${tag != null}">
+            <input type="text" name="tagName" value="${tag.tagName}" required>
         </c:if>
-    </div>
-    <div>
-        <label>Link google maps</label>
-        <textarea name="mapLink" required>${location != null ? location.mapLink : ''}</textarea>
-    </div>
-    <div>
-        <label>Link hình ảnh</label>
-        <input type="text" name="imgURL" value="${location != null ? location.imgURL : ''}">
     </div>
     <%--  Submit --%>
     <div>
-        <button type="submit">${location == null ? "Thêm" : "Cập nhật"}</button>
+        <button type="submit">${tag == null ? "Thêm" : "Cập nhật"}</button>
     </div>
 </form>
-<a href="LocationServlet?action=list" class="back-link">
+<a href="TagServlet?action=list" class="back-link">
     <span class="arrow">← </span>Quay về trang trước
 </a>
 </div>

@@ -4,8 +4,14 @@ public class Tag {
     private int tagId;
     private String tagName;
 
+    public Tag() {}
+
     public Tag(int tagId, String tagName) {
         this.tagId = tagId;
+        this.tagName = tagName;
+    }
+
+    public Tag(String tagName) {
         this.tagName = tagName;
     }
 

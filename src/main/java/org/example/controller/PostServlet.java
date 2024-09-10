@@ -5,6 +5,8 @@ import org.example.service.categoryService.CategoryService;
 import org.example.service.commentService.CommentService;
 import org.example.service.locationService.LocationService;
 import org.example.service.postService.PostService;
+import org.example.service.tagService.ITagService;
+import org.example.service.tagService.TagService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,12 +25,14 @@ public class PostServlet extends HttpServlet {
     private CommentService commentService;
     private LocationService locationService;
     private CategoryService categoryService;
+    private ITagService tagService;
 
     public void init() {
         postService = new PostService();
         commentService = new CommentService();
         locationService = new LocationService();
         categoryService = new CategoryService();
+        tagService = new TagService();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -107,8 +111,10 @@ public class PostServlet extends HttpServlet {
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Location> locations = locationService.getAllLocations();
         List<Category> categories = categoryService.getAllCategories();
+        List<Tag> tags = tagService.getAllTags();
         request.setAttribute("locations", locations);
         request.setAttribute("categories", categories);
+        request.setAttribute("tags", tags);
         RequestDispatcher dispatcher = request.getRequestDispatcher("posts_manage/form-post.jsp");
         dispatcher.forward(request, response);
     }
@@ -119,11 +125,15 @@ public class PostServlet extends HttpServlet {
         List<Comment> comments = commentService.getCommentsWithUserAndPost(postId);
         List<Location> locations = locationService.getAllLocations();
         List<Category> categories = categoryService.getAllCategories();
+        List<Tag> selectedTags = postService.getTagsByPost(postId);
+        List<Tag> tags = tagService.getAllTags();
 
         request.setAttribute("post", post);
         request.setAttribute("comments", comments);
         request.setAttribute("locations", locations);
         request.setAttribute("categories", categories);
+        request.setAttribute("selectedTags", selectedTags);
+        request.setAttribute("tags", tags);
         RequestDispatcher dispatcher = request.getRequestDispatcher("posts_manage/form-post.jsp");
         dispatcher.forward(request, response);
     }
@@ -138,6 +148,9 @@ public class PostServlet extends HttpServlet {
 
         String categoryIdStr = request.getParameter("categoryId");
         int categoryId = (categoryIdStr == null || categoryIdStr.isEmpty()) ? 0 : Integer.parseInt(categoryIdStr);
+
+        String tagIds = request.getParameter("tagIds");
+        String[] tagIdArray = tagIds.split(",");
 
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");
@@ -159,7 +172,7 @@ public class PostServlet extends HttpServlet {
             request.getSession().setAttribute("status", "error");
             response.sendRedirect("PostServlet?action=new");
         } else {
-            postService.addPost(newPost);
+            postService.addPost(newPost, tagIdArray);
             request.getSession().setAttribute("message", "Thêm bài viết thành công!");
             request.getSession().setAttribute("status", "success");
             response.sendRedirect("PostServlet?action=list");
@@ -179,6 +192,9 @@ public class PostServlet extends HttpServlet {
 
         String categoryIdStr = request.getParameter("categoryId");
         int categoryId = (categoryIdStr == null || categoryIdStr.isEmpty()) ? 0 : Integer.parseInt(categoryIdStr);
+
+        String tagIds = request.getParameter("tagIds");
+        String[] tagIdArray = tagIds.split(",");
 
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");
@@ -200,7 +216,7 @@ public class PostServlet extends HttpServlet {
             request.getSession().setAttribute("status", "error");
             response.sendRedirect("PostServlet?action=edit&postId=" + postId);
         } else {
-            postService.updatePost(updatedPost);
+            postService.updatePost(updatedPost, tagIdArray);
             request.getSession().setAttribute("message", "Cập nhật bài viết thành công!");
             request.getSession().setAttribute("status", "success");
             response.sendRedirect("PostServlet?action=list");
@@ -219,9 +235,11 @@ public class PostServlet extends HttpServlet {
         int postId = Integer.parseInt(request.getParameter("postId"));
         Post post = postService.getPost(postId);
         List<Comment> comments = commentService.getCommentsWithUserAndPost(postId);
+        List<Tag> tags = postService.getTagsByPost(postId);
 
         request.setAttribute("post", post);
         request.setAttribute("comments", comments);
+        request.setAttribute("tags",tags);
         String view = request.getParameter("view");
         String page = "posts_manage/detail-post.jsp";
         if("detail-blog".equals(view)) {
@@ -287,6 +305,6 @@ public class PostServlet extends HttpServlet {
         Category postsByCategory = categoryService.selectCategory(categoryId);
         request.setAttribute("postsByCategory", postsByCategory);
         request.setAttribute("posts", posts);
-        request.getRequestDispatcher("category/list-posts-by-category.jsp").forward(request, response);
+        request.getRequestDispatcher("categories_manage/list-posts-by-category.jsp").forward(request, response);
     }
 }

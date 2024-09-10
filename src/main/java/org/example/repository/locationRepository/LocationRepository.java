@@ -35,7 +35,6 @@ public class LocationRepository implements ILocationRepository {
         try (Connection connection = BaseRepository.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOCATION_BY_ID);) {
             preparedStatement.setInt(1, id);
-            System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {

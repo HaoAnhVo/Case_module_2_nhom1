@@ -114,6 +114,14 @@
             <div class="post-content">
                 ${post.content}
             </div>
+            <hr>
+            <div class="comment-form">
+                <h5>Các tags liên quan:
+                    <c:forEach var="tag" items="${tags}">
+                        <a href="TagServlet?action=getPostsByTag&tagId=${tag.tagId}">${tag.tagName}</a>,
+                    </c:forEach>
+                </h5>
+            </div>
 
             <!-- Comments Section -->
             <div class="comments-section mt-5">
@@ -129,7 +137,6 @@
                     </div>
                 </c:forEach>
                 <!-- Single Comment End -->
-
                 <!-- Comment Form -->
                 <div class="comment-form mt-4">
                     <h4>Để lại bình luận của bạn</h4>

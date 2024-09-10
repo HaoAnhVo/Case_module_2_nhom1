@@ -115,7 +115,6 @@ public class LocationServlet extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int locationId = Integer.parseInt(request.getParameter("locationId"));
         Location location = iLocationService.selectLocation(locationId);
-        System.out.println(location);
         request.setAttribute("location", location);
         request.setAttribute("locations", iLocationService.getAllLocations());
         RequestDispatcher dispatcher = request.getRequestDispatcher("locations_manage/form-location.jsp");

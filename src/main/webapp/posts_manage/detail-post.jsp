@@ -109,6 +109,14 @@
 <p><strong>Địa điểm:</strong> ${post.locationName}</p>
 <p><strong>Danh mục:</strong> ${post.categoryName}</p>
 <p>${post.content}</p>
+<hr>
+<div class="comment-form">
+    <h5>Các tags liên quan:
+        <c:forEach var="tag" items="${tags}">
+            <span>${tag.tagName}</span>,
+        </c:forEach>
+    </h5>
+</div>
 <p><strong>Tác giả:</strong> ${post.authorName}</p>
 <p><strong>Ngày đăng:</strong> ${post.createdAt}</p>
 <p><strong>Ngày chỉnh sửa:</strong> ${post.updatedAt}</p>

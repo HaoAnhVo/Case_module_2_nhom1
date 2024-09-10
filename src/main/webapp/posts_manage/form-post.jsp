@@ -1,3 +1,5 @@
+<%@ page import="org.example.model.Tag" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
@@ -280,6 +282,63 @@
             color: #000;
         }
     </style>
+    <script>
+        let selectedTags = [];
+
+        // Lấy các tag đã chọn từ server (danh sách tagId và tagName)
+        <%
+            List<Tag> selectedTags = (List<Tag>) request.getAttribute("selectedTags");
+        %>
+
+        function initSelectedTags() {
+            <% for (Tag tag : selectedTags) { %>
+            selectedTags.push({
+                id: <%= tag.getTagId() %>,
+                name: "<%= tag.getTagName() %>"
+            });
+            <% } %>
+            updateTagList();
+        }
+
+        function addTag() {
+            let select = document.getElementById('tags');
+            let selectedTagId = select.value;
+            let selectedTagName = select.options[select.selectedIndex].text;
+
+            if (!selectedTags.find(tag => tag.id === parseInt(selectedTagId))) {
+                selectedTags.push({ id: parseInt(selectedTagId), name: selectedTagName });
+                updateTagList();
+            } else alert("Exist!")
+        }
+
+        function updateTagList() {
+            let tagList = document.getElementById('tagList');
+            tagList.innerHTML = '';
+
+            selectedTags.forEach(tag => {
+                let tagItem = document.createElement('span');
+                tagItem.innerText = tag.name;
+
+                let removeButton = document.createElement('button');
+                removeButton.innerText = 'X';
+                removeButton.onclick = function() {
+                    removeTag(tag.id);
+                };
+
+                tagItem.appendChild(removeButton);
+                tagList.appendChild(tagItem);
+            });
+
+            document.getElementById('selectedTagIds').value = selectedTags.map(tag => tag.id).join(',');
+        }
+
+        function removeTag(tagId) {
+            selectedTags = selectedTags.filter(tag => tag.id !== tagId);
+            updateTagList();
+        }
+
+        window.onload = initSelectedTags;
+    </script>
 </head>
 <body>
 <h1>${post == null ? "Tạo bài viết mới" : "Chỉnh sửa bài viết"}</h1>
@@ -321,6 +380,25 @@
                 </option>
             </c:forEach>
         </select>
+    </div>
+    <div>
+        <label for="tags">Select Tags</label>
+        <select id="tags" required>
+            <c:forEach var="tag" items="${tags}">--%>
+                <option value="${tag.tagId}">
+                        ${tag.tagName}
+                </option>
+            </c:forEach>
+        </select>
+
+        <button type="button" onclick="addTag()">Thêm</button>
+        <br>
+
+        <h4>Tags được chọn:</h4>
+        <div id="tagList"></div>
+
+        <!-- Hidden input to store the tag IDs for submission -->
+        <input type="hidden" name="tagIds" id="selectedTagIds">
     </div>
     <%--  Submit --%>
     <div>
