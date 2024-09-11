@@ -5,6 +5,8 @@ import org.example.service.categoryService.CategoryService;
 import org.example.service.commentService.CommentService;
 import org.example.service.locationService.LocationService;
 import org.example.service.postService.PostService;
+import org.example.service.tagService.ITagService;
+import org.example.service.tagService.TagService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
 
 @WebServlet(name = "PostServlet", urlPatterns = "/PostServlet")
 public class PostServlet extends HttpServlet {
@@ -23,12 +25,14 @@ public class PostServlet extends HttpServlet {
     private CommentService commentService;
     private LocationService locationService;
     private CategoryService categoryService;
+    private TagService tagService;
 
     public void init() {
         postService = new PostService();
         commentService = new CommentService();
         locationService = new LocationService();
         categoryService = new CategoryService();
+        tagService = new TagService();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,7 +40,6 @@ public class PostServlet extends HttpServlet {
         if (action == null) {
             action = "list";
         }
-
 
         try {
             switch (action) {
@@ -92,14 +95,28 @@ public class PostServlet extends HttpServlet {
 
     private void listPosts(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         List<Post> posts = postService.getAllPosts();
-        request.setAttribute("posts", posts);
-
+        List<Location> locations = locationService.getAllLocations();
+        Map<String, List<Post>> groupedPostsByCategory = new HashMap<>();
         String view = request.getParameter("view");
         String page = "posts_manage/list-posts.jsp";
-        if ("blog".equals(view)) {
+
+        if ("index".equals(view)) {
+            if (posts.size() > 3) {
+                posts = posts.subList(0, 3);
+            }
+            request.setAttribute("posts", posts);
+            request.setAttribute("locations", locations);
+            page = "index.jsp";
+        } else if ("blog".equals(view)) {
+            for (Post post : posts) {
+                groupedPostsByCategory
+                        .computeIfAbsent(post.getCategoryName(), k -> new ArrayList<>())
+                        .add(post);
+            }
+            request.setAttribute("groupedPostsByCategory", groupedPostsByCategory);
             page = "blog.jsp";
         }
-
+        request.setAttribute("posts", posts);
         RequestDispatcher dispatcher = request.getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }
@@ -107,8 +124,10 @@ public class PostServlet extends HttpServlet {
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Location> locations = locationService.getAllLocations();
         List<Category> categories = categoryService.getAllCategories();
+        List<Tag> tags = tagService.getAllTags();
         request.setAttribute("locations", locations);
         request.setAttribute("categories", categories);
+        request.setAttribute("tags", tags);
         RequestDispatcher dispatcher = request.getRequestDispatcher("posts_manage/form-post.jsp");
         dispatcher.forward(request, response);
     }
@@ -119,11 +138,15 @@ public class PostServlet extends HttpServlet {
         List<Comment> comments = commentService.getCommentsWithUserAndPost(postId);
         List<Location> locations = locationService.getAllLocations();
         List<Category> categories = categoryService.getAllCategories();
+        List<Tag> selectedTags = postService.getTagsByPost(postId);
+        List<Tag> tags = tagService.getAllTags();
 
         request.setAttribute("post", post);
         request.setAttribute("comments", comments);
         request.setAttribute("locations", locations);
         request.setAttribute("categories", categories);
+        request.setAttribute("selectedTags", selectedTags);
+        request.setAttribute("tags", tags);
         RequestDispatcher dispatcher = request.getRequestDispatcher("posts_manage/form-post.jsp");
         dispatcher.forward(request, response);
     }
@@ -139,11 +162,12 @@ public class PostServlet extends HttpServlet {
         String categoryIdStr = request.getParameter("categoryId");
         int categoryId = (categoryIdStr == null || categoryIdStr.isEmpty()) ? 0 : Integer.parseInt(categoryIdStr);
 
+        String tagIds = request.getParameter("tagIds");
+        String[] tagIdArray = tagIds.split(",");
+
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");
         int authorId = loggedInUser.getUserId();
-
-        java.util.Date currentDate = new java.util.Date();
 
         Post newPost = new Post();
         newPost.setTitle(title);
@@ -152,14 +176,14 @@ public class PostServlet extends HttpServlet {
         newPost.setLocationId(locationId);
         newPost.setCategoryId(categoryId);
         newPost.setAuthorId(authorId);
-        newPost.setCreatedAt(new java.sql.Date(currentDate.getTime()));
+        newPost.setCreatedAt(new java.util.Date());;
 
         if (locationId == 0 || categoryId == 0) {
             request.getSession().setAttribute("message", "Vui lòng chọn địa điểm và danh mục hợp lệ.");
             request.getSession().setAttribute("status", "error");
             response.sendRedirect("PostServlet?action=new");
         } else {
-            postService.addPost(newPost);
+            postService.addPost(newPost, tagIdArray);
             request.getSession().setAttribute("message", "Thêm bài viết thành công!");
             request.getSession().setAttribute("status", "success");
             response.sendRedirect("PostServlet?action=list");
@@ -180,11 +204,13 @@ public class PostServlet extends HttpServlet {
         String categoryIdStr = request.getParameter("categoryId");
         int categoryId = (categoryIdStr == null || categoryIdStr.isEmpty()) ? 0 : Integer.parseInt(categoryIdStr);
 
+        String tagIds = request.getParameter("tagIds");
+        String[] tagIdArray = tagIds.split(",");
+
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");
         int authorId = loggedInUser.getUserId();
 
-        java.util.Date currentDate = new java.util.Date();
 
         Post updatedPost = postService.getPost(postId);
         updatedPost.setTitle(title);
@@ -193,14 +219,14 @@ public class PostServlet extends HttpServlet {
         updatedPost.setLocationId(locationId);
         updatedPost.setCategoryId(categoryId);
         updatedPost.setAuthorId(authorId);
-        updatedPost.setUpdatedAt(new java.sql.Date(currentDate.getTime()));
+        updatedPost.setUpdatedAt(new java.util.Date());
 
         if (locationId == 0 || categoryId == 0) {
             request.getSession().setAttribute("message", "Vui lòng chọn địa điểm và danh mục hợp lệ.");
             request.getSession().setAttribute("status", "error");
             response.sendRedirect("PostServlet?action=edit&postId=" + postId);
         } else {
-            postService.updatePost(updatedPost);
+            postService.updatePost(updatedPost, tagIdArray);
             request.getSession().setAttribute("message", "Cập nhật bài viết thành công!");
             request.getSession().setAttribute("status", "success");
             response.sendRedirect("PostServlet?action=list");
@@ -219,9 +245,15 @@ public class PostServlet extends HttpServlet {
         int postId = Integer.parseInt(request.getParameter("postId"));
         Post post = postService.getPost(postId);
         List<Comment> comments = commentService.getCommentsWithUserAndPost(postId);
+        List<Tag> tags = postService.getTagsByPost(postId);
+        List<Post> postsLocationRelated = locationService.getPostsByLocation(post.getLocationId());
+
+        postsLocationRelated.removeIf(p -> p.getPostId() == postId);
 
         request.setAttribute("post", post);
+        request.setAttribute("postsLocationRelated", postsLocationRelated);
         request.setAttribute("comments", comments);
+        request.setAttribute("tags",tags);
         String view = request.getParameter("view");
         String page = "posts_manage/detail-post.jsp";
         if ("detail-blog".equals(view)) {
@@ -281,7 +313,7 @@ public class PostServlet extends HttpServlet {
         }
     }
 
-    private void getPostsByCategory (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    private void getPostsByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         List<Post> posts = postService.getPostsByCategory(categoryId);
         Category postsByCategory = categoryService.selectCategory(categoryId);

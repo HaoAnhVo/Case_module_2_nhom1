@@ -27,7 +27,7 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
-            action = "list";
+            action = "";
         }
         switch (action) {
             case "list":
@@ -112,7 +112,7 @@ public class UserServlet extends HttpServlet {
 
         // Kiểm tra xem username đã tồn tại chưa
         if (checkUsernameExists(username)) {
-            request.getSession().setAttribute("message", "Tên tài khoản đã tồn! Vui lòng chọn một tên khác.");
+            request.getSession().setAttribute("message", "Tên tài khoản đã tồn tại! Vui lòng chọn một tên khác.");
             request.getSession().setAttribute("status", "error");
             request.setAttribute("email", email);
             request.setAttribute("birthday", birthdayStr);

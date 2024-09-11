@@ -54,7 +54,6 @@ public class CategoryRepository implements ICategoryRepository {
         try (Connection connection = BaseRepository.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CATEGORY_BY_ID);) {
             preparedStatement.setInt(1, id);
-            System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
@@ -102,34 +101,5 @@ public class CategoryRepository implements ICategoryRepository {
         }
 
         return categories;
-    }
-
-    @Override
-    public List<Post> getPostsByCategory(int categoryId) {
-        List<Post> posts = new ArrayList<>();
-        try (Connection con = BaseRepository.getConnection(); PreparedStatement ps = con.prepareStatement(SELECT_CATEGORY_BY_ID)) {
-            ps.setInt(1, categoryId);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Post post = new Post();
-                post.setPostId(rs.getInt("postId"));
-                post.setTitle(rs.getString("title"));
-                post.setContent(rs.getString("content"));
-                post.setImageUrl(rs.getString("imageUrl"));
-                post.setCreatedAt(rs.getDate("createdAt"));
-                post.setUpdatedAt(rs.getDate("updatedAt"));
-                post.setLocationId(rs.getInt("locationId"));
-                post.setCategoryId(rs.getInt("categoryId"));
-                post.setAuthorId(rs.getInt("authorId"));
-
-                post.setLocationName(rs.getString("locationName"));
-                post.setCategoryName(rs.getString("categoryName"));
-                posts.add(post);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return posts;
     }
 }

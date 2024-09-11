@@ -35,9 +35,4 @@ public class CategoryService implements ICategoryService {
     public void updateCategory(Category category) throws SQLException {
         iCategoryRepository.updateCategory(category);
     }
-
-    @Override
-    public List<Post> getPostsByCategory(int categoryId) {
-        return iCategoryRepository.getPostsByCategory(categoryId);
-    }
 }

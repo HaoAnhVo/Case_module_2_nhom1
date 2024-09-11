@@ -25,13 +25,15 @@
         <c:when test="${user.getRole() == 'admin'}">
             <a href="UserServlet?action=list" class="<%= currentUrl.contains("/users_manage/list-users.jsp") ? "active" : "" %>">Quản lý người dùng</a>
             <a href="PostServlet?action=list" class="<%= currentUrl.contains("/posts_manage/list-posts.jsp") ? "active" : "" %>">Quản lý bài viết</a>
-            <a href="LocationServlet?action=list" class="<%= currentUrl.contains("/location/list-locations.jsp") ? "active" : "" %>">Quản lý địa điểm</a>
-            <a href="CategoryServlet?action=list" class="<%= currentUrl.contains("/category/list-categories.jsp") ? "active" : "" %>">Quản lý danh mục</a>
+            <a href="LocationServlet?action=list" class="<%= currentUrl.contains("/locations_manage/list-locations.jsp") ? "active" : "" %>">Quản lý địa điểm</a>
+            <a href="CategoryServlet?action=list" class="<%= currentUrl.contains("/categories_manage/list-categories.jsp") ? "active" : "" %>">Quản lý danh mục</a>
+            <a href="TagServlet?action=list" class="<%= currentUrl.contains("/tags_manage/list-tags.jsp") ? "active" : "" %>">Quản lý tag</a>
         </c:when>
         <c:when test="${user.getRole() == 'moderator'}">
             <a href="PostServlet?action=list" class="<%= currentUrl.contains("/posts_manage/list-posts.jsp") ? "active" : "" %>">Quản lý bài viết</a>
-            <a href="LocationServlet?action=list" class="<%= currentUrl.contains("/location/list-locations.jsp") ? "active" : "" %>">Quản lý địa điểm</a>
-            <a href="CategoryServlet?action=list" class="<%= currentUrl.contains("/category/list-categories.jsp") ? "active" : "" %>">Quản lý danh mục</a>
+            <a href="LocationServlet?action=list" class="<%= currentUrl.contains("/locations_manage/list-locations.jsp") ? "active" : "" %>">Quản lý địa điểm</a>
+            <a href="CategoryServlet?action=list" class="<%= currentUrl.contains("/categories_manage/list-categories.jsp") ? "active" : "" %>">Quản lý danh mục</a>
+            <a href="TagServlet?action=list" class="<%= currentUrl.contains("/tags_manage/list-tags.jsp") ? "active" : "" %>">Quản lý tag</a>
         </c:when>
     </c:choose>
 </div>

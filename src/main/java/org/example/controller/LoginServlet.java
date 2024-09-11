@@ -43,7 +43,9 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("index.jsp");
             }
         } else {
-            response.sendRedirect("login.jsp?error=true");
+            request.getSession().setAttribute("message", "Sai tài khoản hoặc mật khẩu! Vui lòng thử lại");
+            request.getSession().setAttribute("status", "error");
+            response.sendRedirect("login.jsp");
         }
     }
 }

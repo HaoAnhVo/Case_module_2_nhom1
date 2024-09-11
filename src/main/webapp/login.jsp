@@ -1,9 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% String error = request.getParameter("error"); %>
-<% if ("true".equals(error)) { %>
-<p style="color:red;">Sai tài khoản hoặc mật khẩu!</p>
-<% } %>
+<%
+    String message = (String) session.getAttribute("message");
+    String status = (String) session.getAttribute("status");
+    if (message != null && status != null) {
+%>
+<div id="popup" class="popup <%= status %>">
+    <span class="popup-message"><%= message %></span>
+    <button id="close-popup" onclick="closePopup()">X</button>
+</div>
+<%
+        session.removeAttribute("message");
+        session.removeAttribute("status");
+    }
+%>
 
 <html lang="en">
 <head>
@@ -225,7 +235,7 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-white mb-3">Tin mới</h4>
-                <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                <p>Đăng ký để nhận ngay thông báo bài viết mới</p>
                 <div class="position-relative mx-auto" style="max-width: 400px">
                     <input
                             class="form-control border-primary w-100 py-3 ps-4 pe-5"

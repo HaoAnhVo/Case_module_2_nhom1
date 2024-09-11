@@ -1,6 +1,11 @@
+<%@ page import="org.example.model.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
+    User user = (User) session.getAttribute("user");
+    if (user == null) {
+        response.sendRedirect("login.jsp");
+    }
     String message = (String) session.getAttribute("message");
     String status = (String) session.getAttribute("status");
     if (message != null && status != null) {
@@ -14,9 +19,10 @@
         session.removeAttribute("status");
     }
 %>
+
 <html>
 <head>
-    <title>${location == null ? "Tạo địa điểm mới" : "Chỉnh sửa địa điểm"}</title>
+    <title>${tag == null ? "Tạo tag mới" : "Chỉnh sửa tag"}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,14 +35,12 @@
             flex-direction: column;
             min-height: 100vh;
         }
-
         h1 {
             font-size: 28px;
             font-weight: bold;
             margin-bottom: 20px;
             color: #444;
         }
-
         form {
             background-color: #fff;
             padding: 20px;
@@ -45,18 +49,15 @@
             width: 100%;
             max-width: 600px;
         }
-
         form div {
             margin-bottom: 15px;
         }
-
         label {
             display: block;
             font-weight: bold;
             margin-bottom: 5px;
             color: #444;
         }
-
         select {
             width: calc(100% - 20px);
             padding: 10px;
@@ -68,21 +69,17 @@
             background-color: #fff;
             appearance: none;
         }
-
         select::-ms-expand {
             display: none;
         }
-
         select:hover {
             border-color: #86b817;
         }
-
         select:focus {
             border-color: #86b817;
             outline: none;
             box-shadow: 0 0 5px rgba(134, 184, 23, 0.5);
         }
-
         input[type="text"],
         textarea {
             width: 100%;
@@ -93,12 +90,10 @@
             font-size: 16px;
             color: #333;
         }
-
         textarea {
             height: 100px;
             resize: vertical;
         }
-
         button {
             width: 100%;
             background-color: #86b817;
@@ -110,11 +105,9 @@
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
-
         button:hover {
             background-color: #688b12;
         }
-
         a {
             display: inline-block;
             margin-top: 20px;
@@ -123,19 +116,15 @@
             font-size: 16px;
             transition: color 0.3s ease;
         }
-
         a:hover {
             color: #688b12;
         }
-
         .comment-section {
             margin-top: 20px;
         }
-
         .comment-list {
             margin-bottom: 20px;
         }
-
         .comment-item {
             background-color: #f4f4f4;
             padding: 10px;
@@ -143,7 +132,6 @@
             border-radius: 5px;
             position: relative;
         }
-
         .comment-item .delete-btn {
             position: absolute;
             top: 10px;
@@ -155,11 +143,9 @@
             cursor: pointer;
             border-radius: 3px;
         }
-
         .comment-item .delete-btn:hover {
             background-color: #c0392b;
         }
-
         .popup {
             position: fixed;
             top: 20px;
@@ -174,13 +160,11 @@
             align-items: center;
             justify-content: space-between;
         }
-
         /* Message text */
         .popup-message {
             font-size: 14px;
             margin-right: 10px;
         }
-
         /* Close button */
         #close-popup {
             background: none;
@@ -189,12 +173,10 @@
             font-size: 16px;
             cursor: pointer;
         }
-
         /* Animation for smooth fade-in */
         .popup {
             animation: fadeIn 0.5s ease-in-out;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -205,7 +187,6 @@
                 transform: translateY(0);
             }
         }
-
         .comment-section {
             margin-top: 40px;
             max-width: 600px;
@@ -215,19 +196,16 @@
             justify-content: center;
             align-items: center;
         }
-
         .comment-section h2 {
             color: #333;
             margin-bottom: 20px;
             font-size: 24px;
         }
-
         .comment-list {
             list-style: none;
             padding: 0;
             width: 100%;
         }
-
         .comment-item {
             background-color: #fff;
             border: 1px solid #ddd;
@@ -235,15 +213,12 @@
             padding: 15px;
             margin-bottom: 15px;
         }
-
         .comment-item p {
             margin: 0 0 10px 0;
         }
-
         .comment-item strong {
             color: #555;
         }
-
         .delete-btn {
             background-color: #ff4d4d;
             color: #fff;
@@ -254,52 +229,33 @@
             font-size: 14px;
             transition: background-color 0.3s ease;
         }
-
         .delete-btn:hover {
             background-color: #ff1a1a;
         }
-
-
         .back-link {
             color: #000;
         }
     </style>
 </head>
 <body>
-<h1>${location == null ? "Tạo địa điểm mới" : "Chỉnh sửa địa điểm"}</h1>
-<form action="LocationServlet?action=${location == null ? 'create' : 'edit'}" method="post" class="form-post">
-    <input type="hidden" name="locationId" value="${location != null ? location.locationId : ''}">
+<h1>${tag == null ? "Tạo tag mới" : "Chỉnh sửa tag"}</h1>
+<form action="TagServlet?action=${tag == null ? 'create' : 'edit'}" method="post" class="form-post">
+    <input type="hidden" name="tagId" value="${tag != null ? tag.tagId : ''}">
     <div>
-        <label>Địa điểm</label>
-        <c:if test="${location == null}">
-            <input type="text" name="locationName">
+        <label>Tên tag</label>
+        <c:if test="${tag == null}">
+            <input type="text" name="tagName" required>
         </c:if>
-        <c:if test="${location != null}">
-            <select name="locationId" required disabled>
-                <option value="">-- Chọn địa điểm --</option>
-                <c:forEach var="item" items="${locations}">
-                    <option value="${item.locationId}"
-                            <c:if test="${location != null && location.locationId == item.locationId}">selected</c:if>>
-                            ${item.locationName}
-                    </option>
-                </c:forEach>
-            </select>
+        <c:if test="${tag != null}">
+            <input type="text" name="tagName" value="${tag.tagName}" required>
         </c:if>
-    </div>
-    <div>
-        <label>Link google maps</label>
-        <textarea name="mapLink" required>${location != null ? location.mapLink : ''}</textarea>
-    </div>
-    <div>
-        <label>Link hình ảnh</label>
-        <input type="text" name="imgURL" value="${location != null ? location.imgURL : ''}">
     </div>
     <%--  Submit --%>
     <div>
-        <button type="submit">${location == null ? "Thêm" : "Cập nhật"}</button>
+        <button type="submit">${tag == null ? "Thêm" : "Cập nhật"}</button>
     </div>
 </form>
-<a href="LocationServlet?action=list" class="back-link">
+<a href="TagServlet?action=list" class="back-link">
     <span class="arrow">← </span>Quay về trang trước
 </a>
 </div>

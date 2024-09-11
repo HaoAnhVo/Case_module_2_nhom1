@@ -32,9 +32,8 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet"/>
 </head>
+
 <body>
-
-
 <!-- Topbar Start -->
 <div class="container-fluid bg-dark px-5 d-none d-lg-block">
     <div class="row gx-0">
@@ -77,10 +76,7 @@
         <div class="container py-5">
             <div class="row justify-content-center py-5">
                 <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
-                    <h1 class="display-3 text-white animated slideInDown">${post.title}</h1>
-                    <p class="fs-4 mb-4 animated slideInDown" style="color: var(--primary); font-size: 1.6rem">
-                        Kiến thức - Kinh nghiệm - Trải nghiệm
-                    </p>
+                    <h1 class="display-3 text-white animated slideInDown">Chi tiết bài viết</h1>
                 </div>
             </div>
         </div>
@@ -99,9 +95,11 @@
             <!-- Post Meta Information -->
             <div class="post-meta d-flex align-items-center mb-4">
                 <span><i class="fas fa-user"></i> <a href="#">${post.authorName}</a></span>
-                <span><i class="fas fa-calendar-alt"></i> ${post.createdAt}</span>
-                <span><i class="fas fa-folder-open"></i> <a href="#">${post.categoryName}</a></span>
-                <span><i class="fas fa-map-marker-alt"></i> <a href="#">${post.locationName}</a></span>
+                <span><i class="fas fa-calendar-alt"></i> ${post.formattedCreatedAt}</span>
+                <span><i class="fas fa-folder-open"></i> <a
+                        href="PostServlet?action=getPostsByCategory&categoryId=${post.categoryId}">${post.categoryName}</a></span>
+                <span><i class="fas fa-map-marker-alt"></i> <a
+                        href="LocationServlet?action=getPostsByLocation&locationId=${post.locationId}">${post.locationName}</a></span>
             </div>
 
             <!-- Post Image -->
@@ -115,6 +113,7 @@
             <div class="post-content">
                 ${post.content}
             </div>
+            <hr>
 
             <!-- Comments Section -->
             <div class="comments-section mt-5">
@@ -123,7 +122,8 @@
                     <div class="comment d-flex">
                         <div>
                             <h6 class="mb-1">
-                                    ${comment.username} <small class="text-muted">${comment.createdAt}</small>
+                                    ${comment.username} <small style="margin-left: 12px"
+                                                               class="text-muted">${comment.formattedCreatedAt}</small>
                             </h6>
                             <p>${comment.content}</p>
                         </div>
@@ -152,52 +152,45 @@
             </div>
         </div>
 
-        <!-- Sidebar Start -->
-        <%--        <div class="col-lg-4">--%>
-        <%--            <!-- Search Widget -->--%>
-        <%--            <div class="mb-5">--%>
-        <%--                <form action="#" method="GET">--%>
-        <%--                    <div class="input-group">--%>
-        <%--                        <input type="text" class="form-control" placeholder="Tìm kiếm..."/>--%>
-        <%--                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>--%>
-        <%--                    </div>--%>
-        <%--                </form>--%>
-        <%--            </div>--%>
+        <%--Sidebar Start--%>
+        <div class="col-lg-4">
+            <!-- Recent Posts Widget -->
+            <div class="mb-5">
+                <h4 class="mb-4">Bài Viết Liên Quan </h4>
+                <div class="list-group">
+                    <c:forEach var="postLocation" items="${postsLocationRelated}">
+                        <a href="PostServlet?action=view&view=detail-blog?postId=${postLocation.postId}"
+                           class="list-group-item list-group-item-action d-flex">
+                            <img
+                                    src="${postLocation.imageUrl}"
+                                    alt="${postLocation.title}"
+                                    style="width: 60px; height: 60px; object-fit: cover; margin-right: 15px"
+                            />
+                            <div>
+                                <h6 class="mb-1">${postLocation.title}</h6>
+                                <small class="text-muted">${postLocation.formattedCreatedAt}</small>
+                            </div>
+                        </a>
+                    </c:forEach>
+                </div>
+            </div>
 
-        <%--            <!-- Recent Posts Widget -->--%>
-        <%--            <div class="mb-5">--%>
-        <%--                <h4 class="mb-4">Bài Viết Mới Nhất</h4>--%>
-        <%--                <div class="list-group">--%>
-        <%--                    <c:forEach var="recentPost" items="${recentPosts}">--%>
-        <%--                        <a href="post_details.jsp?id=${recentPost.postId}"--%>
-        <%--                           class="list-group-item list-group-item-action d-flex">--%>
-        <%--                            <img--%>
-        <%--                                    src="${recentPost.imageUrl}"--%>
-        <%--                                    alt="${recentPost.title}"--%>
-        <%--                                    style="width: 60px; height: 60px; object-fit: cover; margin-right: 15px"--%>
-        <%--                            />--%>
-        <%--                            <div>--%>
-        <%--                                <h6 class="mb-1">${recentPost.title}</h6>--%>
-        <%--                                <small class="text-muted">${recentPost.createdAt}</small>--%>
-        <%--                            </div>--%>
-        <%--                        </a>--%>
-        <%--                    </c:forEach>--%>
-        <%--                </div>--%>
-        <%--            </div>--%>
-
-        <%--            <!-- Tags Widget -->--%>
-        <%--            <div class="mb-5">--%>
-        <%--                <h4 class="mb-4">Thẻ</h4>--%>
-        <%--                <div>--%>
-        <%--                    <c:forEach var="tag" items="${tags}">--%>
-        <%--                        <a href="#" class="btn btn-sm btn-outline-primary mb-2">${tag.name}</a>--%>
-        <%--                    </c:forEach>--%>
-        <%--                </div>--%>
-        <%--            </div>--%>
-        <%--        </div>--%>
-        <!-- Sidebar End -->
+            <!-- Tags Widget -->
+            <div class="mb-5">
+                <h4 class="mb-4">Thẻ</h4>
+                <div>
+                    <c:forEach var="tag" items="${tags}">
+                        <a href="TagServlet?action=getPostsByTag&tagId=${tag.tagId}"
+                           class="btn btn-sm btn-outline-primary mb-2">${tag.tagName}</a>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+        <%--Sidebar End--%>
     </div>
 </div>
+
+
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

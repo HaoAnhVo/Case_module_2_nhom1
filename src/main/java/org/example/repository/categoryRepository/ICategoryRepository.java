@@ -18,5 +18,4 @@ public interface ICategoryRepository {
 
     public void updateCategory(Category category) throws SQLException;
 
-    public List<Post> getPostsByCategory(int categoryId);
 }

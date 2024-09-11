@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>${post == null ? "Tạo danh mục mới" : "Chỉnh sửa danh mục"}</title>
+    <title>${category == null ? "Tạo danh mục mới" : "Chỉnh sửa danh mục"}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -101,6 +101,7 @@
         }
 
         button {
+            width: 100%;
             background-color: #86b817;
             color: white;
             padding: 10px 20px;
@@ -271,20 +272,7 @@
     <input type="hidden" name="categoryId" value="${category != null ? category.categoryId : ''}">
     <div>
         <label>Danh mục</label>
-        <c:if test="${category == null}">
-            <input type="text" name="categoryName">
-        </c:if>
-        <c:if test="${category != null}">
-            <select name="categoryId" required disabled>
-                <option value="">-- Chọn danh mục --</option>
-                <c:forEach var="item" items="${categories}">
-                    <option value="${item.categoryId}"
-                            <c:if test="${category != null && category.locationId == item.categoryId}">selected</c:if>>
-                            ${item.categoryName}
-                    </option>
-                </c:forEach>
-            </select>
-        </c:if>
+        <input type="text" name="categoryName" value="${category != null ? category.categoryName : ''}" required>
     </div>
     <%--  Submit --%>
     <div>

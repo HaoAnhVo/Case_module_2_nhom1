@@ -4,6 +4,7 @@ import org.example.model.Comment;
 import org.example.repository.BaseRepository;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +66,7 @@ public class CommentRepository implements ICommentRepository{
 
     public List<Comment> getCommentsWithUserAndPost(int postId) {
         List<Comment> comments = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String query = "SELECT c.*, u.username FROM comments c JOIN users u ON c.userId = u.userId WHERE c.postId = ?";
         try (Connection con = BaseRepository.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ps.setInt(1, postId);
@@ -73,7 +75,11 @@ public class CommentRepository implements ICommentRepository{
                 Comment comment = new Comment();
                 comment.setCommentId(rs.getInt("commentId"));
                 comment.setContent(rs.getString("content"));
-                comment.setCreatedAt(rs.getDate("createdAt"));
+                Date createdAt = rs.getDate("createdAt");
+                if(createdAt != null) {
+                    String formattedCreatedAt = dateFormat.format(createdAt);
+                    comment.setFormattedCreatedAt(formattedCreatedAt);
+                }
                 comment.setUserId(rs.getInt("userId"));
                 comment.setPostId(rs.getInt("postId"));
                 comment.setUsername(rs.getString("username"));

@@ -35,6 +35,12 @@
         <!-- CSS Stylesheet -->
         <link href="css/bootstrap.min.css" rel="stylesheet" />
         <link href="css/style.css" rel="stylesheet" />
+
+        <style>
+            .team-item img {
+                height: 210px;
+            }
+        </style>
     </head>
 
     <body>
@@ -161,10 +167,10 @@
                     <h1 class="mb-5">Nhóm của chúng tôi</h1>
                 </div>
                 <div class="row g-4">
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="col-lg-2 offset-lg-1 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="team-item">
                             <div class="overflow-hidden">
-                                <img class="img-fluid" src="" alt="" />
+                                <img class="img-fluid" src="https://scontent.fdad3-1.fna.fbcdn.net/v/t39.30808-6/241453626_1497275003981775_9102379658119929148_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=fDEOyFzPpkEQ7kNvgGexSLp&_nc_ht=scontent.fdad3-1.fna&_nc_gid=AK0ZrnbZUGknX3SDfU1WMya&oh=00_AYA8y6U1XjE7K_vcsc4XzOZAda9roSbr821jTVeDXBEnJw&oe=66E59366" alt="Linh Phan" />
                             </div>
                             <div class="position-relative d-flex justify-content-center" style="margin-top: -19px">
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -172,15 +178,14 @@
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
                             </div>
                             <div class="text-center p-4">
-                                <h5 class="mb-0">Full Name</h5>
-                                <small>Designation</small>
+                                <h5 class="mb-0">Linh Phan</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="team-item">
                             <div class="overflow-hidden">
-                                <img class="img-fluid" src="" alt="" />
+                                <img class="img-fluid" src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/456020751_2267672190236401_6311886940491195893_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeESNLnA9l8SzW3wOWP2tkhNzVMl8oQ9jhrNUyXyhD2OGsRL47lj6RUkct9Y9brx_R5BKGQIqAoi9HtaGnIdaItt&_nc_ohc=0CEKnxXPT1EQ7kNvgHl699X&_nc_ht=scontent.fsgn2-4.fna&oh=00_AYACbmoJyyVSeli9PkcBTaS-vMnkGbAUOQD62TEsHbBV6A&oe=66E5C2DA" alt="Quang Nguyễn" />
                             </div>
                             <div class="position-relative d-flex justify-content-center" style="margin-top: -19px">
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -188,15 +193,14 @@
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
                             </div>
                             <div class="text-center p-4">
-                                <h5 class="mb-0">Full Name</h5>
-                                <small>Designation</small>
+                                <h5 class="mb-0">Quang Nguyễn</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="team-item">
                             <div class="overflow-hidden">
-                                <img class="img-fluid" src="" alt="" />
+                                <img class="img-fluid" src="https://bedental.vn/wp-content/uploads/2022/11/1e8063154fdf3dcbb07edf0ad2df326a.jpg" alt="Hào Nhỏ" />
                             </div>
                             <div class="position-relative d-flex justify-content-center" style="margin-top: -19px">
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -204,15 +208,14 @@
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
                             </div>
                             <div class="text-center p-4">
-                                <h5 class="mb-0">Full Name</h5>
-                                <small>Designation</small>
+                                <h5 class="mb-0">Hào Nhỏ</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                         <div class="team-item">
                             <div class="overflow-hidden">
-                                <img class="img-fluid" src="" alt="" />
+                                <img class="img-fluid" src="https://ca.slack-edge.com/T062S4QFUJZ-U071BK6FF2A-90e92d59184f-512" alt="Huy Trần" />
                             </div>
                             <div class="position-relative d-flex justify-content-center" style="margin-top: -19px">
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -220,8 +223,22 @@
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
                             </div>
                             <div class="text-center p-4">
-                                <h5 class="mb-0">Full Name</h5>
-                                <small>Designation</small>
+                                <h5 class="mb-0">Huy Trần</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="team-item">
+                            <div class="overflow-hidden">
+                                <img class="img-fluid" src="https://scontent.fsgn5-10.fna.fbcdn.net/v/t39.30808-6/301574501_1277149409722204_1801836726171267379_n.jpg?stp=cp6_dst-jpg&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=UIIsJnqek7kQ7kNvgFH86Bp&_nc_ht=scontent.fsgn5-10.fna&oh=00_AYCeAR94zw_YY87oyii-CkbfCk0AIjJsDf7y2cSbOKxdYw&oe=66E64C1B" alt="Duy Phạm" />
+                            </div>
+                            <div class="position-relative d-flex justify-content-center" style="margin-top: -19px">
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                            <div class="text-center p-4">
+                                <h5 class="mb-0">Duy Phạm</h5>
                             </div>
                         </div>
                     </div>
@@ -230,94 +247,8 @@
         </div>
         <!-- Team End -->
 
-        <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-            <div class="container py-5">
-                <div class="row g-5">
-                    <div class="col-lg-3 col-md-6">
-                        <h4 class="text-white mb-3">Hệ thống</h4>
-                        <a class="btn btn-link" href="">Về chúng tôi</a>
-                        <a class="btn btn-link" href="">Liên hệ</a>
-                        <a class="btn btn-link" href="">Chính sách bảo mật</a>
-                        <a class="btn btn-link" href="">Điều khoản & điều kiện</a>
-                        <a class="btn btn-link" href="">FAQs & Trợ giúp</a>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h4 class="text-white mb-3">Liên hệ</h4>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>CodeGym</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>C0524I1@codegym.com</p>
-                        <div class="d-flex pt-2">
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h4 class="text-white mb-3">Thư viện</h4>
-                        <div class="row g-2 pt-2">
-                            <div class="col-4">
-                                <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="" />
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="" />
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="" />
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="" />
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="" />
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h4 class="text-white mb-3">Tin mới</h4>
-                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px">
-                            <input
-                                class="form-control border-primary w-100 py-3 ps-4 pe-5"
-                                type="text"
-                                placeholder="Your email"
-                            />
-                            <button
-                                type="button"
-                                class="btn btn-secondary py-2 position-absolute top-0 end-0 mt-2 me-2"
-                            >
-                                Đăng ký
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="copyright">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#!">CodeGym</a>, All Right Reserved.
-
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                            Designed By <a class="border-bottom" href="#!">C0524I1</a>
-                        </div>
-                        <div class="col-md-6 text-center text-md-end">
-                            <div class="footer-menu">
-                                <a href="">Trang chủ</a>
-                                <a href="">Cookies</a>
-                                <a href="">Trợ giúp</a>
-                                <a href="">FAQs</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End -->
+        <%--  Footer  --%>
+        <jsp:include page="./common/footer.jsp" />
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

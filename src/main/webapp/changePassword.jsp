@@ -57,6 +57,7 @@
             font-family: Arial, sans-serif;
             color: #333;
         }
+
         /* Header Section */
         .header {
             background: linear-gradient(rgba(20, 20, 31, 0.7), rgba(20, 20, 31, 0.7)), url("./img/bg-hero.jpg") no-repeat center center;
@@ -68,96 +69,118 @@
             color: white;
             text-align: center;
         }
+
         .header h1 {
             font-size: 4rem;
             font-weight: bold;
             color: whitesmoke;
         }
+
         .header p {
             font-size: 1.5rem;
             margin-top: 20px;
         }
+
         .header .btn {
             margin-top: 30px;
             padding: 10px 30px;
             font-size: 1.2rem;
         }
+
         /* About Section */
         .about-section {
             padding: 80px 0;
             background-color: #f8f9fa;
         }
+
         .about-content {
             display: flex;
             align-items: center;
             justify-content: center;
         }
+
         .about-content img {
             max-width: 80%;
             border-radius: 50%;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
+
         .about-text {
             margin-left: 50px;
         }
+
         .about-text h2 {
             font-size: 3rem;
             font-weight: bold;
             margin-bottom: 20px;
         }
+
         .about-text p {
             font-size: 1.2rem;
             line-height: 1.6;
         }
+
         .about-text .btn {
             margin-top: 30px;
             padding: 10px 30px;
             font-size: 1.2rem;
         }
+
         /* Blog Posts Section */
         .blog-section {
             padding: 80px 0;
             background-color: white;
         }
+
         .blog-post {
             margin-bottom: 40px;
         }
+
         .blog-post img {
             width: 100%;
             border-radius: 10px;
             margin-bottom: 20px;
         }
+
         .blog-post h3 {
             font-size: 2rem;
             margin-bottom: 10px;
         }
+
         .blog-post p {
             font-size: 1.2rem;
             color: #555;
         }
+
         img {
             transition: 0.5s;
         }
+
         img:hover {
             transform: scale(1.1);
         }
+
         .form-section {
             background-color: #f8f9fa;
             padding: 60px 0;
         }
+
         .form-label {
             font-weight: 600;
             font-size: 1.2rem;
         }
+
         .form-control {
             border-radius: 5px;
             padding: 15px;
             font-size: 1.1rem;
         }
+
         .btn-lg {
             padding: 12px 30px;
             font-size: 1.2rem;
         }
+
         .popup {
             position: fixed;
             top: 20px;
@@ -172,6 +195,7 @@
             align-items: center;
             justify-content: space-between;
         }
+
         .popup-error {
             position: fixed;
             top: 20px;
@@ -186,11 +210,13 @@
             align-items: center;
             justify-content: space-between;
         }
+
         /* Message text */
         .popup-message {
             font-size: 14px;
             margin-right: 10px;
         }
+
         /* Close button */
         #close-popup {
             background: none;
@@ -199,26 +225,30 @@
             font-size: 16px;
             cursor: pointer;
         }
+
         /* Animation for smooth fade-in */
         .popup {
             animation: fadeIn 0.5s ease-in-out;
         }
+
         label {
             color: #303334;
         }
+
         @media (max-width: 768px) {
             .form-section {
                 padding: 40px 20px;
             }
+
             .form-control {
                 padding: 10px;
             }
-        }
-        @media (max-width: 768px) {
+
             .about-content {
                 flex-direction: column;
                 text-align: center;
             }
+
             .about-text {
                 margin-left: 0;
                 margin-top: 30px;
@@ -228,79 +258,95 @@
 </head>
 
 <body>
-<jsp:include page="./common/navbar.jsp"/>
-<!-- Header Section -->
-<div class="header">
-    <div class="about-section wow fadeInUp overflow-hidden">
-        <div class="container">
-            <h2 class="text-center">Đổi mật khẩu</h2>
-            <div class="d-flex align-items-center">
-                <div class="about-content col-md-6">
-                    <img src="https://cdn.pixabay.com/photo/2019/12/04/13/12/hair-4672684_1280.jpg" alt="Profile Picture"
-                         class="img-fluid">
-                </div>
-                <div class="about-text col-md-6">
-                    <!-- Form Section -->
-                    <div class="form-section py-5">
-                        <div class="justify-content-center">
-                            <div class="col-md-8">
-                                <form action="/profile?action=changePassword" method="post">
-                                    <!-- Name -->
-                                    <div class="form-group mb-3">
-                                        <label for="oldPassword" class="form-label text-start d-block">Mật khẩu cũ:</label>
-                                        <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
-                                    </div>
+<div
+        id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+>
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- Spinner End -->
 
-                                    <!-- Email -->
-                                    <div class="form-group mb-3">
-                                        <label for="newPassword" class="form-label text-start d-block">Mật khẩu mới:</label>
-                                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
-                                    </div>
+<!-- Topbar Start -->
+<div class="container-fluid bg-dark px-5 d-none d-lg-block">
+    <div class="row gx-0">
+        <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+            <div class="d-inline-flex align-items-center" style="height: 45px">
+                <small class="me-3 text-light"><i class="fa fa-map-marker-alt me-2"></i>CodeGym</small>
+                <small class="me-3 text-light"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</small>
+                <small class="text-light"><i class="fa fa-envelope-open me-2"></i>C0524I1@codegym.com</small>
+            </div>
+        </div>
+        <div class="col-lg-4 text-center text-lg-end">
+            <div class="d-inline-flex align-items-center" style="height: 45px">
+                <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""
+                ><i class="fab fa-twitter fw-normal"></i
+                ></a>
+                <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""
+                ><i class="fab fa-facebook-f fw-normal"></i
+                ></a>
+                <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""
+                ><i class="fab fa-linkedin-in fw-normal"></i
+                ></a>
+                <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""
+                ><i class="fab fa-instagram fw-normal"></i
+                ></a>
+                <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href=""
+                ><i class="fab fa-youtube fw-normal"></i
+                ></a>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                    <!-- Birth Date -->
-                                    <div class="form-group mb-3">
-                                        <label for="confirmPassword" class="form-label text-start d-block">Xác nhận mật khẩu:</label>
-                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                                    </div>
+<!-- Navbar & Hero Start -->
+<div class="container-fluid position-relative p-0">
+    <% request.setAttribute("currentPage", "index.jsp"); %>
+    <jsp:include page="./common/navbar.jsp"/>
 
-                                    <!-- Submit Button -->
-                                    <div class="form-group text-center">
-                                        <button type="submit" class="btn btn-primary btn-lg">Cập nhật</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+
+    <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+        <div class="container py-5">
+            <div class="row justify-content-center py-5">
+                <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">
+                        Đổi mật khẩu
+                    </h1>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
+<!-- Navbar & Hero End -->
 
-<!-- About Section -->
+<div class="d-flex justify-content-center">
+    <div class="form-section py-5 w-50 px-5">
+        <form action="/profile?action=changePassword" method="post">
+            <!-- Name -->
+            <div class="form-group mb-3">
+                <label for="oldPassword" class="form-label text-start d-block ">Mật khẩu cũ</label>
+                <input type="password" class="form-control " id="oldPassword" name="oldPassword" required>
+            </div>
 
-<!-- Blog Posts Section -->
-<div class="blog-section">
-    <div class="container">
-        <h2 class="text-center mb-5">Latest Blog Posts</h2>
-        <div class="row">
-            <div class="col-md-4 blog-post wow fadeInUp" data-wow-delay="0.1s">
-                <img src="./img/destination-2.png" alt="Post Image">
-                <h3>Hidden Gems in Southeast Asia</h3>
-                <p>Explore the lesser-known, beautiful places in Southeast Asia, away from the tourist crowds.</p>
+            <!-- Email -->
+            <div class="form-group mb-3">
+                <label for="newPassword" class="form-label text-start d-block">Mật khẩu mới</label>
+                <input type="password" class="form-control" id="newPassword" name="newPassword" required>
             </div>
-            <div class="col-md-4 blog-post wow fadeInUp">
-                <img src="./img/destination-2.jpg" alt="Post Image">
-                <h3>A Journey Through the Alps</h3>
-                <p>My adventure through the majestic Alps, uncovering breathtaking landscapes and local culture.</p>
+
+            <!-- Birth Date -->
+            <div class="form-group mb-3">
+                <label for="confirmPassword" class="form-label text-start d-block">Xác nhận mật khẩu</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                       required>
             </div>
-            <div class="col-md-4 blog-post wow fadeInUp">
-                <img src="./img/destination-3.jpg" alt="Post Image">
-                <h3>Immersing in Japanese Culture</h3>
-                <p>Experience the blend of traditional and modern culture in the land of the rising sun, Japan.</p>
+
+            <!-- Submit Button -->
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary btn-lg">Cập nhật</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 

@@ -76,9 +76,6 @@ public class CategoryServlet extends HttpServlet {
         request.setAttribute("categories", iCategoryService.getAllCategories());
         String view = request.getParameter("view");
         String page = "categories_manage/list-categories.jsp";
-//        if ("location".equals(view)) {
-//            page = "destination.jsp";
-//        }
         RequestDispatcher dispatcher = request.getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }
@@ -93,6 +90,8 @@ public class CategoryServlet extends HttpServlet {
         } else {
             Category category = new Category(categoryName);
             iCategoryService.insertCategory(category);
+            List<Category> categories = iCategoryService.getAllCategories();
+            getServletContext().setAttribute("categories", categories);
             request.getSession().setAttribute("message", "Thêm mới thành công!");
             request.getSession().setAttribute("status", "success");
             response.sendRedirect("CategoryServlet");
@@ -100,22 +99,24 @@ public class CategoryServlet extends HttpServlet {
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("categories_manage/form-categories.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("categories_manage/form-category.jsp");
         dispatcher.forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         Category category = iCategoryService.selectCategory(categoryId);
-        request.setAttribute("categories", category);
+        request.setAttribute("category", category);
         request.setAttribute("categories", iCategoryService.getAllCategories());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("categories_manage/form-categories.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("categories_manage/form-category.jsp");
         dispatcher.forward(request, response);
     }
 
     private void deleteCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         iCategoryService.deleteCategory(categoryId);
+        List<Category> categories = iCategoryService.getAllCategories();
+        getServletContext().setAttribute("categories", categories);
         request.getSession().setAttribute("message", "Xóa danh mục thành công!");
         request.getSession().setAttribute("status", "success");
         response.sendRedirect("CategoryServlet?action=list");
@@ -124,10 +125,11 @@ public class CategoryServlet extends HttpServlet {
     private void updateCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         Category category = null;
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-        Category categoryUpdate = iCategoryService.selectCategory(categoryId);
         String categoryName = request.getParameter("categoryName");
         category = new Category(categoryId, categoryName);
         iCategoryService.updateCategory(category);
+        List<Category> categories = iCategoryService.getAllCategories();
+        getServletContext().setAttribute("categories", categories);
         request.getSession().setAttribute("message", "Cập nhật thành công!");
         request.getSession().setAttribute("status", "success");
         response.sendRedirect("CategoryServlet?action=list");

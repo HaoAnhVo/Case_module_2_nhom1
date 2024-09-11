@@ -1,3 +1,6 @@
+<%@ page import="org.example.model.Tag" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
@@ -44,7 +47,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 600px;
+            max-width: 1000px;
         }
 
         form div {
@@ -96,7 +99,7 @@
         }
 
         textarea {
-            height: 100px;
+            height: 200px;
             resize: vertical;
         }
 
@@ -284,7 +287,8 @@
 <body>
 <h1>${post == null ? "Tạo bài viết mới" : "Chỉnh sửa bài viết"}</h1>
 <%-- Post detail --%>
-<form action="PostServlet?action=${post == null ? 'insert' : 'update'}" method="post" class="form-post">
+<form action="PostServlet?action=${post == null ? 'insert' : 'update'}" method="post" class="form-post"
+      onsubmit="return validateForm()">
     <input type="hidden" name="postId" value="${post != null ? post.postId : ''}">
     <div>
         <label>Tiêu đề</label>
@@ -322,6 +326,25 @@
             </c:forEach>
         </select>
     </div>
+
+    <div>
+        <label for="tags">Thẻ liên quan</label>
+        <select id="tags" required>
+            <c:forEach var="tag" items="${tags}">
+                <option value="${tag.tagId}">
+                        ${tag.tagName}
+                </option>
+            </c:forEach>
+        </select>
+
+        <button type="button" onclick="addTag()">Thêm</button>
+        <br>
+
+        <h4>Tags được chọn:</h4>
+        <div id="tagList"></div>
+
+        <input type="hidden" name="tagIds" id="selectedTagIds">
+    </div>
     <%--  Submit --%>
     <div>
         <button type="submit">${post == null ? "Thêm" : "Cập nhật"}</button>
@@ -336,7 +359,7 @@
                     <div>
                         <p>${comment.content}</p>
                         <p><strong>Người đăng:</strong> ${comment.username}</p>
-                        <p><strong>Ngày đăng:</strong> ${comment.createdAt}</p>
+                        <p><strong>Ngày đăng:</strong> ${comment.formattedCreatedAt}</p>
                     </div>
                     <a class="delete-btn"
                        href="PostServlet?action=deleteComment&commentId=${comment.commentId}&postId=${post.postId}"
@@ -363,6 +386,71 @@
 <a href="PostServlet?action=list" class="back-link">
     <span class="arrow">← </span>Quay về trang trước
 </a>
+<script>
+    let selectedTags = [];
+    <%
+    List<Tag> selectedTags = (List<Tag>) request.getAttribute("selectedTags");
+    if (selectedTags == null) {
+        selectedTags = new ArrayList<>();
+    }
+%>
+
+    function initSelectedTags() {
+        let selectedTagsFromServer = <%= (selectedTags != null && !selectedTags.isEmpty()) ? "true" : "false" %>;
+
+        if (selectedTagsFromServer) {
+            <% for (Tag tag : selectedTags) { %>
+            selectedTags.push({
+                id: <%= tag.getTagId() %>,
+                name: "<%= tag.getTagName() %>"
+            });
+            <% } %>
+        }
+        updateTagList();
+    }
+
+    function addTag() {
+        let select = document.getElementById('tags');
+        let selectedTagId = select.value;
+        let selectedTagName = select.options[select.selectedIndex].text;
+        if (!selectedTags.find(tag => tag.id === parseInt(selectedTagId))) {
+            selectedTags.push({id: parseInt(selectedTagId), name: selectedTagName});
+            updateTagList();
+        } else alert("Exist!")
+    }
+
+    function updateTagList() {
+        let tagList = document.getElementById('tagList');
+        tagList.innerHTML = '';
+        selectedTags.forEach(tag => {
+            let tagItem = document.createElement('span');
+            tagItem.innerText = tag.name;
+            let removeButton = document.createElement('button');
+            removeButton.innerText = 'X';
+            removeButton.onclick = function () {
+                removeTag(tag.id);
+            };
+            tagItem.appendChild(removeButton);
+            tagList.appendChild(tagItem);
+        });
+        document.getElementById('selectedTagIds').value = selectedTags.map(tag => tag.id).join(',');
+    }
+
+    function removeTag(tagId) {
+        selectedTags = selectedTags.filter(tag => tag.id !== tagId);
+        updateTagList();
+    }
+
+    function validateForm() {
+        if (selectedTags.length === 0) {
+            alert('Vui lòng thêm ít nhất một tag trước khi gửi bài viết.');
+            return false;
+        }
+        return true;
+    }
+
+    window.onload = initSelectedTags;
+</script>
 <script src="<%=request.getContextPath()%>js/sub-script.js"></script>
 </body>
 </html>

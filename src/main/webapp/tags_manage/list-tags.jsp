@@ -24,7 +24,7 @@
 %>
 <html>
 <head>
-    <title>Danh sách danh mục</title>
+    <title>Quản lý tag</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href="../common/sidebar.css" rel="stylesheet">
 </head>
@@ -40,26 +40,26 @@
            data-tooltip="Đăng xuất"><i class="fa-solid fa-right-from-bracket"
                                        style="color: #86b817; font-size: 24px"></i></a>
     </div>
-    <h1>Danh sách danh mục</h1>
-    <a class="add" href="CategoryServlet?action=create">Thêm mới danh mục</a>
+    <h1>Quản lý tag</h1>
+    <a class="add" href="TagServlet?action=create">Thêm mới tag</a>
 
     <table border="1">
         <thead>
         <tr>
-            <th>Danh mục</th>
+            <th>Tag</th>
             <th>Hoạt động</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="category" items="${categories}">
+        <c:forEach var="tag" items="${tags}">
             <tr>
-                <td>${category.categoryName}</td>
+                <td>${tag.tagName}</td>
                 <td>
                     <div class="actions">
-                        <a href="CategoryServlet?action=edit&categoryId=${category.categoryId}" data-tooltip="Sửa"><i
+                        <a href="TagServlet?action=edit&tagId=${tag.tagId}" data-tooltip="Sửa"><i
                                 class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="CategoryServlet?action=delete&categoryId=${category.categoryId}"
-                           onclick="return confirm('Bạn chắc chắn muốn xóa danh mục này?')"
+                        <a href="TagServlet?action=delete&tagId=${tag.tagId}"
+                           onclick="return confirm('Bạn chắc chắn muốn xóa địa điểm này?')"
                            data-tooltip="Xóa">
                             <i class="fa-solid fa-trash"></i>
                         </a>

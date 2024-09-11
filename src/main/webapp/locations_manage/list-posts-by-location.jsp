@@ -79,9 +79,6 @@
             <div class="row justify-content-center py-5">
                 <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
                     <h1 class="display-3 text-white animated slideInDown">${locationByPost.locationName}</h1>
-                    <p class="fs-4 mb-4 animated slideInDown" style="color: var(--primary); font-size: 1.6rem">
-                        Kiến thức - Kinh nghiệm - Trải nghiệm
-                    </p>
                 </div>
             </div>
         </div>
@@ -100,7 +97,7 @@
                     <div class="package-item">
                         <a href="PostServlet?action=view&view=detail-blog&postId=${post.postId}">
                             <div class="overflow-hidden">
-                                <img class="img-fluid" src="${post.imageUrl}" alt="${post.title}"/>
+                                <img src="${post.imageUrl}" alt="${post.title}" style="width: 100%; height: 230px; object-fit: cover"/>
                             </div>
                             <div class="d-flex border-bottom p-2">
                                 <h5 class="flex-fill py-2 mt-1">
@@ -124,6 +121,12 @@
         </div>
     </div>
 </div>
+
+<%--  Footer  --%>
+<jsp:include page="../common/footer.jsp" />
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

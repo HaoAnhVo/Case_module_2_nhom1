@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -72,13 +72,13 @@
 <div class="container-fluid position-relative p-0">
     <% request.setAttribute("currentPage", "blog.jsp"); %>
 
-    <jsp:include page="../common/navbar.jsp" />
+    <jsp:include page="../common/navbar.jsp"/>
 
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
         <div class="container py-5">
             <div class="row justify-content-center py-5">
                 <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
-                    <h1 class="display-3 text-white animated slideInDown">${postsByCategory.categoryName}</h1>
+                    <h1 class="display-3 text-white animated slideInDown">Kết quả tìm kiếm</h1>
                 </div>
             </div>
         </div>
@@ -121,6 +121,7 @@
         </div>
     </div>
 </div>
+
 <%--  Footer  --%>
 <jsp:include page="../common/footer.jsp" />
 

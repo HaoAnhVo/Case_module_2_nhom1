@@ -76,12 +76,12 @@ public class LocationServlet extends HttpServlet {
     }
 
     public void listLocation(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-        request.setAttribute("locations", iLocationService.getAllLocations());
         String view = request.getParameter("view");
         String page = "locations_manage/list-locations.jsp";
         if ("location".equals(view)) {
             page = "destination.jsp";
         }
+        request.setAttribute("locations", iLocationService.getAllLocations());
         RequestDispatcher dispatcher = request.getRequestDispatcher(page);
         dispatcher.forward(request, response);
 
@@ -113,7 +113,6 @@ public class LocationServlet extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int locationId = Integer.parseInt(request.getParameter("locationId"));
         Location location = iLocationService.selectLocation(locationId);
-        System.out.println(location);
         request.setAttribute("location", location);
         request.setAttribute("locations", iLocationService.getAllLocations());
         RequestDispatcher dispatcher = request.getRequestDispatcher("locations_manage/form-location.jsp");

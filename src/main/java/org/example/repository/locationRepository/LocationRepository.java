@@ -5,6 +5,7 @@ import org.example.model.Post;
 import org.example.repository.BaseRepository;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,6 +116,7 @@ public class LocationRepository implements ILocationRepository {
     @Override
     public List<Post> getPostsByLocation(int locationId) {
         List<Post> posts = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         try (Connection con = BaseRepository.getConnection(); PreparedStatement ps = con.prepareStatement(SELECT_POSTS_BY_LOCATION_ID)) {
             ps.setInt(1, locationId);
             ResultSet rs = ps.executeQuery();
@@ -125,8 +127,14 @@ public class LocationRepository implements ILocationRepository {
                 post.setTitle(rs.getString("title"));
                 post.setContent(rs.getString("content"));
                 post.setImageUrl(rs.getString("imageUrl"));
-                post.setCreatedAt(rs.getDate("createdAt"));
-                post.setUpdatedAt(rs.getDate("updatedAt"));
+                Date createdAt = rs.getDate("createdAt");
+                Date updatedAt = rs.getDate("updatedAt");
+                if(createdAt != null && updatedAt != null) {
+                    String formattedCreatedAt = dateFormat.format(createdAt);
+                    post.setFormattedCreatedAt(formattedCreatedAt);
+                    String formattedUpdatedAt = dateFormat.format(updatedAt);
+                    post.setFormattedUpdatedAt(formattedUpdatedAt);
+                }
                 post.setLocationId(rs.getInt("locationId"));
                 post.setCategoryId(rs.getInt("categoryId"));
                 post.setAuthorId(rs.getInt("authorId"));

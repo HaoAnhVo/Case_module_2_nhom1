@@ -9,6 +9,7 @@ public class Comment {
     private int userId;
     private int postId;
     private String username;
+    private String formattedCreatedAt;
 
     public Comment() {
     }
@@ -67,5 +68,13 @@ public class Comment {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getFormattedCreatedAt() {
+        return formattedCreatedAt;
+    }
+
+    public void setFormattedCreatedAt(String formattedCreatedAt) {
+        this.formattedCreatedAt = formattedCreatedAt;
     }
 }

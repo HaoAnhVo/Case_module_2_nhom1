@@ -173,6 +173,8 @@
                                                     id="register-password"
                                                     placeholder="Mật khẩu"
                                                     required
+                                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}"
+                                                    title="Mật khẩu phải dài ít nhất 8 ký tự và chứa ít nhất một chữ cái thường, một chữ cái viết hoa, một chữ số và một ký tự đặc biệt."
                                                     value="${param.password}"
                                             />
                                             <label for="register-password"
@@ -189,7 +191,6 @@
                                                     id="register-confirm-password"
                                                     placeholder="Xác nhận mật khẩu"
                                                     required
-
                                             />
 
                                             <label for="register-confirm-password"
@@ -206,12 +207,13 @@
                                                     class="form-control form-register bg-transparent"
                                                     id="register-email"
                                                     placeholder="Email"
+                                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                                    title="Vui lòng nhập địa chỉ email hợp lệ"
                                                     required
                                                     value="${param.email}"
                                             />
                                             <label for="register-email"
-                                            ><i class="fa-solid fa-envelope me-3"></i>Email
-                                            </label>
+                                            ><i class="fa-solid fa-envelope me-3"></i>Email</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -309,7 +311,7 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-white mb-3">Tin mới</h4>
-                <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                <p>Đăng ký để nhận ngay thông báo bài viết mới</p>
                 <div class="position-relative mx-auto" style="max-width: 400px">
                     <input
                             class="form-control border-primary w-100 py-3 ps-4 pe-5"

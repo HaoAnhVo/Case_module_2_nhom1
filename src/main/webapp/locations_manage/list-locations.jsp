@@ -27,6 +27,8 @@
     <title>Quản lý địa điểm</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href="../common/sidebar.css" rel="stylesheet">
+    <style>
+    </style>
 </head>
 <body>
 <jsp:include page="../common/sidebar.jsp"/>
@@ -55,7 +57,7 @@
         <c:forEach var="location" items="${locations}">
             <tr>
                 <td>${location.locationName}</td>
-                <td>${location.mapLink}</td>
+                <td><a href="${location.mapLink}" target="_blank" style="color: #86b817">Link</a></td>
                 <td>
                     <div class="actions">
                         <a href="LocationServlet?action=edit&locationId=${location.locationId}" data-tooltip="Sửa"><i

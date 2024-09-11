@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -33,9 +32,34 @@
     <!-- CSS Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
-</head>
+    <style>
+        #suggestion-box {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
 
+        .suggestion-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .suggestion-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .team-item img {
+            height: 210px;
+        }
+    </style>
+</head>
 <body>
+
 <!-- Spinner Start -->
 <div
         id="spinner"
@@ -83,9 +107,7 @@
 <div class="container-fluid position-relative p-0">
     <% request.setAttribute("currentPage", "index.jsp"); %>
 
-    <jsp:include page="./common/navbar.jsp" />
-
-
+    <jsp:include page="./common/navbar.jsp"/>
 
 
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
@@ -100,10 +122,14 @@
                     </p>
                     <div class="position-relative w-75 mx-auto animated slideInDown">
                         <input
+                                id="search-input"
                                 class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5"
                                 type="text"
-                                placeholder="Eg: Thailand"
+                                placeholder="Eg: Ha Noi"
                         />
+                        <div id="suggestion-box" class="suggestion-box"
+                             style="position: absolute; top: 100%; left: 0; width: 100%; background: white; z-index: 1000;">
+                        </div>
                         <button
                                 type="button"
                                 class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2"
@@ -177,7 +203,7 @@
         </div>
         <div class="row g-4 justify-content-between">
             <div class="col-lg-4 col-sm-4 wow fadeInUp" data-wow-delay="0.1s">
-                <a href="./blog.jsp">
+                <a href="PostServlet?action=list&view=blog">
                     <img
                             src="https://theworldtravelguy.com/wp-content/uploads/2020/04/DSCF3947_450n.jpg"
                             alt=""
@@ -187,7 +213,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-4 wow fadeInUp" data-wow-delay="0.3s">
-                <a href="./destination.jsp">
+                <a href="LocationServlet?action=view&view=location">
                     <img
                             src="https://theworldtravelguy.com/wp-content/uploads/2021/05/DSCF1687_450n2.jpg"
                             alt=""
@@ -219,177 +245,51 @@
             <h1 class="mb-5">Địa điểm nổi bật</h1>
         </div>
         <div class="row g-3">
-            <div class="col-lg-7 col-md-6">
-                <div class="row g-3">
-                    <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
-                        <a class="position-relative d-block overflow-hidden" href="">
-                            <img
-                                    class="img-fluid"
-                                    src="https://ik.imagekit.io/tvlk/blog/2022/10/kinh-nghiem-du-lich-vinh-ha-long-1.jpg?tr=dpr-2,w-675"
-                                    alt="Vịnh Hạ Long"
-                            />
-                            <div
-                                    class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2"
-                            >
-                                Vịnh Hạ Long
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
-                        <a class="position-relative d-block overflow-hidden" href="">
-                            <img
-                                    class="img-fluid"
-                                    src="https://vcdn1-dulich.vnecdn.net/2022/05/09/shutterstock-280926449-6744-15-3483-9174-1652070682.jpg?w=0&h=0&q=100&dpr=1&fit=crop&s=bGCo6Rv6DseMDE_07TT1Aw"
-                                    alt="Nha Trang"
-                            />
-                            <div
-                                    class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2"
-                            >
-                                Nha Trang
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
-                        <a class="position-relative d-block overflow-hidden" href="">
-                            <img
-                                    class="img-fluid"
-                                    src="https://www.arttravel.com.vn/upload/news/hoi-an-7269-6259.jpg"
-                                    alt="Hội An"
-                            />
+            <c:forEach var="location" items="${locations}" varStatus="status">
+                <c:if test="${status.index % 5 == 0}">
+                    <div class="row g-3 mt-0">
+                    <div class="col-lg-7 col-md-6 mt-0">
+                    <div class="row g-3 mt-0">
+                </c:if>
 
-                            <div
-                                    class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2"
-                            >
-                                Hội An
+                <c:if test="${status.index % 5 < 4}">
+                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="${0.1 + (status.index % 5) * 0.2}s">
+                        <a class="position-relative d-block overflow-hidden"
+                           href="LocationServlet?action=getPostsByLocation&locationId=${location.locationId}">
+                            <img src="${location.imgURL}" alt="${location.locationName}"
+                                 style="width: 100%; height: 270px; object-fit: cover"/>
+                            <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">
+                                    ${location.locationName}
                             </div>
                         </a>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px">
-                <a class="position-relative d-block h-100 overflow-hidden" href="">
-                    <img
-                            class="img-fluid position-absolute w-100 h-100"
-                            src="https://ik.imagekit.io/tvlk/blog/2023/11/du-lich-da-nang-mua-nao-dep-1.jpg?tr=dpr-2,w-675"
-                            alt="Đà Nẵng"
-                            style="object-fit: cover"
-                    />
-                    <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">
-                        Đà Nẵng
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="mt-0 row g-3">
-            <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px">
-                <a class="position-relative d-block h-100 overflow-hidden" href="">
-                    <img
-                            class="img-fluid position-absolute w-100 h-100"
-                            src="https://dulichkhampha24.com/wp-content/uploads/2020/12/kinh-nghiem-du-lich-quang-binh-c.jpg"
-                            alt="Quảng Bình"
-                            style="object-fit: cover"
-                    />
-                    <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">
-                        Quảng Bình
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-7 col-md-6">
-                <div class="row g-3">
-                    <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
-                        <a class="position-relative d-block overflow-hidden" href="hanoi_blog.jsp">
-                            <img
-                                    class="img-fluid"
-                                    src="https://suckhoedoisong.qltns.mediacdn.vn/Images/thanhloan/2020/11/28/Nam-2030-du-lich-ha-noi-phan-dau-tro-thanh-nganh-kinh-te-mui-nhon-cua-thu-do-19.jpg"
-                                    alt="Hà Nội"
-                            />
-                            <div
-                                    class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2"
-                            >
-                                Hà Nội
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
-                        <a class="position-relative d-block overflow-hidden" href="">
-                            <img
-                                    class="img-fluid"
-                                    src="https://vcdn1-dulich.vnecdn.net/2022/03/31/thac-Ban-Gioc-Cao-Bang-8614-1648729935.jpg?w=0&h=0&q=100&dpr=1&fit=crop&s=14zFbBkd6hgbDfwOrjQPyQ"
-                                    alt="Cao Bằng"
-                            />
-                            <div
-                                    class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2"
-                            >
-                                Cao Bằng
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
-                        <a class="position-relative d-block overflow-hidden" href="">
-                            <img
-                                    class="img-fluid"
-                                    src="https://mientaycogi.com/wp-content/uploads/2020/10/nui-cam-an-giang.jpg"
-                                    alt="An Giang"
-                            />
+                </c:if>
 
-                            <div
-                                    class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2"
-                            >
-                                An Giang
-                            </div>
-                        </a>
+                <c:if test="${status.index % 5 == 4}">
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="mt-0 row g-3">
-            <div class="col-lg-12 col-md-12">
-                <div class="row g-3">
-                    <div class="col-lg-4 col-md-4 wow zoomIn" data-wow-delay="0.1s">
-                        <a class="position-relative d-block overflow-hidden" href="">
-                            <img
-                                    class="img-fluid"
-                                    src="https://divui.com/blog/wp-content/uploads/2018/10/saigon.jpg"
-                                    alt="Sài Gòn"
-                            />
-                            <div
-                                    class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2"
-                            >
-                                Sài Gòn
-                            </div>
-                        </a>
                     </div>
-                    <div class="col-lg-4 col-md-4 wow zoomIn" data-wow-delay="0.3s">
-                        <a class="position-relative d-block overflow-hidden" href="">
-                            <img
-                                    class="img-fluid"
-                                    src="https://images2.thanhnien.vn/528068263637045248/2023/9/11/568976h1-1694451569790557720062.jpg"
-                                    alt="Đà Lạt"
-                            />
-                            <div
-                                    class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2"
-                            >
-                                Đà Lạt
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-4 wow zoomIn" data-wow-delay="0.5s">
-                        <a class="position-relative d-block overflow-hidden" href="">
-                            <img
-                                    class="img-fluid"
-                                    src="https://mia.vn/media/uploads/blog-du-lich/kham-pha-net-dac-sac-cua-cho-noi-cai-rang-chon-mien-tay-song-nuoc-12-1649149954.jpeg"
-                                    alt="Cần Thơ"
-                            />
 
-                            <div
-                                    class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2"
-                            >
-                                Cần Thơ
+                    <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s"
+                         style="height: 555px; object-fit: cover">
+                        <a class="position-relative d-block h-100 overflow-hidden"
+                           href="LocationServlet?action=getPostsByLocation&locationId=${location.locationId}">
+                            <img
+                                    class="img-fluid position-absolute w-100 h-100"
+                                    src="${location.imgURL}"
+                                    alt="${location.locationName}"
+                                    style="object-fit: cover"
+                            />
+                            <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">
+                                    ${location.locationName}
                             </div>
                         </a>
                     </div>
-                </div>
-            </div>
+                </c:if>
+
+                <c:if test="${status.index % 5 == 4 || status.last}">
+                    </div>
+                </c:if>
+            </c:forEach>
         </div>
     </div>
 </div>
@@ -399,88 +299,37 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h6 class="section-title bg-white text-center text-primary px-3">Bài Blog</h6>
+            <h6 class="section-title bg-white text-center text-primary px-3">Blog</h6>
             <h1 class="mb-5">Bài viết gần đây</h1>
         </div>
         <div class="row g-4 justify-content-center">
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="package-item">
-                    <a href="#!">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/package-1.jpg" alt=""/>
-                        </div>
-                        <div class="d-flex border-bottom p-2">
-                            <h5 class="flex-fill py-2 mt-1">Hà Nội title 1</h5>
-                        </div>
-                        <div class="p-3">
-                            <p class="desc">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex labore animi ipsa
-                                necessitatibus sunt ullam consequatur iure sint minima culpa debitis dolore
-                                sequi ratione nulla explicabo minus quisquam voluptatum tenetur, quidem amet,
-                                rem et illo! Sequi quaerat rerum debitis voluptatem nobis earum dolores tenetur
-                                natus, error quisquam aliquam rem explicabo.
-                            </p>
-                            <div class="d-flex justify-content-center mb-2">
-                                <button class="btn btn-sm btn-primary px-3" style="border-radius: 30px">
-                                    Đọc thêm
-                                </button>
+            <c:forEach var="post" items="${posts}">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="package-item">
+                        <a href="PostServlet?action=view&view=detail-blog&postId=${post.postId}">
+                            <div class="overflow-hidden">
+                                <img src="${post.imageUrl}" alt="${post.title}"
+                                     style="width: 100%; height: 270px; object-fit: cover"/>
                             </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="package-item">
-                    <a href="#!">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/package-1.jpg" alt=""/>
-                        </div>
-                        <div class="d-flex border-bottom p-2">
-                            <h5 class="flex-fill py-2 mt-1">another title</h5>
-                        </div>
-                        <div class="p-3">
-                            <p class="desc">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium doloribus
-                                ab deserunt, delectus nemo aperiam iure praesentium ut sint architecto nobis
-                                deleniti modi cum, itaque earum veritatis sequi reiciendis repellendus fuga sunt
-                                quod repellat neque magni. Sit dignissimos delectus placeat id, alias minus sed
-                                animi deleniti velit voluptate qui. Nostrum.
-                            </p>
-                            <div class="d-flex justify-content-center mb-2">
-                                <button class="btn btn-sm btn-primary px-3" style="border-radius: 30px">
-                                    Đọc thêm
-                                </button>
+                            <div class="d-flex border-bottom p-2">
+                                <h5 class="flex-fill py-2 mt-1">
+                                        ${post.title}
+                                </h5>
                             </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="package-item">
-                    <a href="#!">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/package-1.jpg" alt=""/>
-                        </div>
-                        <div class="d-flex border-bottom p-2">
-                            <h5 class="flex-fill py-2 mt-1">another title</h5>
-                        </div>
-                        <div class="p-3">
-                            <p class="desc">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit, itaque? Saepe
-                                voluptas non, delectus nisi in eos incidunt! Fuga earum eligendi sint architecto
-                                dicta maiores ducimus ipsum quibusdam beatae maxime reiciendis sunt, fugit
-                                eveniet? At, pariatur odit voluptas quia voluptatem, reiciendis expedita ipsam
-                                labore quod facilis delectus non eum commodi.
-                            </p>
-                            <div class="d-flex justify-content-center mb-2">
-                                <button class="btn btn-sm btn-primary px-3" style="border-radius: 30px">
-                                    Đọc thêm
-                                </button>
+                            <div class="p-3">
+                                <p class="desc">
+                                        ${post.content}
+                                </p>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <button class="btn btn-sm btn-primary px-3" style="border-radius: 30px">
+                                        Đọc thêm
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </div>
@@ -494,10 +343,10 @@
             <h1 class="mb-5">Nhóm của chúng tôi</h1>
         </div>
         <div class="row g-4">
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="col-lg-2 offset-lg-1 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="team-item">
                     <div class="overflow-hidden">
-                        <img class="img-fluid" src="" alt=""/>
+                        <img class="img-fluid" src="https://scontent.fdad3-1.fna.fbcdn.net/v/t39.30808-6/241453626_1497275003981775_9102379658119929148_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=fDEOyFzPpkEQ7kNvgGexSLp&_nc_ht=scontent.fdad3-1.fna&_nc_gid=AK0ZrnbZUGknX3SDfU1WMya&oh=00_AYA8y6U1XjE7K_vcsc4XzOZAda9roSbr821jTVeDXBEnJw&oe=66E59366" alt="Linh Phan"/>
                     </div>
                     <div class="position-relative d-flex justify-content-center" style="margin-top: -19px">
                         <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -505,15 +354,14 @@
                         <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
                     </div>
                     <div class="text-center p-4">
-                        <h5 class="mb-0">Full Name</h5>
-                        <small>Designation</small>
+                        <h5 class="mb-0">Linh Phan</h5>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="team-item">
                     <div class="overflow-hidden">
-                        <img class="img-fluid" src="" alt=""/>
+                        <img class="img-fluid" src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/456020751_2267672190236401_6311886940491195893_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeESNLnA9l8SzW3wOWP2tkhNzVMl8oQ9jhrNUyXyhD2OGsRL47lj6RUkct9Y9brx_R5BKGQIqAoi9HtaGnIdaItt&_nc_ohc=0CEKnxXPT1EQ7kNvgHl699X&_nc_ht=scontent.fsgn2-4.fna&oh=00_AYACbmoJyyVSeli9PkcBTaS-vMnkGbAUOQD62TEsHbBV6A&oe=66E5C2DA" alt="Quang Nguyễn"/>
                     </div>
                     <div class="position-relative d-flex justify-content-center" style="margin-top: -19px">
                         <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -521,15 +369,14 @@
                         <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
                     </div>
                     <div class="text-center p-4">
-                        <h5 class="mb-0">Full Name</h5>
-                        <small>Designation</small>
+                        <h5 class="mb-0">Quang Nguyễn</h5>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="team-item">
                     <div class="overflow-hidden">
-                        <img class="img-fluid" src="" alt=""/>
+                        <img class="img-fluid" src="https://bedental.vn/wp-content/uploads/2022/11/1e8063154fdf3dcbb07edf0ad2df326a.jpg" alt="Hào Nhỏ"/>
                     </div>
                     <div class="position-relative d-flex justify-content-center" style="margin-top: -19px">
                         <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -537,15 +384,14 @@
                         <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
                     </div>
                     <div class="text-center p-4">
-                        <h5 class="mb-0">Full Name</h5>
-                        <small>Designation</small>
+                        <h5 class="mb-0">Hào Nhỏ</h5>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="team-item">
                     <div class="overflow-hidden">
-                        <img class="img-fluid" src="" alt=""/>
+                        <img class="img-fluid" src="https://ca.slack-edge.com/T062S4QFUJZ-U071BK6FF2A-90e92d59184f-512" alt="Huy Trần"/>
                     </div>
                     <div class="position-relative d-flex justify-content-center" style="margin-top: -19px">
                         <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -553,8 +399,22 @@
                         <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
                     </div>
                     <div class="text-center p-4">
-                        <h5 class="mb-0">Full Name</h5>
-                        <small>Designation</small>
+                        <h5 class="mb-0">Huy Trần</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="team-item">
+                    <div class="overflow-hidden">
+                        <img class="img-fluid" src="https://scontent.fsgn5-10.fna.fbcdn.net/v/t39.30808-6/301574501_1277149409722204_1801836726171267379_n.jpg?stp=cp6_dst-jpg&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=UIIsJnqek7kQ7kNvgFH86Bp&_nc_ht=scontent.fsgn5-10.fna&oh=00_AYCeAR94zw_YY87oyii-CkbfCk0AIjJsDf7y2cSbOKxdYw&oe=66E64C1B" alt="Duy Phạm"/>
+                    </div>
+                    <div class="position-relative d-flex justify-content-center" style="margin-top: -19px">
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <div class="text-center p-4">
+                        <h5 class="mb-0">Duy Phạm</h5>
                     </div>
                 </div>
             </div>
@@ -588,94 +448,8 @@
 </div>
 <!-- Testimonial End -->
 
-<!-- Footer Start -->
-<div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container py-5">
-        <div class="row g-5">
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-white mb-3">Hệ thống</h4>
-                <a class="btn btn-link" href="">Về chúng tôi</a>
-                <a class="btn btn-link" href="">Liên hệ</a>
-                <a class="btn btn-link" href="">Chính sách bảo mật</a>
-                <a class="btn btn-link" href="">Điều khoản & điều kiện</a>
-                <a class="btn btn-link" href="">FAQs & Trợ giúp</a>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-white mb-3">Liên hệ</h4>
-                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>CodeGym</p>
-                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                <p class="mb-2"><i class="fa fa-envelope me-3"></i>C0524I1@codegym.com</p>
-                <div class="d-flex pt-2">
-                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-white mb-3">Thư viện</h4>
-                <div class="row g-2 pt-2">
-                    <div class="col-4">
-                        <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt=""/>
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt=""/>
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt=""/>
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt=""/>
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt=""/>
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt=""/>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-white mb-3">Tin mới</h4>
-                <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                <div class="position-relative mx-auto" style="max-width: 400px">
-                    <input
-                            class="form-control border-secondary w-100 py-3 ps-4 pe-5"
-                            type="text"
-                            placeholder="Your email"
-                    />
-                    <button
-                            type="button"
-                            class="btn btn-secondary py-2 position-absolute top-0 end-0 mt-2 me-2"
-                    >
-                        Đăng ký
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="copyright">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="border-bottom" href="#!">CodeGym</a>, All Right Reserved.
-
-                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                    Designed By <a class="border-bottom" href="#!">C0524I1</a>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <div class="footer-menu">
-                        <a href="">Trang chủ</a>
-                        <a href="">Cookies</a>
-                        <a href="">Trợ giúp</a>
-                        <a href="">FAQs</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Footer End -->
+<%--  Footer  --%>
+<jsp:include page="./common/footer.jsp"/>
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -691,5 +465,7 @@
 <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
 <script src="js/main.js"></script>
+<script src="js/sub-script.js"></script>
+
 </body>
 </html>

@@ -15,6 +15,9 @@ public class Post {
     private String locationName;
     private String categoryName;
     private String authorName;
+    private String formattedCreatedAt;
+    private String formattedUpdatedAt;
+    private String tagName;
 
     public Post() {
 
@@ -126,5 +129,29 @@ public class Post {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    public String getFormattedCreatedAt() {
+        return formattedCreatedAt;
+    }
+
+    public void setFormattedCreatedAt(String formattedCreatedAt) {
+        this.formattedCreatedAt = formattedCreatedAt;
+    }
+
+    public String getFormattedUpdatedAt() {
+        return formattedUpdatedAt;
+    }
+
+    public void setFormattedUpdatedAt(String formattedUpdatedAt) {
+        this.formattedUpdatedAt = formattedUpdatedAt;
+    }
+
+    public String getTagName() {
+        return tagName;
+    }
+
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
     }
 }
