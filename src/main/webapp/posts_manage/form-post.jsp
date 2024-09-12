@@ -147,6 +147,16 @@
             color: #688b12;
         }
 
+        #tagList span {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        #tagList button {
+            padding: 5px 10px;
+        }
+
         .comment-section {
             margin-top: 20px;
         }
@@ -342,7 +352,6 @@
 
         <h4>Tags được chọn:</h4>
         <div id="tagList"></div>
-
         <input type="hidden" name="tagIds" id="selectedTagIds">
     </div>
     <%--  Submit --%>
@@ -351,7 +360,7 @@
     </div>
 </form>
 <c:if test="${post != null}">
-    <div class="comment-section">
+    <div id="comment-section" class="comment-section">
         <h2>Bình luận</h2>
         <div class="comment-list">
             <c:forEach var="comment" items="${comments}">
@@ -362,7 +371,7 @@
                         <p><strong>Ngày đăng:</strong> ${comment.formattedCreatedAt}</p>
                     </div>
                     <a class="delete-btn"
-                       href="PostServlet?action=deleteComment&commentId=${comment.commentId}&postId=${post.postId}"
+                       href="PostServlet?action=deleteComment&commentId=${comment.commentId}&postId=${post.postId}#comment-section"
                        onclick="return confirm('Bạn chắc chắn muốn xóa bình luận này?')"
                        data-tooltip="Xóa">
                         <i class="fa-solid fa-trash">Xóa</i>
@@ -389,11 +398,11 @@
 <script>
     let selectedTags = [];
     <%
-    List<Tag> selectedTags = (List<Tag>) request.getAttribute("selectedTags");
-    if (selectedTags == null) {
-        selectedTags = new ArrayList<>();
-    }
-%>
+        List<Tag> selectedTags = (List<Tag>) request.getAttribute("selectedTags");
+        if (selectedTags == null) {
+            selectedTags = new ArrayList<>();
+        }
+    %>
 
     function initSelectedTags() {
         let selectedTagsFromServer = <%= (selectedTags != null && !selectedTags.isEmpty()) ? "true" : "false" %>;
@@ -450,6 +459,18 @@
     }
 
     window.onload = initSelectedTags;
+
+    document.addEventListener("DOMContentLoaded", function() {
+        if (window.location.hash === "#comment-section") {
+            const commentSection = document.querySelector("#comment-section");
+            if (commentSection) {
+                setTimeout(function () {
+                    commentSection.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+    });
+
 </script>
 <script src="<%=request.getContextPath()%>js/sub-script.js"></script>
 </body>

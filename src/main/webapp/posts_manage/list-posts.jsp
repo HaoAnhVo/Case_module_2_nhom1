@@ -60,7 +60,7 @@
     <h1>Quản lý bài viết</h1>
     <a class="add" href="PostServlet?action=new">Thêm mới bài viết</a>
 
-    <table border="1">
+    <table border="1" cellpadding="5" cellspacing="5">
         <thead>
         <tr>
             <th>Tiêu đề</th>

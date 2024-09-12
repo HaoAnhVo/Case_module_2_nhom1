@@ -43,7 +43,7 @@
     <h1>Quản lý tag</h1>
     <a class="add" href="TagServlet?action=create">Thêm mới tag</a>
 
-    <table border="1">
+    <table border="1" cellpadding="5" cellspacing="5">
         <thead>
         <tr>
             <th>Tag</th>

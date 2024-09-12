@@ -9,6 +9,7 @@ body {
 }
 
 .sidebar {
+    position: fixed;
     min-height: 100vw;
     width: 15%;
     background-color: #86b817;
@@ -46,6 +47,7 @@ body {
 }
 
 .content {
+    margin-left: 15%;
     flex: 1;
     padding: 20px;
 }

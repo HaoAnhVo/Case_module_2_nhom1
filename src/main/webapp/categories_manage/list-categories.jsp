@@ -43,7 +43,7 @@
     <h1>Danh sách danh mục</h1>
     <a class="add" href="CategoryServlet?action=create">Thêm mới danh mục</a>
 
-    <table border="1">
+    <table border="1" cellpadding="5" cellspacing="5">
         <thead>
         <tr>
             <th>Danh mục</th>

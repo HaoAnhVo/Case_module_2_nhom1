@@ -45,7 +45,7 @@
     <h1>Quản lý địa điểm</h1>
     <a class="add" href="LocationServlet?action=create">Thêm mới địa điểm</a>
 
-    <table border="1">
+    <table border="1" cellpadding="5" cellspacing="5">
         <thead>
         <tr>
             <th>Địa điểm</th>

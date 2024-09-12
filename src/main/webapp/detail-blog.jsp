@@ -17,6 +17,15 @@
             rel="stylesheet"
     />
 
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="./img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet"/>
@@ -116,7 +125,7 @@
             <hr>
 
             <!-- Comments Section -->
-            <div class="comments-section mt-5">
+            <div id="comment-section" class="comments-section mt-5">
                 <!-- Single Comment Start -->
                 <c:forEach var="comment" items="${comments}">
                     <div class="comment d-flex">
@@ -134,7 +143,7 @@
                 <!-- Comment Form -->
                 <div class="comment-form mt-4">
                     <h4>Để lại bình luận của bạn</h4>
-                    <form action="PostServlet?action=addComment" method="POST" class="mt-3">
+                    <form action="PostServlet?action=addComment" method="POST" id="commentForm" class="mt-3">
                         <input type="hidden" name="postId" value="${post.postId}"/>
                         <div class="mb-3">
                             <textarea
@@ -156,7 +165,7 @@
         <div class="col-lg-4">
             <!-- Recent Posts Widget -->
             <div class="mb-5">
-                <h4 class="mb-4">Bài Viết Liên Quan </h4>
+                <h4 class="mb-4">Bài viết liên quan</h4>
                 <div class="list-group">
                     <c:forEach var="postLocation" items="${postsLocationRelated}">
                         <a href="PostServlet?action=view&view=detail-blog?postId=${postLocation.postId}"
@@ -189,7 +198,8 @@
         <%--Sidebar End--%>
     </div>
 </div>
-
+<%--  Footer  --%>
+<jsp:include page="./common/footer.jsp"/>
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -204,5 +214,17 @@
 
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (window.location.hash === "#comment-section") {
+            const commentSection = document.querySelector("#comment-section");
+            if (commentSection) {
+                setTimeout(function () {
+                    commentSection.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+    });
+</script>
 </body>
 </html>

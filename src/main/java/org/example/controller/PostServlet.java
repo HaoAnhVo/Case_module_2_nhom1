@@ -302,9 +302,9 @@ public class PostServlet extends HttpServlet {
             request.getSession().setAttribute("status", "success");
 
             if ("admin".equalsIgnoreCase(role) || "moderator".equalsIgnoreCase(role)) {
-                response.sendRedirect("PostServlet?action=edit&postId=" + postId);
+                response.sendRedirect("PostServlet?action=edit&postId=" + postId + "#comment-section");
             } else {
-                response.sendRedirect("PostServlet?action=view&view=detail-blog&postId=" + postId);
+                response.sendRedirect("PostServlet?action=view&view=detail-blog&postId=" + postId + "#comment-section");
             }
         } else {
             request.getSession().setAttribute("message", "Bạn cần đăng nhập để có thể bình luận bài viết!");

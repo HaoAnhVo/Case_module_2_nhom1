@@ -3,6 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-2 py-lg-0">
     <a href="PostServlet?action=list&view=index" class="navbar-brand px-5">
         <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>MeTrip</h1>
+
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="fa fa-bars"></span>
